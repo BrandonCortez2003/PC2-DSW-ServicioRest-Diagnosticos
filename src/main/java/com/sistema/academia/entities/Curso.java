@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+//BRANDONNNNNNNNNNNN !!!!!!!!!!
+
 @Entity
 @Table(name="tb_curso")
 public class Curso {

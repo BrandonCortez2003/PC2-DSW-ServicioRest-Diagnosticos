@@ -106,34 +106,18 @@
 							  <thead>
 							   <tr>
 					                <th>Codigo</th>
-					                <th>Nombre</th>
-					                <th>Apellido</th>
-					                <th>Edad</th>
-					                <th>Estado</th>
-					                <th>Dni</th>
-					                <th>Fono</th>
-					                <th>Direccion</th>
-					                <th>Correo</th>
-					                <th>Fecha Nacimiento</th>
-					                <th>Fecha Registra </th>
-					                
+					                <th>Codigo Profesor</th>
+					                <th>Codigo Curso</th>					                					                
 					                <th></th>
 					                <th></th>
 					            </tr>
 							  </thead>
 							  <tbody>
-								<tr th:each="row:${profesor}">
+								<tr th:each="row:${cursoProfesor}">
 							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.nombre}"></td>
-							      <td th:text="${row.apellido}"></td>
-							      <td th:text="${row.edad}"></td>
-							      <td th:text="${row.estado}"></td>
-							      <td th:text="${row.dni}"></td>
-							      <td th:text="${row.fono}"></td>
-							      <td th:text="${row.direccion}"></td>
-							      <td th:text="${row.mail}"></td>
-							      <td th:text="${row.fecNac}"></td>
-							      <td th:text="${row.fecReg}"></td>
+							      <td th:text="${row.codigoPro.nombre}"></td>
+							      <td th:text="${row.codigoCur.nombre}"></td>
+
 							  
 							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalProfesor"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>

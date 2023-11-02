@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -19,12 +20,15 @@ public class WebSecurityConfig {
 	public BCryptPasswordEncoder encriptarClave() {
 		return new BCryptPasswordEncoder();
 	}
+
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/sesion/**","resources/**","templates/img/**").permitAll()
-				.requestMatchers("/director/**","/profesor/**","/cursos/**","/alumno/**").authenticated()
+
+		http.authorizeHttpRequests((requests) -> requests
+				.requestMatchers("/sesion/**","resources/**","/css/**","/img/**").permitAll()
+				.requestMatchers("/director/**","/profesor/**","/cursos/**","/cursosalumno/**").authenticated()
+				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
 				.loginPage("/sesion/login")

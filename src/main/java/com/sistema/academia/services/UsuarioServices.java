@@ -15,6 +15,9 @@ public class UsuarioServices {
 	@Autowired
 	private UsuarioRepository repo;
 	
+	public void registrar(Usuario usu) {
+		repo.save(usu);
+	}
 
 	public Usuario iniciarSesion(String vlogin){
 		return repo.iniciarSesion(vlogin);

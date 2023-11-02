@@ -88,16 +88,14 @@
 	}*/
 </style> 
 </head>
-<body class="base">
+<body>
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>
 	<div class="container">
 		
-	
-		
-			<h3 class="text-center mt-4">LISTA DE CURSOS</h3>
+			<h3 class="text-center mt-4">LISTA DE CURSOS Y ALUMNOS</h3>
 			
 			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Curso
+			 <i class="far fa-file"></i> Nuevo 
 			</button>
 			<div class=" mt-2">
 	
@@ -105,29 +103,24 @@
 							  <thead>
 							   <tr>
 					                <th>Código</th>
-					                <th>Nombre</th>
-					                <th>Hora de inicio</th>
-					                <th>Hora de Fin</th>
-					                <th>Seccion</th>
-					                <th>Turno</th>
-					                <th>Tipo</th>
-					                <th>Vacantes</th>
-					                <th>Vacantes Libres</th>
+					                <th>Alumno</th>
+					                <th>Curso</th>
+					                <th>Promedio</th>
+					                <th>Asistencia</th>
+					                <th>Faltas</th>
 					                <th></th>
 					                <th></th>
 					            </tr>
 							  </thead>
 							  <tbody>
-								<tr th:each="row:${cursos}">
+								<tr th:each="row:${cursosalumno}">
 							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.nombre}"></td>
-							      <td th:text="${row.horaini}"></td>
-							      <td th:text="${row.horafin}"></td>
-							      <td th:text="${row.seccion}"></td>
-							      <td th:text="${row.turnoCurs.nombre}"></td>
-							      <td th:text="${row.tipoCurs.nombre}"></td>
-							      <td th:text="${row.vacantes}"></td>
-							      <td th:text="${row.vacantesLibre}"></td>
+							      <td th:text="${row.alumno.nombre}"></td>
+							      <td th:text="${row.curso.nombre}"></td>
+							      <td th:text="${row.promedio}"></td>
+							      <td th:text="${row.asistencia}"></td>
+							      <td th:text="${row.faltas}"></td>
+							      
 							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
 							    </tr>  
@@ -151,44 +144,29 @@
 										<div class="container">
 											<div class="row">
 												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Nombre</b></label><br>		
+														<label for="exampleInputEmail1"><b>Promedio</b></label><br>		
 														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idNombre" placeholder="Ingresar nombre" name="nombre">																										
-												</div>
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Hora de Inicio</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="time" class="form-control"  id="idHoraIni" placeholder="Ingresar Hora Inicio" name="horaIni">																										
-												</div>
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Hora de Fin</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="time" class="form-control"  id="idHoraFin" placeholder="Ingresar Hora Fin" name="horaFin">																										
-												</div>
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Sección</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idSección" placeholder="Ingresar Sección" name="seccion">																										
+														<input type="text" class="form-control"  id="idPromedio" placeholder="Ingresar " name="promedio">																										
 												</div>
 												
-											
-												<div class="form-group has-feedback col-md-4">
-													<label for="exampleInputEmail1"><b>Vacantes</b></label><br>	
-													<i class="fas fa-pen-fancy form-control-feedback2"></i>
-													<input type="text" class="form-control" id="idVacantes" placeholder="Ingresar Vacantes" name="vacantes">	
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Asistencia</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idAsistencia" placeholder="Ingresar " name="asistencia">																										
 												</div>
-												<div class="form-group has-feedback col-md-4">
-													<label for="exampleInputEmail1"><b>Vacantes Libres</b></label><br>
-													<i class="fas fa-money-check-alt form-control-feedback2"></i>
-													<input type="text" class="form-control" id="idVacantesLib" placeholder="Ingresar Vacantes Libres" name="vacantesLib">														
+												
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Faltas</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idFaltas" placeholder="Ingresar " name="faltas">																										
 												</div>
 												
 												<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Turno</b></label><br>
+														<label for="exampleInputEmail1"><b>Curso</b></label><br>
 												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idTurno" name="turno">
-													      <option value=" ">[Seleccione Turno]</option>
-													      <option th:each="row:${turnos}"
+													    <select class="form-control" id="idCurso" name="curso">
+													      <option value=" ">[Seleccione Curso]</option>
+													      <option th:each="row:${cursos}"
 													      th:text="${row.nombre}"
 													      th:value="${row.codigo}"
 													       />
@@ -196,11 +174,11 @@
 													   
 												 </div>
 												 <div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Tipo</b></label><br>
+														<label for="exampleInputEmail1"><b>Alumno</b></label><br>
 												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idTipo" name="tipo">
-													      <option value=" ">[Seleccione Tipo]</option>
-													      <option th:each="row:${tipoCursos}"
+													    <select class="form-control" id="idAlumno" name="alumno">
+													      <option value=" ">[Seleccione Alumno]</option>
+													      <option th:each="row:${alumno}"
 													      th:text="${row.nombre}"
 													      th:value="${row.codigo}"
 													       />
@@ -270,14 +248,11 @@
 				
 				//asignar valores a las cajas usando el atributo "ID"
 				$("#idCodigo").val(response.codigo);
-				$("#idNombre").val(response.nombre);
-				$("#idHoraIni").val(response.horaini);
-				$("#idHoraFin").val(response.horafin);
-				$("#idSección").val(response.seccion);
-				$("#idVacantes").val(response.vacantes);
-				$("#idVacantesLib").val(response.vacantesLibre);
-				$("#idTurno").val(response.turnoCurs.codigo);
-				$("#idTipo").val(response.tipoCurs.codigo);
+				$("#idPromedio").val(response.promedio);
+				$("#idAsistencia").val(response.asistencia);
+				$("#idFaltas").val(response.faltas);
+				$("#idCurso").val(response.curso.codigo);
+				$("#idAlumno").val(response.alumno.codigo);
 
 				
 				
@@ -305,7 +280,7 @@
 			
 			alertify.confirm("SISTEMA","Seguro de eliminar!",
 			  function(){
-				  window.location="http://localhost:8091/cursos/eliminar?codigo="+cod
+				  window.location="http://localhost:8091/cursosalumno/eliminar?codigo="+cod
 		
 			  },
 			  function(){ 

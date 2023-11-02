@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Cursos</title>
+<title>Curso Profesor</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -88,47 +88,54 @@
 	}*/
 </style> 
 </head>
-<body class="base">
-	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>
+<body>
+	
+	<!-- consumir fragmento cabecera-->
+	<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	
+	
 	<div class="container">
 		
-	
-		
-			<h3 class="text-center mt-4">LISTA DE CURSOS</h3>
+			<h3 class="text-center mt-4">LISTA DE CURSOS X PROFESOR</h3>
 			
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Curso
+			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo">
+			 <i class="far fa-file"></i> Nuevo curso x profesor
 			</button>
 			<div class=" mt-2">
 	
-				<table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
+				<table class="table table-striped table-bordered mt-5" id="tableProfesor">
 							  <thead>
 							   <tr>
-					                <th>Código</th>
+					                <th>Codigo</th>
 					                <th>Nombre</th>
-					                <th>Hora de inicio</th>
-					                <th>Hora de Fin</th>
-					                <th>Seccion</th>
-					                <th>Turno</th>
-					                <th>Tipo</th>
-					                <th>Vacantes</th>
-					                <th>Vacantes Libres</th>
+					                <th>Apellido</th>
+					                <th>Edad</th>
+					                <th>Estado</th>
+					                <th>Dni</th>
+					                <th>Fono</th>
+					                <th>Direccion</th>
+					                <th>Correo</th>
+					                <th>Fecha Nacimiento</th>
+					                <th>Fecha Registra </th>
+					                
 					                <th></th>
 					                <th></th>
 					            </tr>
 							  </thead>
 							  <tbody>
-								<tr th:each="row:${cursos}">
+								<tr th:each="row:${profesor}">
 							      <td th:text="${row.codigo}"></td>
 							      <td th:text="${row.nombre}"></td>
-							      <td th:text="${row.horaini}"></td>
-							      <td th:text="${row.horafin}"></td>
-							      <td th:text="${row.seccion}"></td>
-							      <td th:text="${row.turnoCurs.nombre}"></td>
-							      <td th:text="${row.tipoCurs.nombre}"></td>
-							      <td th:text="${row.vacantes}"></td>
-							      <td th:text="${row.vacantesLibre}"></td>
-							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
+							      <td th:text="${row.apellido}"></td>
+							      <td th:text="${row.edad}"></td>
+							      <td th:text="${row.estado}"></td>
+							      <td th:text="${row.dni}"></td>
+							      <td th:text="${row.fono}"></td>
+							      <td th:text="${row.direccion}"></td>
+							      <td th:text="${row.mail}"></td>
+							      <td th:text="${row.fecNac}"></td>
+							      <td th:text="${row.fecReg}"></td>
+							  
+							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalProfesor"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
 							    </tr>  
 							  </tbody>
@@ -137,13 +144,13 @@
 		
 		
 			<!-- begin #modal-dialog : MODAL MEDICAMENTO-->
-			<div class="modal fade" id="modalMedicamento" data-backdrop="static" 
+			<div class="modal fade" id="modalProfesor" data-backdrop="static" 
 							data-keyboard="false" tabindex="-1" 
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered modal-login modal-lg" >					
 							<div class="modal-content">
 								<div class="modal-header bg-blue-darker">
-									<h4 class="modal-title text-white">Medicos</h4>
+									<h4 class="modal-title text-white">Profesor</h4>
 								</div>
 								<div class="modal-body">
 									<form method="POST" id="idRegistra" action="grabar">	
@@ -156,58 +163,68 @@
 														<input type="text" class="form-control"  id="idNombre" placeholder="Ingresar nombre" name="nombre">																										
 												</div>
 												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Hora de Inicio</b></label><br>		
+														<label for="exampleInputEmail1"><b>Apellido</b></label><br>		
 														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="time" class="form-control"  id="idHoraIni" placeholder="Ingresar Hora Inicio" name="horaIni">																										
+														<input type="text" class="form-control"  id="idApellido" placeholder="Ingresar Apellido" name="apellido">																										
 												</div>
 												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Hora de Fin</b></label><br>		
+														<label for="exampleInputEmail1"><b>Edad</b></label><br>		
 														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="time" class="form-control"  id="idHoraFin" placeholder="Ingresar Hora Fin" name="horaFin">																										
-												</div>
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Sección</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idSección" placeholder="Ingresar Sección" name="seccion">																										
+														<input type="text" class="form-control"  id="idEdad" placeholder="Ingresar Edad" name="edad">																										
 												</div>
 												
-											
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Estado</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idEstado" placeholder="Ingresar Estado Civil" name="estado">																										
+												</div>
+												
 												<div class="form-group has-feedback col-md-4">
-													<label for="exampleInputEmail1"><b>Vacantes</b></label><br>	
+													<label for="exampleInputEmail1"><b>DNI</b></label><br>	
 													<i class="fas fa-pen-fancy form-control-feedback2"></i>
-													<input type="text" class="form-control" id="idVacantes" placeholder="Ingresar Vacantes" name="vacantes">	
-												</div>
-												<div class="form-group has-feedback col-md-4">
-													<label for="exampleInputEmail1"><b>Vacantes Libres</b></label><br>
-													<i class="fas fa-money-check-alt form-control-feedback2"></i>
-													<input type="text" class="form-control" id="idVacantesLib" placeholder="Ingresar Vacantes Libres" name="vacantesLib">														
+													<input type="text" class="form-control" id="idDni" placeholder="Ingresar DNI" name="dni">	
 												</div>
 												
-												<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Turno</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idTurno" name="turno">
-													      <option value=" ">[Seleccione Turno]</option>
-													      <option th:each="row:${turnos}"
-													      th:text="${row.nombre}"
-													      th:value="${row.codigo}"
-													       />
-													    </select>
-													   
-												 </div>
-												 <div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Tipo</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idTipo" name="tipo">
-													      <option value=" ">[Seleccione Tipo]</option>
-													      <option th:each="row:${tipoCursos}"
-													      th:text="${row.nombre}"
-													      th:value="${row.codigo}"
-													       />
-													    </select>
-													   
-												 </div>
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Fono</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idFono" placeholder="Ingresar Fono" name="fono">																										
+												</div>
+												
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Direccion</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idDireccion" placeholder="Ingresar Direccion" name="direccion">																										
+												</div>
+												
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Correo</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idCorreo" placeholder="Ingresar Correo" name="mail">																										
+												</div>
+												
+												
+											    <div class="form-group has-feedback col-md-4">	
+													<label for="exampleInputEmail1" class="text-center"><b>Fecha Nacimiento</b></label><br>
+												    <i class="fas fa-calendar-week form-control-feedback2"></i>
+												    <input type="text" style="background-color:#aed6f1" class="form-control" id="usr1" name="fechaNac"
+												    													   placeholder="YYYY-MM-DD" autocomplete="off" >
+												    													 												
+							
+											    </div>
 											    
+											    
+											    
+											    
+											    <div class="form-group has-feedback col-md-4">	
+													<label for="exampleInputEmail1" class="text-center"><b>Fecha Registro</b></label><br>
+												    <i class="fas fa-calendar-week form-control-feedback2"></i>
+												    <input type="text" style="background-color:#aed6f1" class="form-control" id="usr2" name="fechaReg"
+												    													   placeholder="YYYY-MM-DD" autocomplete="off" >
+												    													 												
+							
+											    </div>
+										
 												 
 											</div>
 										</div>								
@@ -271,14 +288,16 @@
 				//asignar valores a las cajas usando el atributo "ID"
 				$("#idCodigo").val(response.codigo);
 				$("#idNombre").val(response.nombre);
-				$("#idHoraIni").val(response.horaini);
-				$("#idHoraFin").val(response.horafin);
-				$("#idSección").val(response.seccion);
-				$("#idVacantes").val(response.vacantes);
-				$("#idVacantesLib").val(response.vacantesLibre);
-				$("#idTurno").val(response.turnoCurs.codigo);
-				$("#idTipo").val(response.tipoCurs.codigo);
-
+				$("#idApellido").val(response.apellido);
+				$("#idEdad").val(response.edad);
+				$("#idEstado").val(response.estado);
+				$("#idDni").val(response.dni);
+				$("#idFono").val(response.fono);
+				$("#idDireccion").val(response.direccion);
+				$("#idCorreo").val(response.mail);
+				$("#usr1").val(response.fecNac);
+				$("#usr2").val(response.fecReg);
+			
 				
 				
 			})
@@ -296,6 +315,7 @@
 		})
 		
 		
+		
 		//evento Click al boton eliminar
 		$(document).on("click",".btn-eliminar",function(){
 			
@@ -305,7 +325,7 @@
 			
 			alertify.confirm("SISTEMA","Seguro de eliminar!",
 			  function(){
-				  window.location="http://localhost:8091/cursos/eliminar?codigo="+cod
+				  window.location="http://localhost:8091/profesor/eliminar?codigo="+cod
 		
 			  },
 			  function(){ 
@@ -317,20 +337,35 @@
 		})
 		
 		
-		$('#tableMedicamentos').DataTable();
-		$(function() {
-			$('#usr1').datepicker({
-				'format': 'yyyy-mm-dd',
-				'autoclose': true
-			});
+		
 	
-		});
-		$('#usr1').on('changeDate show', function(e) {
-		    $('#idRegistra').bootstrapValidator('revalidateField', $('#usr1'));
-		});
-
 
 	</script>
+	
+	<script>
+	
+	 $(function() {
+            $('#usr1').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr1').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr1'));
+        });
+
+
+		$(function() {
+            $('#usr2').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr2').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr2'));
+        });
+        
+		</script>
 	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     
@@ -384,7 +419,7 @@
 	                    }    
 	                },       				
 	                Fecha: {
-	     	    		selector:'#usr1',   
+	     	    		selector:'#usr2',   
 	                    validators: {    
 	                        notEmpty: {    
 	                            message: 'Seleccione fecha '    

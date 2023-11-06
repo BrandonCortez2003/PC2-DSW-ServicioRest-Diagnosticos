@@ -37,8 +37,6 @@
   <div class="container">
     <div class="row justify-content-center" style="margin-top: 200px!important">
       <div class="col-lg-4 col-md-6 col-sm-6">
-		  <div class="alert alert-danger" th:if="${param.error}">Clave incorrecta</div>
-		<div class="alert alert-success" th:if="${param.logout}">Sesión terminada</div>
         <div class="card shadow">
           <div class="card-title text-center border-bottom">
             <h2 class="p-3">REGISTRARSE</h2>
@@ -56,7 +54,7 @@
               </div>
               <div class="row justify-content-center">
 					 
-				<button type="submit" class="btn btn-secondary">Registrarse</button>
+				<button type="submit" class="btn btn-success">Registrarse</button>
               </div>
             </form>
             

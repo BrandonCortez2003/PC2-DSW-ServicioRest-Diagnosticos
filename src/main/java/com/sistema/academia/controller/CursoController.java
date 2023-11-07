@@ -56,21 +56,6 @@ public String grabar (@RequestParam("codigo") Integer cod,
 			
 			Curso curso = new Curso();
 			
-			curso.setNombre(nom);
-			curso.setHoraini(horaini);
-			curso.setHorafin(horafin);
-			curso.setSeccion(seccion);
-			curso.setVacantes(vacantes);
-			curso.setVacantesLibre(vacantesLib);
-			
-			TipoCurso tipo = new TipoCurso();
-			TurnoCurso turno = new TurnoCurso();
-			
-			tipo.setCodigo(codTipo);
-			turno.setCodigo(codTurno);
-			
-			curso.setTipoCurs(tipo);
-			curso.setTurnoCurs(turno);
 			
 			if(cod == 0)
 			{

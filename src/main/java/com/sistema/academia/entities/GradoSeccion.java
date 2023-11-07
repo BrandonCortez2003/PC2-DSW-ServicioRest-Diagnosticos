@@ -5,24 +5,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
-
 @Entity
-@Table(name="tb_curso")
-public class Curso {
-	
+@Table(name="tb_grado_seccion")
+public class GradoSeccion {
+
 	@Id
-	@Column(name="Idcurso")
+	@Column(name="IdGradoSeccion")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(name="Descripcion")
-	private String descripcion;
+	@Column(name="DescripcionGrado")
+	private String descripGrado;
 	
+	@Column(name="DescripcionSeccion")
+	private String descripSeccion;
 	
 	@Column(name="Activo")
 	private Boolean estado;
@@ -35,12 +33,20 @@ public class Curso {
 		this.codigo = codigo;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescripGrado() {
+		return descripGrado;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripGrado(String descripGrado) {
+		this.descripGrado = descripGrado;
+	}
+
+	public String getDescripSeccion() {
+		return descripSeccion;
+	}
+
+	public void setDescripSeccion(String descripSeccion) {
+		this.descripSeccion = descripSeccion;
 	}
 
 	public Boolean getEstado() {
@@ -52,19 +58,5 @@ public class Curso {
 	}
 	
 	
-
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

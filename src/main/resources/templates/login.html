@@ -10,9 +10,7 @@
 	  --main-bg:#0dcaf0;
 	}
 	
-	.main-bg {
-	  background: var(--main-bg) !important;
-	}
+
 	
 	input:focus, button:focus {
 	  border: 1px solid var(--main-bg) !important;
@@ -25,7 +23,15 @@
 	}
 	
 	.card, .btn, input{
-	  border-radius:0 !important;
+	  border-radius:2% !important;
+	}
+	
+	.main-bg{
+		
+	background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D");
+	background-repeat: no-repeat;
+    background-size: cover;
+		
 	}
 
 </style>
@@ -33,38 +39,42 @@
 <body class="main-bg">
   <!-- Login Form -->
   <div class="container">
-    <div class="row justify-content-center" style="margin-top: 300px!important">
+    <div class="row justify-content-center" style="margin-top: 100px!important">
       <div class="col-lg-4 col-md-6 col-sm-6">
-		  <div class="alert alert-danger" th:if="${param.error}">Clave incorrecta</div>
+		<div class="alert alert-danger" th:if="${param.error}">Clave incorrecta</div>
 		<div class="alert alert-success" th:if="${param.logout}">Sesión terminada</div>
         <div class="card shadow">
-          <div class="card-title text-center border-bottom">
-            <h2 class="p-3">INTRANET</h2>
+          <div class="card-title text-center ">
+			  </br>
+            <img width="200px" height="200px" src="/src/main/resources/static/img/user.png" th:src="@{/img/user.png}"/>
           </div>
-          <div class="card-body">
-            <form method="post" th:action="@{/sesion/login}">
-              <div class="mb-4">
-                <label for="username" class="form-label font-weight-bold">Username/Email</label>
-                <input type="text" class="form-control" id="username" name="username" />
-              </div>
-              <div class="mb-4">
-                <label for="password" class="form-label font-weight-bold">Password</label>
-                <input type="password" class="form-control" id="password" name="password" />
-              </div>
-              <div class="d-grid">
-                <button type="submit" class="btn text-light main-bg">Login</button>
-              </div>
-            </form>
-          </div>
+          
+        <div class="card-body rounded-2 bg-white">
+			  <form method="post" th:action="@{/sesion/login}">
+			    <div class="mb-4">
+			      <label for="username" class="form-label font-weight-bold">Usuario/Email</label>
+			      <input type="text" class="form-control rounded" id="username" name="username" />
+			    </div>
+			    <div class="mb-4">
+			      <label for="password" class="form-label font-weight-bold">Contraseña</label>
+			      <input type="password" class="form-control rounded" id="password" name="password" />
+			    </div>
+			    <div class="d-grid">
+			      <button type="submit" class="btn btn-primary ">Ingresar</button>
+			    </div>
+			    </form>
+			    </br>
+			    <div class="d-flex gap-1 justify-content-center mt-1">
+                            <div>¿No tienes Cuenta?</div>					 
+			                <a th:href="@{/sesion/register}">Registrarse</a>
+			         </div>
+  </form>
+</div>
         </div>
       </div>
       </div>
       <form>	
-      <div class="row justify-content-center">
-					 
-                <a th:href="@{/sesion/register}">Registrarse</a>
-              </div>
-		</form>		
+     	
 
   </div>
   

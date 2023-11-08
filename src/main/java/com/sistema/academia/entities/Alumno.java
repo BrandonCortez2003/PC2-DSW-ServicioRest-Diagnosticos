@@ -18,143 +18,131 @@ import jakarta.persistence.Table;
 public class Alumno {
 	
 	@Id
-	@Column(name="cod_alum")
+	@Column(name="IdAlumno")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(name="nom_alum")
+	@Column(name="Nombres")
 	private String nombre;
 	
-	@Column(name="ape_alum")
+	@Column(name="Apellidos")
 	private String apellido;
 	
-	@Column(name="edad_alum")
-	private String edad;
-	
-	@Column(name="esta_Alum")
-	private String estado;
-	
-	@Column(name="dni_alum")
+	@Column(name="DNI")
 	private String dni;
 	
-	@Column(name="fono_alum")
-	private String telefono;
+	@Column(name="FechaNacimiento")
+	private LocalDate fecha;
 	
-	@Column(name="dire_alum")
+	@Column(name="sexo")
+	private String sexo;
+	
+	@Column(name="Ciudad")
+	private String ciudad;
+	
+	@Column(name="Direccion")
 	private String direccion;
 	
-	@Column(name="mail_alum")
-	private String correo;
+	@Column(name="Activo")
+	private boolean activo;
 	
-	@Column(name="fec_nac_alum")
-	private LocalDate fechanaci;
+	@Column(name="FechaRegistro")
+	private LocalDate registro;
 	
-	@Column(name="fec_reg_alum")
-	private LocalDate fecharegi;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "alumno")
-	private List<Matricula> listaAlumno;
+@JsonIgnore
 	
-	public List<Matricula> getListaAlumno() {
-		return listaAlumno;
-	}
+	//Relaccion
+	@OneToMany (mappedBy = "alumno")
+	private List<Calificacion> listaAlumno;
 
-	public void setListaAlumno(List<Matricula> listaAlumno) {
-		this.listaAlumno = listaAlumno;
-	}
+public Integer getCodigo() {
+	return codigo;
+}
 
-	public Integer getCodigo() {
-		return codigo;
-	}
+public void setCodigo(Integer codigo) {
+	this.codigo = codigo;
+}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
+public String getNombre() {
+	return nombre;
+}
 
-	public String getNombre() {
-		return nombre;
-	}
+public void setNombre(String nombre) {
+	this.nombre = nombre;
+}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+public String getApellido() {
+	return apellido;
+}
 
-	public String getApellido() {
-		return apellido;
-	}
+public void setApellido(String apellido) {
+	this.apellido = apellido;
+}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+public String getDni() {
+	return dni;
+}
 
-	public String getEdad() {
-		return edad;
-	}
+public void setDni(String dni) {
+	this.dni = dni;
+}
 
-	public void setEdad(String edad) {
-		this.edad = edad;
-	}
+public LocalDate getFecha() {
+	return fecha;
+}
 
-	public String getEstado() {
-		return estado;
-	}
+public void setFecha(LocalDate fecha) {
+	this.fecha = fecha;
+}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+public String getSexo() {
+	return sexo;
+}
 
-	public String getDni() {
-		return dni;
-	}
+public void setSexo(String sexo) {
+	this.sexo = sexo;
+}
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+public String getCiudad() {
+	return ciudad;
+}
 
-	public String getTelefono() {
-		return telefono;
-	}
+public void setCiudad(String ciudad) {
+	this.ciudad = ciudad;
+}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+public String getDireccion() {
+	return direccion;
+}
 
-	public String getDireccion() {
-		return direccion;
-	}
+public void setDireccion(String direccion) {
+	this.direccion = direccion;
+}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+public boolean isActivo() {
+	return activo;
+}
 
-	public String getCorreo() {
-		return correo;
-	}
+public void setActivo(boolean activo) {
+	this.activo = activo;
+}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+public LocalDate getRegistro() {
+	return registro;
+}
 
-	public LocalDate getFechanaci() {
-		return fechanaci;
-	}
+public void setRegistro(LocalDate registro) {
+	this.registro = registro;
+}
 
-	public void setFechanaci(LocalDate fechanaci) {
-		this.fechanaci = fechanaci;
-	}
+public List<Calificacion> getListaAlumno() {
+	return listaAlumno;
+}
 
-	public LocalDate getFecharegi() {
-		return fecharegi;
-	}
+public void setListaAlumno(List<Calificacion> listaAlumno) {
+	this.listaAlumno = listaAlumno;
+}
 
-	public void setFecharegi(LocalDate fecharegi) {
-		this.fecharegi = fecharegi;
-	}
-	
-	
-	
-	
 	
 
 	

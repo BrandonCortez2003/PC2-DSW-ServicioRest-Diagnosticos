@@ -1,12 +1,16 @@
 package com.sistema.academia.entities;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +51,18 @@ public class Alumno {
 	
 	@Column(name="fec_reg_alum")
 	private LocalDate fecharegi;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "alumno")
+	private List<Matricula> listaAlumno;
+	
+	public List<Matricula> getListaAlumno() {
+		return listaAlumno;
+	}
+
+	public void setListaAlumno(List<Matricula> listaAlumno) {
+		this.listaAlumno = listaAlumno;
+	}
 
 	public Integer getCodigo() {
 		return codigo;

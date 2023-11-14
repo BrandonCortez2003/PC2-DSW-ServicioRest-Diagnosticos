@@ -1,6 +1,7 @@
 package com.sistema.academia.entities;
 
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -184,10 +185,12 @@ public class Apoderado {
 	}
 	
 	
+	
+	
 	@PrePersist
     protected void onCreate() {
 		fechaRegistro = LocalDateTime.now();
     }
-	
+
 	
 }

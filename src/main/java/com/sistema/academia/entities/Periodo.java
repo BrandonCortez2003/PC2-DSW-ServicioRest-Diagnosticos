@@ -1,9 +1,12 @@
 package com.sistema.academia.entities;
 
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
@@ -35,6 +39,7 @@ public class Periodo {
 	@Column(name="estado_perio")
 	private Boolean estado;
 	
+
 	@Column(name="fecha_registro")
 	private LocalDateTime fechaRegistro;
 	
@@ -43,6 +48,21 @@ public class Periodo {
 	@OneToMany(mappedBy = "periodo")
 	private List<Nivel> listaNivel;
 	
+
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "periodo") 
+	private List<Nivel> listaPeriodo;
+	
+
+	public List<Nivel> getListaPeriodo() {
+		return listaPeriodo;
+	}
+
+	public void setListaPeriodo(List<Nivel> listaPeriodo) {
+		this.listaPeriodo = listaPeriodo;
+	}
+
 
 	public Integer getCodigo() {
 		return codigo;

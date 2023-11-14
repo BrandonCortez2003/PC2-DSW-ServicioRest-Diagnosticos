@@ -149,5 +149,6 @@ public class NivelDetalle {
     protected void onCreate() {
 		fechaRegistro = LocalDateTime.now();
     }
+
 	
 }

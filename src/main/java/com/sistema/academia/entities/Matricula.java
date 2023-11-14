@@ -1,5 +1,6 @@
 package com.sistema.academia.entities;
 
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -170,5 +171,6 @@ public class Matricula {
 		fechaRegistro = LocalDateTime.now();
     }
 	
+
 
 }

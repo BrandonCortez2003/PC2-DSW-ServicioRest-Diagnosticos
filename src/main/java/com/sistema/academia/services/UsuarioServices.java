@@ -28,4 +28,29 @@ public class UsuarioServices {
 		return repo.traerEnlacesDelUsuario(desRol);
 	}
 	
+
+	public void guardar(Usuario usu) {
+		repo.save(usu);
+	}
+	
+	public void actualizar (Usuario usu){
+		repo.save(usu);
+	}
+	
+	public void eliminarPorID (Integer cod) {
+		repo.deleteById(cod);
+	}
+	
+	public Usuario buscarPorID (Integer cod) {
+		return repo.findById(cod).orElse(null);
+	}
+	
+	public List<Usuario> listarTodos() {
+		return repo.findAll();
+		}
+	
+	
+	
 }
+
+

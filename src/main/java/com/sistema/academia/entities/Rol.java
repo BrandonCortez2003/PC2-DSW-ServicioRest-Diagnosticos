@@ -19,10 +19,14 @@ public class Rol {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idrol")
 	private int codigo;
+	
+	@Column(name="descripcion")
 	private String descripcion;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "rol")
 	private List<Usuario> listaUsuario;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "rol")
 	private List<RolEnlace> listaRolEnlace;

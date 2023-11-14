@@ -1,6 +1,7 @@
 package com.sistema.academia.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sistema.academia.entities.Alumno;
 import com.sistema.academia.services.ALumnoServices;
+import com.sistema.academia.services.DistritoServices;
 
 @Controller
 @RequestMapping("/alumno")
@@ -20,10 +22,14 @@ public class AlumnoController {
 	@Autowired
 	private ALumnoServices servicioAlu;
 	
+	@Autowired
+	private DistritoServices servicioDis;
+	
 	@RequestMapping("/lista")
 	public String Index(Model  model)
 	{
 		model.addAttribute("alumnos", servicioAlu.listarTodos());
+		model.addAttribute("distritos", servicioDis.listaDistrito());
 		
 		return "alumno";
 	}
@@ -33,7 +39,7 @@ public class AlumnoController {
 						 @RequestParam("nombre") String nom,
 						 @RequestParam("apellido") String ape,
 						 @RequestParam("edad")String edad,
-						 @RequestParam("estado")String estado,
+						 @RequestParam("estado")boolean estado,
 						 @RequestParam("dni")String dni,
 						 @RequestParam("telefono")String fono,
 						 @RequestParam("direccion")String direccion,
@@ -48,14 +54,11 @@ public class AlumnoController {
 			
 			alu.setNombre(nom);
 			alu.setApellido(ape);
-			alu.setEdad(edad);
 			alu.setEstado(estado);
 			alu.setDni(dni);
-			alu.setTelefono(fono);
 			alu.setDireccion(direccion);
-			alu.setCorreo(correo);
 			alu.setFechanaci(LocalDate.parse(fechanaci));
-			alu.setFecharegi(LocalDate.parse(fecharegi));
+			alu.setFecharegi(LocalDateTime.parse(fecharegi));
 			
 			if(cod == 0)
 			{

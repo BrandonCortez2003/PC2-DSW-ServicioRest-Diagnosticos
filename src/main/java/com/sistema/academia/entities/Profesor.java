@@ -1,54 +1,65 @@
 package com.sistema.academia.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tb_profesor")
+@Table(name="tb_docente")
 public class Profesor {
 	
 	@Id
-	@Column(name="cod_prof")
+	@Column(name="cod_doc")
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(name = "nom_prof")
+	@Column(name = "nom_doc")
 	private String nombre;
 	
-	@Column(name = "ape_prof")
+	@Column(name = "ape_doc")
 	private String apellido;
 	
-	@Column(name = "edad_prof")
-	private String edad;
+	@Column(name = "estado_doc")
+	private Boolean estado;
 	
-	@Column(name = "esta_prof")
-	private String estado;
-	
-	@Column(name = "dni_prof")
+	@Column(name = "dni_doc")
 	private String dni;
 	
-	@Column(name = "fono_prof")
+	@Column(name="sexo_doc")
+	private String sexo;
+	
+	@Column(name="grado_estudio_doc")
+	private String gradoStudio;
+	
+	@Column(name = "telef_doc")
 	private String fono;
 	
-	@Column(name = "dire_prof")
+	@Column(name = "direc_doc")
 	private String direccion;
 	
+	@Column(name = "correo_doc")
+	private String correo;
 	
-	@Column(name = "mail_prof")
-	private String mail;
-	
-	@Column(name = "fec_nac_prof")
-	private LocalDate fecNac;
+	@Column(name = "fecha_naci_doc")
+	private LocalDate fecNacimiento;
 	
 	
-	@Column(name = "fec_reg_prof")
-	private LocalDate fecReg;
+	@Column(name = "fecha_registro")
+	private LocalDateTime fecReg;
+
+	
+	//Relacion 
+	@ManyToOne
+	@JoinColumn(name="cod_dis")
+	private Distrito distrito;
 
 
 	public Integer getCodigo() {
@@ -81,22 +92,12 @@ public class Profesor {
 	}
 
 
-	public String getEdad() {
-		return edad;
-	}
-
-
-	public void setEdad(String edad) {
-		this.edad = edad;
-	}
-
-
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 
@@ -108,6 +109,26 @@ public class Profesor {
 
 	public void setDni(String dni) {
 		this.dni = dni;
+	}
+
+
+	public String getSexo() {
+		return sexo;
+	}
+
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+
+	public String getGradoStudio() {
+		return gradoStudio;
+	}
+
+
+	public void setGradoStudio(String gradoStudio) {
+		this.gradoStudio = gradoStudio;
 	}
 
 
@@ -131,34 +152,47 @@ public class Profesor {
 	}
 
 
-	public String getMail() {
-		return mail;
+	public String getCorreo() {
+		return correo;
 	}
 
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 
-	public LocalDate getFecNac() {
-		return fecNac;
+	public LocalDate getFecNacimiento() {
+		return fecNacimiento;
 	}
 
 
-	public void setFecNac(LocalDate fecNac) {
-		this.fecNac = fecNac;
+	public void setFecNacimiento(LocalDate fecNacimiento) {
+		this.fecNacimiento = fecNacimiento;
 	}
 
 
-	public LocalDate getFecReg() {
+	public LocalDateTime getFecReg() {
 		return fecReg;
 	}
 
 
-	public void setFecReg(LocalDate fecReg) {
+	public void setFecReg(LocalDateTime fecReg) {
 		this.fecReg = fecReg;
 	}
+
+
+	public Distrito getDistrito() {
+		return distrito;
+	}
+
+
+	public void setDistrito(Distrito distrito) {
+		this.distrito = distrito;
+	}
+	
+
+	
 
 
 	

@@ -1,7 +1,5 @@
 package com.sistema.academia.entities;
 
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,35 +13,29 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tb_periodo")
-public class Periodo {
+@Table(name="tb_seccion")
+public class Seccion {
 
 	@Id
-	@Column(name="cod_perio")
+	@Column(name="cod_seccion")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(name="des_perio")
-	private String descripcion;
+	@Column(name="des_seccion")
+	private String descripSeccion;
 	
-	@Column(name="fecha_ini_perio")
-	private LocalDate fechaIni;
-	
-	@Column(name="fecha_fin_perio")
-	private LocalDate fechafin;
-	
-	@Column(name="estado_perio")
-	private Boolean estado;
+	@Column(name="estado_seccion")
+	private Boolean estado;	
 	
 	@Column(name="fecha_registro")
 	private LocalDateTime fechaRegistro;
 	
 	
-	//Relacion
-	@OneToMany(mappedBy = "periodo")
-	private List<Nivel> listaNivel;
-	
+	//Relacion con nivel detalle
+	@OneToMany(mappedBy = "seccion")
+	private List<NivelDetalle> listaNivelDetalle;
 
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -52,28 +44,13 @@ public class Periodo {
 		this.codigo = codigo;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+
+	public String getDescripSeccion() {
+		return descripSeccion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public LocalDate getFechaIni() {
-		return fechaIni;
-	}
-
-	public void setFechaIni(LocalDate fechaIni) {
-		this.fechaIni = fechaIni;
-	}
-
-	public LocalDate getFechafin() {
-		return fechafin;
-	}
-
-	public void setFechafin(LocalDate fechafin) {
-		this.fechafin = fechafin;
+	public void setDescripSeccion(String descripSeccion) {
+		this.descripSeccion = descripSeccion;
 	}
 
 	public Boolean getEstado() {
@@ -94,19 +71,19 @@ public class Periodo {
 	
 	
 	
-	
-	public List<Nivel> getListaNivel() {
-		return listaNivel;
+	public List<NivelDetalle> getListaNivelDetalle() {
+		return listaNivelDetalle;
 	}
 
-	public void setListaNivel(List<Nivel> listaNivel) {
-		this.listaNivel = listaNivel;
+	public void setListaNivelDetalle(List<NivelDetalle> listaNivelDetalle) {
+		this.listaNivelDetalle = listaNivelDetalle;
 	}
 
 	@PrePersist
     protected void onCreate() {
 		fechaRegistro = LocalDateTime.now();
     }
+	
 	
 	
 	

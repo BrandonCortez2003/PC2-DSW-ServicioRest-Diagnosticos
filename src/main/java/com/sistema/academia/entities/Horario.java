@@ -1,6 +1,7 @@
 package com.sistema.academia.entities;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,20 +15,26 @@ import jakarta.persistence.Table;
 public class Horario {
 
 	@Id
-	@Column(name="IdHorario")
+	@Column(name="cod_horario")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(name="DiaSemana")
+	@Column(name="dia_semana")
 	private String diaSemana;
 	
-	@Column(name="HoraInicio")
+	@Column(name="hora_ini_horario")
 	private Time horaIni;
 	
-	@Column(name="HoraFin")
+	@Column(name="hora_fin_horario")
 	private Time horaFin;
 	
-	@Column(name="Activo")
+	@Column(name="estado_horario")
 	private Boolean estado;
+	
+	@Column(name="fecha_registro")
+	private LocalDateTime fechaRegistro;
+	
+	//Relacion
+	
 	
 }

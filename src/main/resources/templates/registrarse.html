@@ -44,9 +44,25 @@
           <div class="card-body">
             <form method="post" th:action="@{/sesion/registrarse}">
             
+            <div class="mb-4">
+                <label for="text" class="form-label font-weight-bold">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre"/>
+              </div>
+              <div class="mb-4">
+                <label for="text" class="form-label font-weight-bold">Apellido</label>
+                <input type="text" class="form-control" id="apellido" name="apellido"/>
+              </div>
+              <div class="mb-4">
+                <label for="text" class="form-label font-weight-bold">Correo</label>
+                <input type="text" class="form-control" id="correo" name="correo"/>
+              </div>
+              <div class="mb-4">
+                <label for="text" class="form-label font-weight-bold">Dni</label>
+                <input type="text" class="form-control" id="dni" name="dni"/>
+              </div>
               <div class="mb-4">
                 <label for="password" class="form-label font-weight-bold">Usuario</label>
-                <input type="text" class="form-control" id="password" name="login"/>
+                <input type="text" class="form-control" id="login" name="login"/>
               </div>
               <div class="mb-4">
                 <label for="password" class="form-label font-weight-bold">Contraseña</label>

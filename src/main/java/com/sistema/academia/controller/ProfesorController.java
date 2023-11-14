@@ -1,6 +1,7 @@
 package com.sistema.academia.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sistema.academia.entities.Curso;
 import com.sistema.academia.entities.Profesor;
+import com.sistema.academia.services.DistritoServices;
 import com.sistema.academia.services.ProfesorServices;
 
 @Controller
@@ -21,10 +22,14 @@ public class ProfesorController {
 	@Autowired
 	private ProfesorServices servicioPro;
 	
+	@Autowired
+	private DistritoServices servicioDis;
+	
 	@RequestMapping("/lista")
 	public String index(Model model) {
 		
 		model.addAttribute("profesor",servicioPro.listarTodos());
+		model.addAttribute("distritos", servicioDis.listaDistrito());
 		
 		return "profesor";
 	
@@ -35,11 +40,11 @@ public class ProfesorController {
 						@RequestParam("nombre")String nom,
 						@RequestParam("apellido")String ape,
 						@RequestParam("edad")String edad,
-						@RequestParam("estado")String estado,
+						@RequestParam("estado")boolean estado,
 						@RequestParam("dni")String dni,
 						@RequestParam("fono")String fono,
 						@RequestParam("direccion")String direc,
-						@RequestParam("mail")String mail,
+						@RequestParam("mail")String correo,
 						@RequestParam("fechaNac")String fecNac,
 						@RequestParam("fechaReg")String fecReg,
 						
@@ -52,14 +57,13 @@ public class ProfesorController {
 			//setear atrinutos 
 			pro.setNombre(nom);
 			pro.setApellido(ape);
-			pro.setEdad(edad);
 			pro.setEstado(estado);
 			pro.setDni(dni);
 			pro.setFono(dni);
 			pro.setDireccion(direc);
-			pro.setMail(mail);
-			pro.setFecNac(LocalDate.parse(fecNac));
-			pro.setFecReg(LocalDate.parse(fecReg));
+			pro.setCorreo(correo);
+			pro.setFecNacimiento(LocalDate.parse(fecNac));
+			pro.setFecReg(LocalDateTime.parse(fecReg));
 		
 			
 			

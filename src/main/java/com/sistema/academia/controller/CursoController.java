@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.sistema.academia.entities.Curso;
-import com.sistema.academia.entities.TipoCurso;
-import com.sistema.academia.entities.TurnoCurso;
 import com.sistema.academia.services.CursoServices;
-import com.sistema.academia.services.TipoCursoServices;
-import com.sistema.academia.services.TurnoCursoServices;
+
 
 @Controller
 @RequestMapping("/cursos")
@@ -22,19 +18,13 @@ public class CursoController {
 	@Autowired
 	private CursoServices servicioCurso;
 	
-	@Autowired
-	private TipoCursoServices servicioTipoCurso;
-	
-	@Autowired
-	private TurnoCursoServices servicioTurno;
 	
 
 @RequestMapping("/lista")
 	public String Index(Model model)
 	{
 		model.addAttribute("cursos", servicioCurso.listarTodos());
-		model.addAttribute("tipoCursos", servicioTipoCurso.listarTodos());
-		model.addAttribute("turnos", servicioTurno.listarTodos());
+
 		
 		return "cursos";
 	

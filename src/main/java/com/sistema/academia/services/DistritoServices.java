@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sistema.academia.entities.TurnoCurso;
-import com.sistema.academia.repository.TurnoCursoRepository;
+import com.sistema.academia.entities.Distrito;
+import com.sistema.academia.repository.DistritoRepository;
 
 @Service
-public class TurnoCursoServices {
+public class DistritoServices {
 
 	@Autowired
-	private TurnoCursoRepository repo;
+	private DistritoRepository repo;
 	
-	public List<TurnoCurso> listarTodos()
+	public List<Distrito> listaDistrito()
 	{
 		return repo.findAll();
 	}

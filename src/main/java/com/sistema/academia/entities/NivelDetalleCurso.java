@@ -1,7 +1,6 @@
 package com.sistema.academia.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,50 +9,40 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-
-
 @Entity
-@Table(name="tb_curso")
-public class Curso {
-	
+@Table(name="tn_nivel_detalle_curso")
+public class NivelDetalleCurso {
+
 	@Id
-	@Column(name="cod_curso")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer codigo;
+	@Column(name="cod_nivel_detalle_curso")
+	private Integer codigoDetalleCurso;
 	
-	@Column(name="des_curso")
-	private String descripcion;
-		
-	@Column(name="estado_curso")
+	@Column(name="estado_nivel_detalle_curso")
 	private Boolean estado;
 	
 	@Column(name="fecha_registro")
 	private LocalDateTime fechaRegistro;
 	
+	//Relacion con nivel detalle
+	@ManyToOne
+	@JoinColumn(name="cod_nivel_detalle")
+	private NivelDetalle nivelDetalle;
 	
-	//Relacion con nivel detalle curso
-	@OneToMany(mappedBy = "curso")
-	private List<NivelDetalleCurso> listaNivelDetalleCurso;
-	
+	//Relacion con curso
+	@ManyToOne
+	@JoinColumn(name="cod_curso")
+	private Curso curso;
 
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getCodigoDetalleCurso() {
+		return codigoDetalleCurso;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setCodigoDetalleCurso(Integer codigoDetalleCurso) {
+		this.codigoDetalleCurso = codigoDetalleCurso;
 	}
 
 	public Boolean getEstado() {
@@ -71,22 +60,28 @@ public class Curso {
 	public void setFechaRegistro(LocalDateTime fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-	
 
+	public NivelDetalle getNivelDetalle() {
+		return nivelDetalle;
+	}
+
+	public void setNivelDetalle(NivelDetalle nivelDetalle) {
+		this.nivelDetalle = nivelDetalle;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+	
+	
 	@PrePersist
     protected void onCreate() {
 		fechaRegistro = LocalDateTime.now();
     }
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

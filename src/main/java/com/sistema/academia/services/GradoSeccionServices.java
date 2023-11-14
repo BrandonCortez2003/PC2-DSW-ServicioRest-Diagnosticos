@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sistema.academia.entities.Curso;
-import com.sistema.academia.entities.GradoSeccion;
+import com.sistema.academia.entities.Seccion;
 import com.sistema.academia.repository.CursoRepository;
 import com.sistema.academia.repository.GradoSeccionRepository;
 
@@ -18,12 +18,12 @@ public class GradoSeccionServices {
 	@Autowired
 	private CursoRepository repoCurso;
 	
-	public void registrar(GradoSeccion gradoS)
+	public void registrar(Seccion gradoS)
 	{
 		repo.save(gradoS);
 	}
 	
-	public void actualizar(GradoSeccion gradoS)
+	public void actualizar(Seccion gradoS)
 	{
 		repo.save(gradoS);
 	}
@@ -33,12 +33,12 @@ public class GradoSeccionServices {
 		repo.deleteById(cod);
 	}
 	
-	public GradoSeccion buscarPorID(Integer cod)
+	public Seccion buscarPorID(Integer cod)
 	{
 		return repo.findById(cod).orElse(null);
 	}
 	
-	public List<GradoSeccion> listarTodos()
+	public List<Seccion> listarTodos()
 	{
 		return repo.findAll();
 	}

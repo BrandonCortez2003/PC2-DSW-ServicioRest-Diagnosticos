@@ -19,7 +19,11 @@ public class Enlace {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idenlace")
 	private int codigo;
+	
+	@Column(name="descripcion")
 	private String descripcion;
+	
+	@Column(name="ruta")
 	private String ruta;
 
 	

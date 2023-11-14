@@ -1,12 +1,18 @@
 package com.sistema.academia.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,39 +20,48 @@ import jakarta.persistence.Table;
 public class Alumno {
 	
 	@Id
-	@Column(name="cod_alum")
+	@Column(name="cod_alu")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(name="nom_alum")
+	@Column(name="nom_alu")
 	private String nombre;
 	
-	@Column(name="ape_alum")
+	@Column(name="ape_alu")
 	private String apellido;
+
+	@Column(name="sexo_alu")
+	private String sexo;
 	
-	@Column(name="edad_alum")
-	private String edad;
+	@Column(name="estado_Alu")
+	private Boolean estado;
 	
-	@Column(name="esta_Alum")
-	private String estado;
-	
-	@Column(name="dni_alum")
+	@Column(name="dni_alu")
 	private String dni;
-	
-	@Column(name="fono_alum")
-	private String telefono;
-	
-	@Column(name="dire_alum")
+		
+	@Column(name="dire_alu")
 	private String direccion;
-	
-	@Column(name="mail_alum")
-	private String correo;
-	
-	@Column(name="fec_nac_alum")
+		
+	@Column(name="fecha_naci_alu")
 	private LocalDate fechanaci;
 	
-	@Column(name="fec_reg_alum")
-	private LocalDate fecharegi;
+	@Column(name="fecha_registro")
+	private LocalDateTime fecharegi;
+	
+	//Relacion con distrito
+	
+	@ManyToOne
+	@JoinColumn(name="cod_dis")
+	private Distrito distrito;
+	
+	
+	//Relacion con apoderado
+	@OneToMany(mappedBy = "alumno")
+	private List<Apoderado> listaApoderado;
+	
+	//Relacion con matricula
+	@OneToMany(mappedBy = "alumno")
+	private List<Matricula> listaMatricula;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -72,19 +87,12 @@ public class Alumno {
 		this.apellido = apellido;
 	}
 
-	public String getEdad() {
-		return edad;
-	}
 
-	public void setEdad(String edad) {
-		this.edad = edad;
-	}
-
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 
@@ -96,13 +104,6 @@ public class Alumno {
 		this.dni = dni;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
 
 	public String getDireccion() {
 		return direccion;
@@ -112,13 +113,6 @@ public class Alumno {
 		this.direccion = direccion;
 	}
 
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
 
 	public LocalDate getFechanaci() {
 		return fechanaci;
@@ -128,17 +122,54 @@ public class Alumno {
 		this.fechanaci = fechanaci;
 	}
 
-	public LocalDate getFecharegi() {
+	public LocalDateTime getFecharegi() {
 		return fecharegi;
 	}
 
-	public void setFecharegi(LocalDate fecharegi) {
+	public void setFecharegi(LocalDateTime fecharegi) {
 		this.fecharegi = fecharegi;
 	}
 	
 	
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public Distrito getDistrito() {
+		return distrito;
+	}
+
+	public void setDistrito(Distrito distrito) {
+		this.distrito = distrito;
+	}
 	
 	
+	
+
+	public List<Apoderado> getListaApoderado() {
+		return listaApoderado;
+	}
+
+	public void setListaApoderado(List<Apoderado> listaApoderado) {
+		this.listaApoderado = listaApoderado;
+	}
+
+	public List<Matricula> getListaMatricula() {
+		return listaMatricula;
+	}
+
+	public void setListaMatricula(List<Matricula> listaMatricula) {
+		this.listaMatricula = listaMatricula;
+	}
+
+	@PrePersist
+    protected void onCreate() {
+		fecharegi = LocalDateTime.now();
+    }
 	
 
 	

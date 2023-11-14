@@ -55,6 +55,10 @@ public class UsuarioController {
 	
 	@RequestMapping("/registrarse")
 	public String grabar (
+						@RequestParam("nombre")String nombre,
+						@RequestParam("apellido")String apellido,
+						@RequestParam("correo")String correo,
+						@RequestParam("dni")String dni,
 	                    @RequestParam("login") String login,
 	                    @RequestParam("password") String clave,
 	                   
@@ -67,6 +71,10 @@ public class UsuarioController {
 	        Usuario usu = new Usuario();
 	        // Setear atributos 
 	      
+	        usu.setNombre(nombre);
+	        usu.setApellido(apellido);
+	        usu.setCorreo(correo);
+	        usu.setDni(dni);
 	        usu.setLogin(login);
 	        usu.setClave(encoder.encode(clave));
 	        

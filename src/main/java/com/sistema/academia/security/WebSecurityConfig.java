@@ -26,10 +26,15 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests((requests) -> requests
+<<<<<<< Upstream, based on branch 'master' of https://github.com/DanielPRe15/Sistema_Academia_2023
 				.requestMatchers("/sesion/**","resources/**","/css/**","/img/**","/error/**").permitAll()
 				.requestMatchers("/director/**","/profesor/**","/cursos/**","/cursosalumno/**",
 						"/cursoprofesor/**","/usuario/**"
 						).authenticated()
+=======
+				.requestMatchers("/sesion/**","resources/**","/css/**","/img/**").permitAll()
+				.requestMatchers("/director/**","/profesor/**","/cursos/**","/periodos/**","/cursosalumno/**","/cursoprofesor/**").authenticated()
+>>>>>>> f6935b4 Crud Periodo
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form

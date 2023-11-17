@@ -34,7 +34,7 @@ public class AlumnoController {
 		return "alumno";
 	}
 	
-	/*@RequestMapping("/grabar")
+	@RequestMapping("/grabar")
 	public String grabar(@RequestParam("codigo") Integer cod,
 						 @RequestParam("nombre") String nom,
 						 @RequestParam("apellido") String ape,
@@ -96,7 +96,7 @@ public class AlumnoController {
 		return "redirect:/alumno/lista";
 	}
 	
-		*/
+		
 }
 	
 

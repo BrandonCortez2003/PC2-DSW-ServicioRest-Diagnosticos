@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +23,7 @@ import jakarta.persistence.Table;
 public class Nivel {
 
 	@Id
+	@Column(name="cod_nivel")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
@@ -126,6 +128,7 @@ public class Nivel {
 	
 	
 	@PrePersist
+	@PreUpdate
     protected void onCreate() {
 		fecharegi = LocalDateTime.now();
     }

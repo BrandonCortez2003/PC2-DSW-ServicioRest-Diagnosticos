@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sistema.academia.entities.Distrito;
 import com.sistema.academia.entities.Profesor;
 import com.sistema.academia.services.DistritoServices;
 import com.sistema.academia.services.ProfesorServices;
@@ -39,14 +40,16 @@ public class ProfesorController {
 	public String grabar (@RequestParam("codigo") Integer cod,
 						@RequestParam("nombre")String nom,
 						@RequestParam("apellido")String ape,
-						@RequestParam("edad")String edad,
-						@RequestParam("estado")boolean estado,
 						@RequestParam("dni")String dni,
-						@RequestParam("fono")String fono,
+						@RequestParam("sexo")String sexo,
+						@RequestParam("grado")String grado,
+						@RequestParam("fechaNac")String fechaNac,
+						@RequestParam("distrito")int codDis,
 						@RequestParam("direccion")String direc,
 						@RequestParam("mail")String correo,
-						@RequestParam("fechaNac")String fecNac,
-						@RequestParam("fechaReg")String fecReg,
+						@RequestParam("fono")String fono,
+						 @RequestParam("estado")Boolean estado,		
+						
 						
 						RedirectAttributes redirect)
 	{
@@ -57,16 +60,21 @@ public class ProfesorController {
 			//setear atrinutos 
 			pro.setNombre(nom);
 			pro.setApellido(ape);
-			pro.setEstado(estado);
 			pro.setDni(dni);
-			pro.setFono(dni);
+			pro.setSexo(sexo);
+			pro.setGradoStudio(grado);
+			pro.setFecNacimiento(LocalDate.parse(fechaNac));
 			pro.setDireccion(direc);
 			pro.setCorreo(correo);
-			pro.setFecNacimiento(LocalDate.parse(fecNac));
-			pro.setFecReg(LocalDateTime.parse(fecReg));
+			pro.setFono(fono);
+			pro.setEstado(estado);
+			
+			Distrito dis = new Distrito();
+			
+			dis.setCodigo(codDis);
+			pro.setDistrito(dis);
 		
-			
-			
+
 			
 			//validar parametro
 		

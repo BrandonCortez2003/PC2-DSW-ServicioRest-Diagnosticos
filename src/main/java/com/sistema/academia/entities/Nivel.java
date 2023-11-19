@@ -23,6 +23,7 @@ public class Nivel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="cod_nivel")
 	private Integer codigo;
 	
 	@Column(name="des_nivel")

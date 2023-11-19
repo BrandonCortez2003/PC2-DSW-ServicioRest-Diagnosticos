@@ -86,6 +86,35 @@
 	/*.toast-succes{
 		width: 120px;
 	}*/
+	
+	 .moveall, .removeall {
+            border: 1px solid #ccc !important;
+            background: #efefef;
+        }
+
+
+        .moveall:hover, .removeall:hover {
+            background: #efefef;
+        }
+
+        .moveall::after {
+            content: attr(title);
+        }
+
+        .removeall::after {
+            content: attr(title);
+        }
+
+        .form-control option {
+            padding: 10px;
+            border-bottom: 1px solid #efefef;
+            cursor:pointer
+        }
+        .bootstrap-duallistbox-container > div.box1 > select,
+        .bootstrap-duallistbox-container > div.box2 > select {
+            height: 180px !important;
+        }
+	
 </style> 
 </head>
 <body>
@@ -94,89 +123,73 @@
 	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
 	
 	
-	<div class="container">
-		
-			<h3 class="text-center mt-4">LISTA DE ROLES</h3>
-			
-			<div class="col-md-2 float-right">
-							
-			<button class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#modalRol" id="btn-nuevo">
-			 <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
-				</button> </div>
+	<div class="row mt-4">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-10">
+                        Asignar Secciones por nivel academico
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-sm float-right" onclick="GuardarCambios()">
+                            <i class="fas fa-check" aria-hidden="true"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="cboPeriodo">Periodo</label>
+                            <select id="cboperiodo" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="cboNivelAcademico">Nivel Academico</label>
+                            <select id="cboNivelAcademico" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="bg"></label>
+                            <button type="button" class="btn btn-success btn-block mt-1" id="btnBuscar" onclick="Buscar()">Buscar</button>
+                        </div>
 
-			<div class=" mt-2">
-	
-				<table class="table table-striped table-bordered mt-5" id="tableProfesor">
-							  <thead>
-							   <tr>
-					                <th>Codigo</th>
-					                <th>Descripcion</th>
-					                <th>Estado</th>
-					                
-					                <th></th>
-					                <th></th>
-					            </tr>
-							  </thead>
-							  <tbody>
-								<tr th:each="row:${roles}">
-								<td th:text="${row.codigo}"></td>	
-								<td th:text="${row.descripcion}"></td>	
-								<td>
-                   						 <span th:if="${row.rol}">Activo</span>
-                    					<span th:unless="${row.rol}">Inactivo</span>
-                				  </td>	
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="alert alert-danger" role="alert">
+                                    Secciones pendientes por asignar
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="alert alert-success" role="alert">
+                                    Secciones Asignadas
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <select multiple="multiple" id="cbodata" class="form-control"></select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
 
-							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalRol"><i class="far fa-edit"></i></a></td>
-							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
-							    </tr>  
-							  </tbody>
-				</table>
-			</div>
-		
-		
-			<!-- begin #modal-dialog : MODAL MEDICAMENTO-->
-			<div class="modal fade" id="modalRol" data-backdrop="static" 
-							data-keyboard="false" tabindex="-1" 
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered modal-login modal-lg" >					
-							<div class="modal-content">
-								<div class="modal-header bg-blue-darker">
-									<h4 class="modal-title text-white">Profesor</h4>
-								</div>
-								<div class="modal-body">
-									<form method="POST" id="idRegistra" th:action="@{grabar}">	
-										<input  type="hidden" value="0" name="codigo" id="idCodigo">
-										<div class="container">
-											<div class="row">
-												
-																							
-												<div class="form-group has-feedback col-md-12">
-													<label for="exampleFormControlInput1">Descripcion</label>
-													<input type="text" class="form-control" id="idDescripcion" name="descripcion">																																
-												</div>
-												
-												<div class="form-group has-feedback col-md-12">
-													    <label><b>Estado</b></label><br>
-													    <input type="radio" id="activo" name="tipo" value="true">
-													    <label for="activo">Activo</label>
-													    <input type="radio" id="inactivo" name="tipo" value="false">
-													    <label for="inactivo">Inactivo</label>
-												</div>																															
-												 
-											</div>
-										</div>								
-										<div class="col-md-12 text-center mt-4"> 										
-											<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i> Registrar</button>
-											<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
-										</div> 																								
-									</form>
-								</div>
-							</div>
-						</div>
-		</div>
-		<!-- FIN Modal MEDICAMENTO-->	
-	
-	</div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
@@ -209,71 +222,9 @@
 	
 	<script>
 		
-		//aisgna evento click a todos los botones con clase btn-editar
-		$(document).on("click",".btn-editar", function(){
-			
-		
-			//varible
-			var cod;
-			//alamacenar el codigo del medicamento segun el boton
-			//editar que se seleccione
-			
-			cod=$(this).parents("tr").find("td")[0].innerHTML;
-			//funcion get de JQUERY
-			$.get("buscar?codigo="+cod,function(response){
-				
-				//asignar valores a las cajas usando el atributo "ID"
-				$("#idCodigo").val(response.codigo);
-				$("#idDescripcion").val(response.descripcion);
-				if (response.rol === true) {
-			        $("#activo").prop("checked", true);
-			        $("#inactivo").prop("checked", false);
-			    } else {
-			        $("#activo").prop("checked", false);
-			        $("#inactivo").prop("checked", true);
-			    }
-				
-			
-				
-				
-			})
-			
-		})
-		
-		
-		//asignar ebento click al boton conID "btn-cerrar"
-		$(document).on("click","#btn-cerrar",function(){
-			
-			//resetear el formulario
-			$("#idRegistra").trigger("reset");
-			//resetear validacion
-			$("#idRegistra").data("bootstrapValidator").resetForm(true);
-		})
-		
-		
-		
-		//evento Click al boton eliminar
-		$(document).on("click",".btn-eliminar",function(){
-			
-			var cod;
-			//Almacenar el codigo del medicamento segun el boton eliminar que se seleccionò 
-			cod = $ (this).parents("tr").find("td")[0].innerHTML;
-			
-			alertify.confirm("SISTEMA","Seguro de eliminar!",
-			  function(){
-				  window.location="http://localhost:8091/rol/eliminar?codigo="+cod
-		
-			  },
-			  function(){ 
-				alertify.error('Cancelado!')
-			  }).
-			  set('labels', {ok:'Si', cancel:'No'});
-			
-			
-		})
-		
-		
-		
+	
+
+
 	
 
 	</script>

@@ -25,7 +25,7 @@ public class Matricula {
 	@Column(name="situ_matricula")
 	private String situacion;
 	
-	@Column(name="intituto_procedencia")
+	@Column(name="instituto_procedencia")
 	private String institutoPro;
 	
 	@Column(name="estado_matricula")

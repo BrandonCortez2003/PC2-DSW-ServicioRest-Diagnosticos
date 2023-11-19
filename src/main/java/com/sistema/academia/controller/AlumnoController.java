@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sistema.academia.entities.Alumno;
+import com.sistema.academia.entities.Distrito;
 import com.sistema.academia.services.ALumnoServices;
 import com.sistema.academia.services.DistritoServices;
 
@@ -38,14 +39,12 @@ public class AlumnoController {
 	public String grabar(@RequestParam("codigo") Integer cod,
 						 @RequestParam("nombre") String nom,
 						 @RequestParam("apellido") String ape,
-						 @RequestParam("edad")String edad,
-						 @RequestParam("estado")boolean estado,
 						 @RequestParam("dni")String dni,
-						 @RequestParam("telefono")String fono,
+						 @RequestParam("fechaNac")String fechaNac,
+						 @RequestParam("sexo")String sexo,
+						 @RequestParam("distrito")int codDis,
 						 @RequestParam("direccion")String direccion,
-						 @RequestParam("correo")String correo,
-						 @RequestParam("fehanaci")String fechanaci,
-						 @RequestParam("fecharegi")String fecharegi,
+						 @RequestParam("estado")Boolean estado,						
 						 RedirectAttributes redirect)
 	{
 		try {
@@ -54,11 +53,18 @@ public class AlumnoController {
 			
 			alu.setNombre(nom);
 			alu.setApellido(ape);
-			alu.setEstado(estado);
 			alu.setDni(dni);
+			alu.setFechanaci(LocalDate.parse(fechaNac));
+			alu.setSexo(sexo);
 			alu.setDireccion(direccion);
-			alu.setFechanaci(LocalDate.parse(fechanaci));
-			alu.setFecharegi(LocalDateTime.parse(fecharegi));
+			alu.setEstado(estado);
+
+			Distrito dis = new Distrito();
+			
+			dis.setCodigo(codDis);
+			alu.setDistrito(dis);
+			
+			
 			
 			if(cod == 0)
 			{

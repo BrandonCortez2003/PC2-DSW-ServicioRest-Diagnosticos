@@ -29,7 +29,7 @@ public class RolController {
 	@RequestMapping("/grabar")
 	public String grabar(@RequestParam("codigo") Integer cod,
 						@RequestParam("descripcion") String nom,
-						@RequestParam("tipo")boolean tipo,
+						@RequestParam("tipo")Boolean tipo,
 						RedirectAttributes redirect) 
 	{
 		try {

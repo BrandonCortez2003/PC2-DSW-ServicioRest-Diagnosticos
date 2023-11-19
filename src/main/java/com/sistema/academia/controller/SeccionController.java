@@ -1,6 +1,6 @@
 package com.sistema.academia.controller;
 
-import java.time.LocalDate;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class SeccionController {
 	{
 		model.addAttribute("seccion", servicioSeccion.listarTodos());
 		
-		return "Crear_Seccion";
+		return "seccion2";
 		
 	}
 	

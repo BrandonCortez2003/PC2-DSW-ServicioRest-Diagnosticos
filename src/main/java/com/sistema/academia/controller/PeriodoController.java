@@ -27,7 +27,7 @@ public class PeriodoController {
 	{
 		model.addAttribute("periodo", servicioPeriodo.listarTodos());
 		
-		return "Crear_Periodo";
+		return "periodos";
 		
 	}
 	

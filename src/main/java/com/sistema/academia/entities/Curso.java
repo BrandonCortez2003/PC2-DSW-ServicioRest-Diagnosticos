@@ -3,6 +3,10 @@ package com.sistema.academia.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 
@@ -32,8 +37,10 @@ public class Curso {
 	private Boolean estado;
 	
 	@Column(name="fecha_registro")
+	@CreationTimestamp
 	private LocalDateTime fechaRegistro;
 	
+	@JsonIgnore
 	
 	//Relacion con nivel detalle curso
 	@OneToMany(mappedBy = "curso")
@@ -74,19 +81,9 @@ public class Curso {
 	
 
 	@PrePersist
-    protected void onCreate() {
-		fechaRegistro = LocalDateTime.now();
-    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PreUpdate
+	public void beforeSaveOrUpdate() {
+		this.fechaRegistro = LocalDateTime.now();
+	}
 
 }

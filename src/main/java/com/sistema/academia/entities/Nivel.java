@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,6 @@ public class Nivel {
 	@Id
 	@Column(name="cod_nivel")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cod_nivel")
 	private Integer codigo;
 	
 	@Column(name="des_nivel")
@@ -51,6 +52,8 @@ public class Nivel {
 	@JoinColumn(name="cod_perio")
 	private Periodo periodo;
 	
+	
+	@JsonIgnore
 	//Relacion con nivel detalle
 	@OneToMany(mappedBy = "nivel")
 	private List<NivelDetalle> listaNivelDetalle;

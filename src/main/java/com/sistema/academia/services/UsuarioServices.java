@@ -49,7 +49,18 @@ public class UsuarioServices {
 		return repo.findAll();
 		}
 	
-	
+	public boolean existsByDni(String dni) {
+	    // Lógica para verificar si el DNI ya existe en la base de datos
+	    // Esto puede ser una llamada a tu capa de persistencia o base de datos
+	    return repo.existsByDni(dni);
+	}
+
+	 public void guardarUsuario(Usuario usuario) {
+	        // Aquí puedes realizar validaciones adicionales, lógica de negocio, etc.,
+	        // antes de guardar el usuario en la base de datos, si es necesario.
+	        repo.save(usuario);
+	    }
+
 	
 }
 

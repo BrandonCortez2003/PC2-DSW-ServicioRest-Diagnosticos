@@ -371,93 +371,62 @@
 	    $(document).ready(function(){     
 	
 	        $('#idRegistra').bootstrapValidator({     
-	        	feedbackIcons: {
-	                valid: 'glyphicon glyphicon-ok',
-	                invalid: 'glyphicon glyphicon-remove',
-	                validating: 'glyphicon glyphicon-refresh'
-	            },
-	        	 fields:{
-	        		 
-	        		 Nombres: {
-	     	    		selector:'#idNombre',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese nombre'    
-	                        }      
-	                    }    
-	                },   
-	                Descripcion: {
-	     	    		selector:'#idDescripcion',       
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese descripción'    
-	                        }      
-	                    }    
-	                },    
-	                Stock: {
-	     	    		selector:'#idStock',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese stock'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[0-9]{1,2}$/,    
-	                            message: 'Campo stock hasta dos cifras'    
-	                        },   
-	                    }    
-	                },
-	                precio: {
-	     	    		selector:'#idPrecio',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese precio'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
-	                            message: 'Campo precio real hasta dos decimales'    
-	                        },   
-	                    }    
-	                },       				
-	                Fecha: {
-	     	    		selector:'#usr2',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione fecha '    
-	                        },
-	                        date: {
-	                            format: 'YYYY-MM-DD',
-	                            message: 'The format is dd/mm/yyyy'
-	                        },
-	                    }    
-	                },
-	                Tipo: {
-	     	    		selector:'#idTipo',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione tipo medicamento'    
-	                        },					
-	                    }    
-	                } 
-	        	 }
-	        })					
-	    });    
+	        	dni: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese el DNI'
+                        },
+                        stringLength: {
+                            min: 8,
+                            max: 8,
+                            message: 'El DNI debe tener exactamente 8 dígitos'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Ingrese solo números para el DNI'
+                        }
+                    }
+                },
+                fono: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese el número de teléfono'
+                        },
+                        stringLength: {
+                            min: 9,
+                            max: 9,
+                            message: 'El número de teléfono debe tener exactamente 9 dígitos'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Ingrese solo números para el teléfono'
+                        }
+                    }
+                },
+                fechaNac: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese la fecha de nacimiento'
+                        },
+                        callback: {
+                            message: 'Debe ser mayor de edad',
+                            callback: function(value, validator) {
+                                var selectedDate = new Date(value);
+                                var now = new Date();
+                                var diff = now - selectedDate;
+                                var age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+                                return age >= 18;
+                            }
+                        }
+                    
+                }
+                }
+            
+        });
+         });
+ 
+	          
 	</script>   
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

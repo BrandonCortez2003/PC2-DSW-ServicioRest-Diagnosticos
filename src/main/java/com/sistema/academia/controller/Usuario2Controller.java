@@ -1,9 +1,15 @@
 package com.sistema.academia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -85,7 +91,7 @@ public class Usuario2Controller {
 	}
 
 	@RequestMapping("/buscar")
-	@ResponseBody
+	
 	public Usuario buscar(@RequestParam("codigo") Integer cod) {
 		return servicioUsu.buscarPorID(cod);
 
@@ -99,4 +105,12 @@ public class Usuario2Controller {
 		return "redirect:/usuario/lista";
 	}
 	
+	
+    
+    // Otros métodos del controlador
+
+	 
 }
+	
+	
+	

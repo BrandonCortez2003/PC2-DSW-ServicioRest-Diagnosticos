@@ -142,7 +142,7 @@
 								<div class="modal-body">
 									<form method="POST" id="idRegistra" th:action="@{grabar}">	
 										<div class="form-group has-feedback col-md-12">
-										<input  class="form-control" type="text" value="0" name="codigo" id="idCodigo">
+										<input  class="form-control" type="hidden" value="0" name="codigo" id="idCodigo">
 										</div>
 										<div class="container">
 											<div class="row">
@@ -307,7 +307,7 @@
 	                        }      
 	                    }    
 	                },   
-	                Descripcion: {
+	                descripcion: {
 	     	    		selector:'#idDescripcion',       
 	                    validators: {    
 	                        notEmpty: {    
@@ -315,17 +315,15 @@
 	                        }      
 	                    }    
 	                },    
-	                Stock: {
-	     	    		selector:'#idStock',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese stock'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[0-9]{1,2}$/,    
-	                            message: 'Campo stock hasta dos cifras'    
-	                        },   
-	                    }    
+	                 estado: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, seleccione el estado'
+                        }
+                    
+                
+            
+	                    }   
 	                },
 	                precio: {
 	     	    		selector:'#idPrecio',      

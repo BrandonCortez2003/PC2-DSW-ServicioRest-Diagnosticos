@@ -142,7 +142,7 @@
 								<div class="modal-body">
 									<form method="POST" id="idRegistra" th:action="@{grabar}">	
 										<div class="form-group has-feedback col-md-12">
-										<input  class="form-control" type="text" value="0" name="codigo" id="idCodigo">
+										<input  class="form-control" type="hidden" value="0" name="codigo" id="idCodigo">
 										</div>
 										<div class="container">
 											<div class="row">
@@ -292,76 +292,29 @@
 	    $(document).ready(function(){     
 	
 	        $('#idRegistra').bootstrapValidator({     
-	        	feedbackIcons: {
-	                valid: 'glyphicon glyphicon-ok',
-	                invalid: 'glyphicon glyphicon-remove',
-	                validating: 'glyphicon glyphicon-refresh'
-	            },
-	        	 fields:{
-	        		 
-	        		 Nombres: {
-	     	    		selector:'#idNombre',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese nombre'    
-	                        }      
-	                    }    
-	                },   
-	                Descripcion: {
-	     	    		selector:'#idDescripcion',       
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese descripción'    
-	                        }      
-	                    }    
-	                },    
-	                Stock: {
-	     	    		selector:'#idStock',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese stock'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[0-9]{1,2}$/,    
-	                            message: 'Campo stock hasta dos cifras'    
-	                        },   
-	                    }    
-	                },
-	                precio: {
-	     	    		selector:'#idPrecio',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese precio'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
-	                            message: 'Campo precio real hasta dos decimales'    
-	                        },   
-	                    }    
-	                },       				
-	                Fecha: {
-	     	    		selector:'#usr1',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione fecha '    
-	                        },
-	                        date: {
-	                            format: 'YYYY-MM-DD',
-	                            message: 'The format is dd/mm/yyyy'
-	                        },
-	                    }    
-	                },
-	                Tipo: {
-	     	    		selector:'#idTipo',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione tipo medicamento'    
-	                        },					
-	                    }    
-	                } 
-	        	 }
-	        })					
-	    });    
+				fields: {
+                descripcion: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese la Descripción'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 100,
+                            message: 'La Descripción debe tener entre 3 y 100 caracteres'
+                        }
+                    }
+                },
+                estado: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, seleccione el Estado'
+                        }
+                    }
+                }
+            }
+        });
+    });
 	</script>   
 	
 	

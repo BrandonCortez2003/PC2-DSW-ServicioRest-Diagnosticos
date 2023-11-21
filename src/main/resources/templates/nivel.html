@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Cursos</title>
+<title>Nivel</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -94,7 +94,7 @@
 		
 	
 		
-			<h3 class="text-center mt-4">LISTA DE CURSOS</h3>
+			<h3 class="text-center mt-4">LISTA DE NIVEL</h3>
 			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
 			 <i class="far fa-file"></i> Nuevo Curso
 			</button>
@@ -146,7 +146,7 @@
 								</div>
 								<div class="modal-body">
 									<form method="POST" id="idRegistra" th:action="@{grabar}">	
-										<input  type="text" value="0" name="codigo" id="idCodigo">
+										<input  type="hidden" value="0" name="codigo" id="idCodigo">
 										<div class="container">
 											<div class="row">
 												
@@ -181,7 +181,7 @@
 											
 							
 												<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Turno</b></label><br>
+														<label for="exampleInputEmail1"><b>Periodo</b></label><br>
 												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
 													    <select class="form-control" id="idPeriodo" name="periodo">
 													      <option value=" ">[Seleccione Turno]</option>
@@ -324,95 +324,133 @@
 	</script>
 	
 	<script type="text/javascript">    
-	    $(document).ready(function(){     
-	
-	        $('#idRegistra').bootstrapValidator({     
-	        	feedbackIcons: {
-	                valid: 'glyphicon glyphicon-ok',
-	                invalid: 'glyphicon glyphicon-remove',
-	                validating: 'glyphicon glyphicon-refresh'
-	            },
-	        	 fields:{
-	        		 
-	        		 Nombres: {
-	     	    		selector:'#idNombre',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese nombre'    
-	                        }      
-	                    }    
-	                },   
-	                Descripcion: {
-	     	    		selector:'#idDescripcion',       
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese descripción'    
-	                        }      
-	                    }    
-	                },    
-	                Stock: {
-	     	    		selector:'#idStock',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese stock'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[0-9]{1,2}$/,    
-	                            message: 'Campo stock hasta dos cifras'    
-	                        },   
-	                    }    
-	                },
-	                precio: {
-	     	    		selector:'#idPrecio',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese precio'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
-	                            message: 'Campo precio real hasta dos decimales'    
-	                        },   
-	                    }    
-	                },       				
-	                Fecha: {
-	     	    		selector:'#usr1',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione fecha '    
-	                        },
-	                        date: {
-	                            format: 'YYYY-MM-DD',
-	                            message: 'The format is dd/mm/yyyy'
-	                        },
-	                    }    
-	                },
-	                Tipo: {
-	     	    		selector:'#idTipo',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione tipo medicamento'    
-	                        },					
-	                    }    
-	                } 
-	        	 }
-	        })					
-	    });    
-	</script>   
 	
 	
 	
+	  
+	
+	       $(document).ready(function() {
+        $('#idRegistra').submit(function(e) {
+            e.preventDefault(); // Evitar el envío del formulario por ahora
+
+            // Obtener los valores de las horas de inicio y fin
+            var horaInicio = $('#idHoraIni').val();
+            var horaFin = $('#idHoraFin').val();
+
+            // Convertir los valores a objetos de fecha para comparación
+            var fechaInicio = new Date('1970-01-01T' + horaInicio);
+            var fechaFin = new Date('1970-01-01T' + horaFin);
+
+            // Realizar la validación
+            if (fechaFin <= fechaInicio) {
+                alert('La hora de fin debe ser posterior a la hora de inicio');
+                return false; // Detener el envío del formulario si la validación falla
+            } else {
+                // Si pasa la validación, puedes enviar el formulario
+                this.submit();
+            }
+            
+            
+            
+        });
+    });
+    
+    
+	</script>
+	
+	<script th:inline="javascript">
+    $(document).ready(function() {
+        $('#idRegistra').bootstrapValidator({
+	
+			fields: {
+                nivel: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese el nivel'
+                        }
+                    }
+                 },
+                 
+                 turno: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese turno'
+                        }
+                    }
+                 
+             },
+             
+             turno: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, seleccione el periodo'
+                        }
+                    }
+                },
+                horaIni: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese la fecha de inicio'
+                        }
+                    }
+                },
+             
+             horaFin: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese turno'
+                        }
+                    }
+                 
+             },
+                
+           }
+	 });
+
+	
+	
+	 });
 	
 	
 	
 	
 	
+	</script>
 	
 	
-	
-	
-	
-	
-	
+	<script>
+    $(document).ready(function() {
+        $('#idRegistra').submit(function(e) {
+            // Obtener los valores de los campos
+            var nivelValue = $('#idNivel').val().trim();
+            var turnoValue = $('#idTurno').val().trim();
+            var horaIniValue = $('#idHoraIni').val().trim();
+            var horaFinValue = $('#idHoraFin').val().trim();
+            var estadoActivo = $('#activo').is(':checked');
+            var estadoInactivo = $('#inactivo').is(':checked');
+            var periodoValue = $('#idPeriodo').val();
+
+            // Validar si algún campo obligatorio está vacío
+            if (nivelValue === '' || turnoValue === '' || horaIniValue === '' || horaFinValue === '' || (!estadoActivo && !estadoInactivo) || periodoValue === '') {
+                e.preventDefault(); // Evitar el envío del formulario
+
+                // Mostrar un mensaje indicando que todos los campos deben llenarse
+                alert('Por favor, complete todos los campos obligatorios.');
+            } else {
+                // Los campos están completos, puedes continuar con el envío del formulario
+                // o realizar cualquier acción adicional aquí antes de enviar el formulario
+                // Por ejemplo, puedes hacer una llamada AJAX para enviar los datos.
+                
+                // Aquí puedes agregar el código para enviar el formulario si todo está bien
+                // this.submit();
+                
+                // En este ejemplo, se muestra un mensaje de éxito y se reinicia el formulario
+                alert('Formulario enviado con éxito');
+                this.reset(); // Restablecer el formulario después del envío exitoso
+            }
+        });
+    });
+</script>
 	
 	
 	

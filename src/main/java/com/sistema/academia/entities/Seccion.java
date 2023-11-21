@@ -44,6 +44,17 @@ public class Seccion {
 		
 	
 	
+	public Seccion() {
+		
+	}
+	
+	
+	public Seccion(Integer codigo) {
+		this.codigo=codigo;
+	}
+
+
+
 	public Integer getCodigo() {
 			return codigo;
 		}

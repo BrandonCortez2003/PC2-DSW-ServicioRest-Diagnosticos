@@ -40,4 +40,8 @@ private SeccionRepository repo;
 		return repo.findAll();
 	}
 	
+	public List<Seccion> listaTodasSecciones(){
+		return repo.listarSecciones();
+	}
+	
 }

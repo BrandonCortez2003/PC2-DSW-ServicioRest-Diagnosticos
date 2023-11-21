@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,8 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
-
-
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -53,23 +52,13 @@ public class Alumno {
 		
 	@Column(name="dire_alu")
 	private String direccion;
-	
-	@Column(name="FechaNacimiento")
-	private LocalDate fecha;
-	
-	
-	@Column(name="Ciudad")
-	private String ciudad;
-	
 
 	@Column(name="fecha_naci_alu")
 	private LocalDate fechanaci;
 
 	
-	@Column(name="Activo")
-	private boolean activo;
-	
 	@Column(name="fecha_registro")
+	@CreationTimestamp
 	private LocalDateTime fecharegi;
 	
 	//Relacion con distrito
@@ -173,29 +162,6 @@ public class Alumno {
 
 
 
-	public LocalDate getFecha() {
-		return fecha;
-	}
-
-
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
-
-
-
-	public String getCiudad() {
-		return ciudad;
-	}
-
-
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-
-
 
 	public LocalDate getFechanaci() {
 		return fechanaci;
@@ -208,16 +174,6 @@ public class Alumno {
 	}
 
 
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
 
 
 
@@ -270,6 +226,7 @@ public class Alumno {
 
 
 	@PrePersist
+	@PreUpdate
     protected void onCreate() {
 		fecharegi = LocalDateTime.now();
     }

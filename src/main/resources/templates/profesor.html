@@ -108,14 +108,16 @@
 					                <th>Codigo</th>
 					                <th>Nombre</th>
 					                <th>Apellido</th>
-					                <th>Edad</th>
-					                <th>Estado</th>
 					                <th>Dni</th>
-					                <th>Fono</th>
+					                <th>sexo</th>
+					                <th>Grado</th>
+					                <th>Fecha Nacimiento</th>
+					                <th>Distrito</th>
 					                <th>Direccion</th>
 					                <th>Correo</th>
-					                <th>Fecha Nacimiento</th>
-					                <th>Fecha Registra </th>
+					                <th>telefono</th>
+					                <th>Estado</th>					                
+					                <th>Fecha Registro </th>
 					                
 					                <th></th>
 					                <th></th>
@@ -126,14 +128,19 @@
 							      <td th:text="${row.codigo}"></td>
 							      <td th:text="${row.nombre}"></td>
 							      <td th:text="${row.apellido}"></td>
-							      <td th:text="${row.edad}"></td>
-							      <td th:text="${row.estado}"></td>
 							      <td th:text="${row.dni}"></td>
-							      <td th:text="${row.fono}"></td>
+							      <td th:text="${row.sexo}"></td>
+							      <td th:text="${row.gradoStudio}"></td>
+							      <td th:text="${row.fecNacimiento}"></td>
+							      <td th:text="${row.distrito.nombre}"></td>
 							      <td th:text="${row.direccion}"></td>
-							      <td th:text="${row.mail}"></td>
-							      <td th:text="${row.fecNac}"></td>
-							      <td th:text="${row.fecReg}"></td>
+							      <td th:text="${row.correo}"></td>
+							      <td th:text="${row.fono}"></td>
+							      <td>
+                   						 <span th:if="${row.estado}">Activo</span>
+                    					<span th:unless="${row.estado}">Inactivo</span>
+                				  </td>
+                				  <td th:text="${row.fecReg}"></td>
 							  
 							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalProfesor"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
@@ -153,7 +160,7 @@
 									<h4 class="modal-title text-white">Profesor</h4>
 								</div>
 								<div class="modal-body">
-									<form method="POST" id="idRegistra" action="grabar">	
+									<form method="POST" id="idRegistra" th:action="@{grabar}">	
 										<input  type="hidden" value="0" name="codigo" id="idCodigo">
 										<div class="container">
 											<div class="row">
@@ -168,34 +175,56 @@
 														<input type="text" class="form-control"  id="idApellido" placeholder="Ingresar Apellido" name="apellido">																										
 												</div>
 												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Edad</b></label><br>		
+														<label for="exampleInputEmail1"><b>Dni</b></label><br>		
 														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idEdad" placeholder="Ingresar Edad" name="edad">																										
+														<input type="text" class="form-control"  id="idDni" placeholder="Ingresar Dni" name="dni">																										
 												</div>
 												
+												<div class="form-group has-feedback col-md-4">	
+														<label for="exampleInputEmail1"><b>Sexo</b></label><br>
+												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+													    <select class="form-control" id="idSexo" name="sexo">
+													      <option value=" ">[Seleccione Sexo]</option>
+													      <option value="Masculino">Masculino</option>
+													      <option value="Femenino">Femenino</option>
+													      <option value="Otros">Otros</option>
+													    </select>
+													   
+												 </div>
+												
 												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Estado</b></label><br>		
+														<label for="exampleInputEmail1"><b>Grado de Estudio</b></label><br>		
 														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idEstado" placeholder="Ingresar Estado Civil" name="estado">																										
+														<input type="text" class="form-control"  id="idGrado" placeholder="Ingresar Grado Estudio" name="grado">																										
 												</div>
+												
+												<div class="form-group has-feedback col-md-4">	
+													<label for="exampleInputEmail1" class="text-center"><b>Fecha Nacimiento</b></label><br>
+												    <i class="fas fa-calendar-week form-control-feedback2"></i>
+												    <input type="date" style="background-color:#aed6f1" class="form-control" id="usr1" name="fechaNac"
+												    													   placeholder="YYYY-MM-DD" autocomplete="off" >
+											    												 												
+							
+											    </div>
+											    
+											    <div class="form-group has-feedback col-md-4">	
+														<label for="exampleInputEmail1"><b>Distrito</b></label><br>
+												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+													    <select class="form-control" id="idDistrito" name="distrito">
+													      <option value=" ">[Seleccione distrito]</option>
+													      <option th:each="row:${distritos}" 
+													      			th:value="${row.codigo}"
+													      			th:text="${row.nombre}"/>
+													    </select>
+													   
+												 </div>
 												
 												<div class="form-group has-feedback col-md-4">
-													<label for="exampleInputEmail1"><b>DNI</b></label><br>	
+													<label for="exampleInputEmail1"><b>Direccion</b></label><br>	
 													<i class="fas fa-pen-fancy form-control-feedback2"></i>
-													<input type="text" class="form-control" id="idDni" placeholder="Ingresar DNI" name="dni">	
+													<input type="text" class="form-control" id="idDireccion" placeholder="Ingresar direccion" name="direccion">	
 												</div>
-												
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Fono</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idFono" placeholder="Ingresar Fono" name="fono">																										
-												</div>
-												
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Direccion</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idDireccion" placeholder="Ingresar Direccion" name="direccion">																										
-												</div>
+							
 												
 												<div class="form-group has-feedback col-md-12">
 														<label for="exampleInputEmail1"><b>Correo</b></label><br>		
@@ -203,28 +232,21 @@
 														<input type="text" class="form-control"  id="idCorreo" placeholder="Ingresar Correo" name="mail">																										
 												</div>
 												
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Telefono</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idFono" placeholder="Ingresar Fono" name="fono">																										
+												</div>
 												
-											    <div class="form-group has-feedback col-md-4">	
-													<label for="exampleInputEmail1" class="text-center"><b>Fecha Nacimiento</b></label><br>
-												    <i class="fas fa-calendar-week form-control-feedback2"></i>
-												    <input type="text" style="background-color:#aed6f1" class="form-control" id="usr1" name="fechaNac"
-												    													   placeholder="YYYY-MM-DD" autocomplete="off" >
-												    													 												
-							
-											    </div>
+												<div class="form-group has-feedback col-md-12">
+													    <label><b>Estado</b></label><br>
+													    <input type="radio" id="activo" name="estado" value="true">
+													    <label for="activo">Activo</label>
+													    <input type="radio" id="inactivo" name="estado" value="false">
+													    <label for="inactivo">Inactivo</label>
+												</div>	
+												
 											    
-											    
-											    
-											    
-											    <div class="form-group has-feedback col-md-4">	
-													<label for="exampleInputEmail1" class="text-center"><b>Fecha Registro</b></label><br>
-												    <i class="fas fa-calendar-week form-control-feedback2"></i>
-												    <input type="text" style="background-color:#aed6f1" class="form-control" id="usr2" name="fechaReg"
-												    													   placeholder="YYYY-MM-DD" autocomplete="off" >
-												    													 												
-							
-											    </div>
-										
 												 
 											</div>
 										</div>								
@@ -289,15 +311,22 @@
 				$("#idCodigo").val(response.codigo);
 				$("#idNombre").val(response.nombre);
 				$("#idApellido").val(response.apellido);
-				$("#idEdad").val(response.edad);
-				$("#idEstado").val(response.estado);
 				$("#idDni").val(response.dni);
-				$("#idFono").val(response.fono);
+				$("#idSexo").val(response.sexo);
+				$("#idGrado").val(response.gradoStudio);
+				$("#usr1").val(response.fecNacimiento);
+				$("#idDistrito").val(response.distrito.codigo);
 				$("#idDireccion").val(response.direccion);
-				$("#idCorreo").val(response.mail);
-				$("#usr1").val(response.fecNac);
-				$("#usr2").val(response.fecReg);
-			
+				$("#idCorreo").val(response.correo);
+				$("#idFono").val(response.fono);
+				$("#idFechaRegistro").val(response.fecReg);
+				if (response.estado === true) {
+			        $("#activo").prop("checked", true);
+			        $("#inactivo").prop("checked", false);
+			    } else {
+			        $("#activo").prop("checked", false);
+			        $("#inactivo").prop("checked", true);
+			    }
 				
 				
 			})

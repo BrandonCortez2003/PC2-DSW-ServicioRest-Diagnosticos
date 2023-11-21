@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Alumno</title>
+<title>Rol</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -12,13 +12,10 @@
 
 <style>
 	.modal-header, h4, .close {
-		background-color: blue;
+		background-color: #5E7A2E;
 		color: white !important;
 		text-align: center;
 		font-size: 20px;
-	}
-	.base{
-		background: url(../static/img/FondoF.jpg) no-repeat;
 	}
 	.help-block{
 	 color: red;
@@ -56,14 +53,14 @@
 	    border-color: #dc3545;
 	}
 	.btn-primary{
-	background-color: skyblue !important;
+	background-color: #286090 !important;
 	}
 	.dataTables_length, .dataTables_info{
 		display: none;
 	}
 	.modal-lg, .modal-xl {
-		max-width: 900px;
-		max-height: 800px;
+		max-width: 400px;
+		max-height: 300px;
 	}
 	
 	.form-control-feedback2 {
@@ -91,138 +88,85 @@
 	}*/
 </style> 
 </head>
-<body class="base">
+<body>
 	
-	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>	
+	<!-- consumir fragmento cabecera-->
+	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
+	
 	
 	<div class="container">
 		
-			<h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
+			<h3 class="text-center mt-4">LISTA DE ROLES</h3>
 			
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-			 <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
-			</button>
+			<div class="col-md-2 float-right">
+							
+			<button class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#modalRol" id="btn-nuevo">
+			 <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
+				</button> </div>
+
 			<div class=" mt-2">
 	
-				<table class="table table-striped table-bordered mt-5 " id="tableMedicamentos">
+				<table class="table table-striped table-bordered mt-5" id="tableProfesor">
 							  <thead>
 							   <tr>
-					                <th>Código</th>
-					                <th>Nombre</th>
-					                <th>Apellido</th>
-					                <th>Dni</th>
-					                <th>Fecha Nacimiento</th>
-					                <th>Sexo</th>
-					                <th>Distrito</th>
-					                <th>Direccion</th>
+					                <th>Codigo</th>
+					                <th>Descripcion</th>
 					                <th>Estado</th>
-					                <th>Fecha Registro</th>
+					                
+					                <th></th>
 					                <th></th>
 					            </tr>
 							  </thead>
 							  <tbody>
-								<tr th:each="row:${alumnos}">
-							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.nombre}"></td>
-							      <td th:text="${row.apellido}"></td>
-							      <td th:text="${row.dni}"></td>
-							      <td th:text="${row.fechanaci}"></td>
-							      <td th:text="${row.sexo}"></td>
-							      <td th:text="${row.distrito.nombre}"></td>
-							      <td th:text="${row.direccion}"></td>
-							      <td>
-                   						 <span th:if="${row.estado}">Activo</span>
-                    					<span th:unless="${row.estado}">Inactivo</span>
-                				  </td>
-                				  <td th:text="${row.fecharegi}"></td>	
-							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
+								<tr th:each="row:${roles}">
+								<td th:text="${row.codigo}"></td>	
+								<td th:text="${row.descripcion}"></td>	
+								<td>
+                   						 <span th:if="${row.rol}">Activo</span>
+                    					<span th:unless="${row.rol}">Inactivo</span>
+                				  </td>	
+
+							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalRol"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
 							    </tr>  
 							  </tbody>
 				</table>
 			</div>
-			
 		
-			
-			<div class="modal fade" id="modalMedicamento" data-backdrop="static" 
+		
+			<!-- begin #modal-dialog : MODAL MEDICAMENTO-->
+			<div class="modal fade" id="modalRol" data-backdrop="static" 
 							data-keyboard="false" tabindex="-1" 
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered modal-login modal-lg" >					
 							<div class="modal-content">
 								<div class="modal-header bg-blue-darker">
-									<h4 class="modal-title text-white">ALUMNO</h4>
+									<h4 class="modal-title text-white">Profesor</h4>
 								</div>
 								<div class="modal-body">
 									<form method="POST" id="idRegistra" th:action="@{grabar}">	
-										<input type="hidden" value="0" name="codigo" id="idCodigo">
+										<input  type="hidden" value="0" name="codigo" id="idCodigo">
 										<div class="container">
 											<div class="row">
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Nombre</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idNombre" name="nombre">																										
-												</div>
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Apellido</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idApellido" name="apellido">																										
-												</div>
-												<div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Dni</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idDni" name="dni">																										
-												</div>
-												<div class="form-group has-feedback col-md-4">	
-													<label for="exampleInputEmail1" class="text-center"><b>Fecha Nacimiento</b></label><br>
-												    <i class="fas fa-calendar-week form-control-feedback2"></i>
-												    <input type="date" style="background-color:#aed6f1" class="form-control" id="usr1" name="fechaNac"
-												    													   placeholder="YYYY-MM-DD" autocomplete="off" >
-											    												 												
-							
-											    </div>
 												
-												<div class="form-group has-feedback col-md-4">	
-														<label for="exampleInputEmail1"><b>Sexo</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idSexo" name="sexo">
-													      <option value=" ">[Seleccione Sexo]</option>
-													      <option value="Masculino">Masculino</option>
-													      <option value="Femenino">Femenino</option>
-													      <option value="Otros">Otros</option>
-													    </select>
-													   
-												 </div>
-												 
-												 <div class="form-group has-feedback col-md-4">	
-														<label for="exampleInputEmail1"><b>Distrito</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idDistrito" name="distrito">
-													      <option value=" ">[Seleccione distrito]</option>
-													      <option th:each="row:${distritos}" 
-													      			th:value="${row.codigo}"
-													      			th:text="${row.nombre}"/>
-													    </select>
-													   
-												 </div>
-												 
-												 <div class="form-group has-feedback col-md-12">
-														<label for="exampleInputEmail1"><b>Direccion</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idDireccion" name="direccion">																										
+																							
+												<div class="form-group has-feedback col-md-12">
+													<label for="exampleFormControlInput1">Descripcion</label>
+													<input type="text" class="form-control" id="idDescripcion" name="descripcion">																																
 												</div>
-												 
-												 <div class="form-group has-feedback col-md-12">
+												
+												<div class="form-group has-feedback col-md-12">
 													    <label><b>Estado</b></label><br>
-													    <input type="radio" id="activo" name="estado" value="true">
+													    <input type="radio" id="activo" name="tipo" value="true">
 													    <label for="activo">Activo</label>
-													    <input type="radio" id="inactivo" name="estado" value="false">
+													    <input type="radio" id="inactivo" name="tipo" value="false">
 													    <label for="inactivo">Inactivo</label>
-												</div>		
-												
+												</div>																															
+												 
 											</div>
 										</div>								
 										<div class="col-md-12 text-center mt-4"> 										
-									<button type="submit" id="Guardar" class="btn btn-success"><i class="fas fa-save"></i> Registrar</button> 	
+											<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i> Registrar</button>
 											<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
 										</div> 																								
 									</form>
@@ -245,83 +189,119 @@
 	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
 	
+	
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
-		//leer atributo MENSAJE
-		let msj=/*[[${MENSAJE}]]*/
-		toastr.success(msj, toastr.options = {
-			"timeOut": "2000",
-			"positionClass " : " toast-top-right ",
-		});
+		
+		//leer atributo mensaje 
+		let msj = /*[[${MENSAJE}]]*/
+		
+	toastr.success(msj, toastr.options = {
+	"timeOut": "2000",
+	"positionClass " : " toast-top-right ",
+	});
+		
 	</script>
-
+	
+	
+	
+	
+	
+	
 	<script>
-		//asignar evento click a todos los botones con clase "btn-editar"
-		$(document).on("click",".btn-editar",function(){
-			//variable
+		
+		//aisgna evento click a todos los botones con clase btn-editar
+		$(document).on("click",".btn-editar", function(){
+			
+		
+			//varible
 			var cod;
-			//almacenar el còdigo del medicamento según el botòn
-			//editar que se selecciono.
+			//alamacenar el codigo del medicamento segun el boton
+			//editar que se seleccione
+			
 			cod=$(this).parents("tr").find("td")[0].innerHTML;
-			//funciòn get de JQUERY
+			//funcion get de JQUERY
 			$.get("buscar?codigo="+cod,function(response){
+				
 				//asignar valores a las cajas usando el atributo "ID"
 				$("#idCodigo").val(response.codigo);
-				$("#idNombre").val(response.nombre);
-				$("#idApellido").val(response.apellido);
-				$("#idDni").val(response.dni);
-				$("#usr1").val(response.fechanaci);
-				$("#idSexo").val(response.sexo);
-				$("#idDistrito").val(response.distrito.codigo);
-				$("#idDireccion").val(response.direccion);
-				$("#idFechaRegistro").val(response.fecharegi);
-				if (response.estado === true) {
+				$("#idDescripcion").val(response.descripcion);
+				if (response.rol === true) {
 			        $("#activo").prop("checked", true);
 			        $("#inactivo").prop("checked", false);
 			    } else {
 			        $("#activo").prop("checked", false);
 			        $("#inactivo").prop("checked", true);
 			    }
+				
+			
+				
+				
 			})
+			
 		})
-		//asignar ebento click al botòn con ID "btn-cerrar"
+		
+		
+		//asignar ebento click al boton conID "btn-cerrar"
 		$(document).on("click","#btn-cerrar",function(){
+			
 			//resetear el formulario
-			$("#idRegistra").trigger("reset");	
-			//resetear validaciòn
+			$("#idRegistra").trigger("reset");
+			//resetear validacion
 			$("#idRegistra").data("bootstrapValidator").resetForm(true);
 		})
 		
-	  //asignar ebento click a los botones con class "btn-eliminar"
+		
+		
+		//evento Click al boton eliminar
 		$(document).on("click",".btn-eliminar",function(){
-			//almacenar el còdigo del medicamento según el botòn
-			//eliminar que se selecciono.
-			cod=$(this).parents("tr").find("td")[0].innerHTML;
-		    alertify.confirm("SISTEMA","Seguro de eliminar!",
-	        function(){
-                 window.location="http://localhost:8091/alumno/eliminar?codigo="+cod
-	         },
-	        function(){ 
-	    	alertify.error('Cancelado!')
-	        }).
-	        set('labels', {ok:'Si', cancel:'No'});
+			
+			var cod;
+			//Almacenar el codigo del medicamento segun el boton eliminar que se seleccionò 
+			cod = $ (this).parents("tr").find("td")[0].innerHTML;
+			
+			alertify.confirm("SISTEMA","Seguro de eliminar!",
+			  function(){
+				  window.location="http://localhost:8091/rol/eliminar?codigo="+cod
 		
-		
+			  },
+			  function(){ 
+				alertify.error('Cancelado!')
+			  }).
+			  set('labels', {ok:'Si', cancel:'No'});
+			
+			
 		})
 		
 		
-		$('#tableMedicamentos').DataTable();
-		$(function() {
-			$('#usr1').datepicker({
-				'format': 'yyyy-mm-dd',
-				'autoclose': true
-			});
+		
 	
-		});
-		$('#usr1').on('changeDate show', function(e) {
-		    $('#idRegistra').bootstrapValidator('revalidateField', $('#usr1'));
-		});
 
 	</script>
+	
+	<script>
+	
+	 $(function() {
+            $('#usr1').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr1').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr1'));
+        });
+
+
+		$(function() {
+            $('#usr2').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr2').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr2'));
+        });
+        
+		</script>
 	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     
@@ -375,7 +355,7 @@
 	                    }    
 	                },       				
 	                Fecha: {
-	     	    		selector:'#usr1',   
+	     	    		selector:'#usr2',   
 	                    validators: {    
 	                        notEmpty: {    
 	                            message: 'Seleccione fecha '    
@@ -401,24 +381,7 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 </body>
 </html>

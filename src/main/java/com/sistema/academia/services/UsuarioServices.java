@@ -1,6 +1,8 @@
 package com.sistema.academia.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ public class UsuarioServices {
 
 	@Autowired
 	private UsuarioRepository repo;
+	
+	private Map<String, Boolean> dniCache = new HashMap<>();
 	
 	public void registrar(Usuario usu) {
 		repo.save(usu);
@@ -49,15 +53,44 @@ public class UsuarioServices {
 		return repo.findAll();
 		}
 	
-	public boolean existsByDni(String dni) {
-	    return repo.existsByDni(dni);
-	}
 
-	 public void guardarUsuario(Usuario usuario) {
-	        repo.save(usuario);
+	public boolean existeDni(String dni) {
+		 Usuario usuario = repo.findByDni(dni); 
+
+	        return usuario != null; 
 	    }
 
+	public String guardarUsuario(Usuario usuario) {
+       
+       
+		String dni = usuario.getDni();
+
 	
-}
+		        Boolean dniExistente = dniCache.get(dni);
 
+		        if (dniExistente != null && dniExistente) {
+		            return "El DNI ya está registrado en el sistema";
+		        } else {
+		            Usuario usuarioExistente = repo.findByDni(dni);
 
+		            if (usuarioExistente != null) {
+		                dniCache.put(dni, 
+		             
+		true); 
+		                return "El DNI ya está registrado en el sistema";
+		            } else {
+		      
+		                repo.save(usuario);
+		                dniCache.put(dni, 
+		             
+		true);
+		                return "Usuario registrado correctamente";
+		            }
+		        }
+		    }
+
+		    
+
+		}
+
+		

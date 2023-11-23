@@ -37,7 +37,7 @@ public class RolController {
 			Rol rol = new Rol();
 			
 			rol.setDescripcion(nom);
-			rol.setRol(tipo);
+		
 			
 			if(cod == 0) {
 				servicioRol.registrar(rol);

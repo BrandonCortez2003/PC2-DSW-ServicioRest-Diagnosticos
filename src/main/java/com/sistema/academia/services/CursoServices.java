@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sistema.academia.entities.Curso;
+import com.sistema.academia.entities.Seccion;
 import com.sistema.academia.repository.CursoRepository;
 
 @Service
@@ -39,5 +40,8 @@ public class CursoServices {
 		return repo.findAll();
 	}
 	
+	public List<Curso> listaCursos(){
+		return repo.listarCursos();
+	}
 	
 }

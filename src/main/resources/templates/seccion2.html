@@ -96,6 +96,8 @@
 		
 			<h3 class="text-center mt-4">LISTA DE SECCIONES</h3>
 			
+			
+			
 			<div class="col-md-2 float-right">
                             <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalPeriodo" id="btn-nuevo">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
@@ -108,14 +110,16 @@
 							   <tr>
 								   <th>Código</th>
 					                <th>Descripcion</th>
-                                <th>Estado</th>
+					                <th>Vacantes</th>
+                                	<th>Estado</th>
                                 <th></th>
 					            </tr>
 							  </thead>
 							  <tbody>
 								<tr th:each="row:${seccion}">
 									<td th:text="${row.codigo}"></td>
-							      <td th:text="${row.descripSeccion}"></td>	   							      							      
+							      <td th:text="${row.descripSeccion}"></td>	
+							      <td th:text="${row.vacante}"></td>	   							      							      
 							      <td>
                    						 <span th:if="${row.estado}">Activo</span>
                     					<span th:unless="${row.estado}">Inactivo</span>
@@ -149,7 +153,13 @@
 												<div class="form-group has-feedback col-md-12">
 														<label for="exampleInputEmail1"><b>Descripcion</b></label><br>		
 														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control"  id="idDescripcion" placeholder="Ingresar nombre" name="descripcion">																										
+														<input type="text" class="form-control"  id="idDescripcion" placeholder="Ingresar descripcion" name="descripcion">																										
+												</div>
+												
+												<div class="form-group has-feedback col-md-12">
+														<label for="exampleInputEmail1"><b>Vacantes</b></label><br>		
+														<i class="fas fa-file-signature form-control-feedback2"></i>	
+														<input type="text" class="form-control"  id="idVacante" placeholder="Ingresar vacante" name="vacante">																										
 												</div>
 												
 												<div class="form-group has-feedback col-md-12">
@@ -223,6 +233,7 @@
 				//asignar valores a las cajas usando el atributo "ID"
 				$("#idCodigo").val(response.codigo);
 				$("#idDescripcion").val(response.descripSeccion);
+				$("#idVacante").val(response.vacante);
 				$("#idFechaRegistro").val(response.fechaRegistro);
 				
 				if (response.estado === true) {
@@ -311,8 +322,15 @@
                             message: 'Por favor, seleccione el Estado'
                         }
                     }
-                }
+                },
+                vacante:{
+					validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese Vacantes '
+                        }
+				}
             }
+           }
         });
     });
 	</script>   

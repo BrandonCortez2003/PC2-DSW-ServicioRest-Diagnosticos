@@ -83,6 +83,12 @@
 	.form-control {
 	  padding-left: 40px!important;
 	}
+	
+	.form-label{
+		width: 300px;
+		padding-left: 40px!important;
+	}
+
 	/*.toast-succes{
 		width: 120px;
 	}*/
@@ -97,10 +103,31 @@
 		
 			<h3 class="text-center mt-4">LISTA DE PROFESORES</h3>
 			
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Profesor
-			</button>
+					
+						<div class="col-md-2 float-right">
+                            <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Profesor
+                            </button>
+                        </div>
+	
+
+				<form class="form-imline" th:action="@{lista}" id="filtroForm">
+				<div class="form-group mb-2">
+					<label>Filtrar: </label>
+				</div>
+				<div class="form-group mx-sm-3 mb-2">
+					<input type="text" name="palabraClave" class="form-label" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el valor a filtrar" required>
+				</div>
+				<input type="submit" class="btn btn-primary mb-2" value="Buscar">
+				&nbsp;&nbsp;
+				<input type="button" class="btn btn-secondary mb-2" value="limpiar" onclick="limpiarYEnviar()">				
+			</form>
+	
+		
+		
 			<div class=" mt-2">
+				
+
 	
 				<table class="table table-striped table-bordered mt-5" id="tableProfesor">
 							  <thead>
@@ -287,9 +314,18 @@
 		
 	</script>
 	
+	<script>
+		function limpiarYEnviar() {
+        // Limpia el campo de texto
+        document.getElementById('palabraClave').value = '';
+        
+        // Envía el formulario
+        document.getElementById('filtroForm').submit();
+    }
 	
-	
-	
+		
+	</script>
+
 	
 	
 	<script>
@@ -366,7 +402,50 @@
 		})
 		
 		
-		
+		function buscarPorLetras() {
+			console.log("Se hizo clic en el botón de búsqueda");
+	    var letras = document.getElementById("#inputBusqueda").value;
+	
+	    // Realizar la solicitud al servidor usando AJAX
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/buscarPorLetras?letras=" + letras, true);
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === XMLHttpRequest.DONE) {
+	            if (xhr.status === 200) {
+	                var response = JSON.parse(xhr.responseText);
+	                actualizarTabla(response);
+	            } else {
+	                console.error('Hubo un problema al realizar la solicitud');
+	            }
+	        }
+	    };
+	    xhr.send();
+	}
+
+function actualizarTabla(data) {
+    var tableBody = document.querySelector("#tableProfesor tbody");
+    tableBody.innerHTML = "";
+
+    data.forEach(function (profesor) {
+        var row = tableBody.insertRow(-1);
+
+        // Insertar datos en la tabla
+        // Aquí debes ajustar según la estructura de tu objeto profesor y las columnas de tu tabla
+        row.insertCell(0).innerText = profesor.codigo;
+        row.insertCell(1).innerText = profesor.nombre;
+        row.insertCell(2).innerText = profesor.apellido;
+        row.insertCell(3).innerText = profesor.estado;
+        row.insertCell(4).innerText = profesor.dni;
+        row.insertCell(5).innerText = profesor.sexo;
+        row.insertCell(6).innerText = profesor.gradoStudio;
+        row.insertCell(7).innerText = profesor.fecNacimiento;
+        row.insertCell(8).innerText = profesor.distrito.nombre;
+        row.insertCell(9).innerText = profesor.direccion;
+        row.insertCell(10).innerText = profesor.correo;
+        row.insertCell(11).innerText = profesor.fono;
+    });
+}
+
 	
 
 	</script>

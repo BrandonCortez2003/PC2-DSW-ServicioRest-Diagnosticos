@@ -36,6 +36,7 @@ public class SeccionController {
 	@RequestMapping("/grabar")
 	public String grabar (@RequestParam("codigo") Integer cod,
 			@RequestParam("descripcion") String des,
+			@RequestParam("vacante") int vacante,
 			@RequestParam("estado") Boolean es,
 			RedirectAttributes redirect)
 	{ 

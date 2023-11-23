@@ -29,6 +29,9 @@ public class Seccion {
 	@Column(name="des_seccion")
 	private String descripSeccion;
 	
+	@Column(name="vaca_seccion")
+	private Integer vacante;
+	
 	@Column(name="estado_seccion")
 	private Boolean estado;	
 	
@@ -113,6 +116,18 @@ public class Seccion {
 			this.listaNivelDetalle = listaNivelDetalle;
 		}
 
+		
+		
+
+
+	public Integer getVacante() {
+			return vacante;
+		}
+
+
+		public void setVacante(Integer vacante) {
+			this.vacante = vacante;
+		}
 
 
 	@PrePersist

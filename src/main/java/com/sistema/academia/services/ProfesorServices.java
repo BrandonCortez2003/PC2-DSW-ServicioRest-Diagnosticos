@@ -30,7 +30,11 @@ public class ProfesorServices {
 		return repo.findById(cod).orElse(null);
 	}
 	
-	public List<Profesor> listarTodos(){
+	public List<Profesor> listarTodos(String palabraClave){
+		
+		if(palabraClave != null) {
+			return repo.findAll(palabraClave);
+		}
 		return repo.findAll();
 	}
 

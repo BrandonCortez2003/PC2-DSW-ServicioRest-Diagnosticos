@@ -2,10 +2,13 @@ package com.sistema.academia.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sistema.academia.entities.Distrito;
 import com.sistema.academia.entities.Profesor;
+import com.sistema.academia.repository.ProfesorRepository;
 import com.sistema.academia.services.DistritoServices;
 import com.sistema.academia.services.ProfesorServices;
 
@@ -20,21 +24,28 @@ import com.sistema.academia.services.ProfesorServices;
 @RequestMapping("/profesor")
 public class ProfesorController {
 	
+	
 	@Autowired
 	private ProfesorServices servicioPro;
 	
 	@Autowired
 	private DistritoServices servicioDis;
 	
+	
 	@RequestMapping("/lista")
-	public String index(Model model) {
+	public String index(Model model, @Param("palabraClave") String palabraClave) {
 		
-		model.addAttribute("profesor",servicioPro.listarTodos());
+		
+		model.addAttribute("profesor",servicioPro.listarTodos(palabraClave));
+		model.addAttribute("palabraClave", palabraClave);
 		model.addAttribute("distritos", servicioDis.listaDistrito());
+		
 		
 		return "profesor";
 	
 	}
+	
+
 	
 	@RequestMapping("/grabar")
 	public String grabar (@RequestParam("codigo") Integer cod,

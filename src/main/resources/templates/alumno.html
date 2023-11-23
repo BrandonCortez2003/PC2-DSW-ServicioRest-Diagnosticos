@@ -323,6 +323,47 @@
 
 	</script>
 	
+	
+	
+	
+	<script>
+    window.onload = function() {
+        const form = document.getElementById('idRegistra');
+        const fechaNacimiento = document.getElementById('usr1');
+        fechaNacimiento.addEventListener('change', function() {
+            const selectedDate = new Date(this.value);
+            const today = new Date();
+            const age = today.getFullYear() - selectedDate.getFullYear();
+            const monthDiff = today.getMonth() - selectedDate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < selectedDate.getDate())) {
+                age--;
+            }
+
+            if (age < 18) {
+                alert('Debes ser mayor de edad para registrarte.');
+                this.value = '';// Limpiar la fecha seleccionada si es menor de edad
+            }
+        });
+        form.addEventListener('submit', function(event) {
+            const selectedDate = new Date(fechaNacimiento.value);
+            const today = new Date();
+            const age = today.getFullYear() - selectedDate.getFullYear();
+            const monthDiff = today.getMonth() - selectedDate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < selectedDate.getDate())) {
+                age--;
+            }
+
+            if (age < 18) {
+                alert('Debes ser mayor de edad para registrarte.');
+                event.preventDefault(); // Prevenir el envío del formulario si es menor de edad
+            }
+        });
+    };
+</script>
+	
+	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     
 	
@@ -342,37 +383,42 @@
 	                        }      
 	                    }    
 	                },   
-	                Descripcion: {
-	     	    		selector:'#idDescripcion',       
+	                
+	                dni: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, ingrese el DNI'
+                        },
+                        stringLength: {
+                            min: 8,
+                            max: 8,
+                            message: 'El DNI debe tener exactamente 8 dígitos'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Ingrese solo números para el DNI'
+                        }
+                    }
+                },
+	                
+	                
+	                
+	                Apellido: {
+	     	    		selector:'#idApellido',       
 	                    validators: {    
 	                        notEmpty: {    
 	                            message: 'Ingrese descripción'    
 	                        }      
 	                    }    
 	                },    
-	                Stock: {
-	     	    		selector:'#idStock',      
+	              
+	                Distrito: {
+	     	    		selector:'#idDistrito',      
 	                    validators: {    
 	                        notEmpty: {    
-	                            message: 'Ingrese stock'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[0-9]{1,2}$/,    
-	                            message: 'Campo stock hasta dos cifras'    
-	                        },   
-	                    }    
-	                },
-	                precio: {
-	     	    		selector:'#idPrecio',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese precio'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
-	                            message: 'Campo precio real hasta dos decimales'    
-	                        },   
-	                    }    
+	                            message: 'Seleccione el distrito'    
+	                        }
+	                       }
 	                },       				
 	                Fecha: {
 	     	    		selector:'#usr1',   
@@ -386,14 +432,33 @@
 	                        },
 	                    }    
 	                },
-	                Tipo: {
-	     	    		selector:'#idTipo',   
+	                sexo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, seleccione el sexo'
+                        }
+                    
+                			
+	                    }    
+	                },
+	                
+	                 Direccion: {
+	     	    		selector:'#idDireccion',      
 	                    validators: {    
 	                        notEmpty: {    
-	                            message: 'Seleccione tipo medicamento'    
-	                        },					
-	                    }    
-	                } 
+	                            message: 'Ingrese su direccion'    
+	                        }
+	                       }
+	                },   
+	                
+	                estado: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor, seleccione el estado'
+                        }
+                    }
+                }
+	                
 	        	 }
 	        })					
 	    });    

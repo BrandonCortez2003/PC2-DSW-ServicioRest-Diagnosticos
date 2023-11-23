@@ -2,6 +2,8 @@ package com.sistema.academia.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,10 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tn_nivel_detalle_curso")
+@Table(name="tb_nivel_detalle_curso")
 public class NivelDetalleCurso {
 
 	@Id
@@ -21,10 +24,10 @@ public class NivelDetalleCurso {
 	@Column(name="cod_nivel_detalle_curso")
 	private Integer codigoDetalleCurso;
 	
-	@Column(name="estado_nivel_detalle_curso")
-	private Boolean estado;
+	
 	
 	@Column(name="fecha_registro")
+	@CreationTimestamp
 	private LocalDateTime fechaRegistro;
 	
 	//Relacion con nivel detalle
@@ -36,6 +39,10 @@ public class NivelDetalleCurso {
 	@ManyToOne
 	@JoinColumn(name="cod_curso")
 	private Curso curso;
+	
+	
+	
+	
 
 	public Integer getCodigoDetalleCurso() {
 		return codigoDetalleCurso;
@@ -45,13 +52,7 @@ public class NivelDetalleCurso {
 		this.codigoDetalleCurso = codigoDetalleCurso;
 	}
 
-	public Boolean getEstado() {
-		return estado;
-	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
 
 	public LocalDateTime getFechaRegistro() {
 		return fechaRegistro;
@@ -79,6 +80,7 @@ public class NivelDetalleCurso {
 	
 	
 	@PrePersist
+	@PreUpdate
     protected void onCreate() {
 		fechaRegistro = LocalDateTime.now();
     }

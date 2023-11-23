@@ -10,7 +10,7 @@ import com.sistema.academia.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>  {
 	
-	 boolean existsByDni(String dni);
+	Usuario findByDni(String dni);
 	
 	@Query("select u from Usuario u where u.login=?1")
 	public Usuario iniciarSesion(String vlogin);

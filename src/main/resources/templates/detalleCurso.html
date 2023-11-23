@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DetalleCurso</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" th:href="@{/resources/datepicker/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}"> 
+
+<style>
+	.modal-header, h4, .close {
+		background-color: #5E7A2E;
+		color: white !important;
+		text-align: center;
+		font-size: 20px;
+	}
+	.help-block{
+	 color: red;
+	 /*display: none;*/
+	}
+	.form-group.has-error .form-control-label {
+	  color: red;
+	}
+	.form-group.has-error .form-control {
+	  border: 1px solid red;
+	  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+	}
+	
+	.alertify .ajs-dialog {
+	    top: 50%;
+	    transform: translateY(-50%);
+	    margin: auto;
+	}
+	
+	.ajs-header{
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.ajs-ok{
+		color: #fff;
+	    background-color: #007bff;
+	    border-color: #007bff;
+	}
+	.ajs-cancel{
+		color: #fff;
+	    background-color: #dc3545;
+	    border-color: #dc3545;
+	}
+	.btn-primary{
+	background-color: #286090 !important;
+	}
+	.dataTables_length, .dataTables_info{
+		display: none;
+	}
+	.modal-lg, .modal-xl {
+		max-width: 400px;
+		max-height: 300px;
+	}
+	
+	.form-control-feedback2 {
+	  margin:1px;
+	  position: absolute;
+	  padding: 10px;
+	  pointer-events: none;
+	  background-color: #e9ecef;
+	  border-style: none;
+	}
+	.form-control-feedback3 {
+	  margin:1px;
+	  position: absolute;
+	  margin-left:225px;
+	  padding: 10px;
+	  pointer-events: none;
+	  background-color: #e9ecef;
+	  border-style: none;
+	}
+	.form-control {
+	  padding-left: 40px!important;
+	}
+	/*.toast-succes{
+		width: 120px;
+	}*/
+	
+	 .moveall, .removeall {
+            border: 1px solid #ccc !important;
+            background: #efefef;
+        }
+
+
+        .moveall:hover, .removeall:hover {
+            background: #efefef;
+        }
+
+        .moveall::after {
+            content: attr(title);
+        }
+
+        .removeall::after {
+            content: attr(title);
+        }
+
+        .form-control option {
+            padding: 10px;
+            border-bottom: 1px solid #efefef;
+            cursor:pointer
+        }
+        .bootstrap-duallistbox-container > div.box1 > select,
+        .bootstrap-duallistbox-container > div.box2 > select {
+            height: 180px !important;
+        }
+	
+</style> 
+</head>
+<body>
+	
+	<!-- consumir fragmento cabecera-->
+	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
+	
+	
+	<div class="row mt-4">
+    <div class="col-sm-12">
+		<form th:action="@{grabar}" method="POST">
+			<input  type="hidden" value="0" name="codigo" id="idCodigo">
+			<div class="card" >
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-10">
+                        Asignar Curso
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-sm float-right" >
+                            <i class="fas fa-check" aria-hidden="true"></i> Guardar Cambios
+                        </buttontype="submit">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!---<div class="col-sm-5">
+                        <div class="form-group col-sm-6">
+							<label for="inputEmail3">Periodo</label>
+							<select class="form-group form-control" id="idBien" name="periodos">
+								<option  th:each="row:${periodos}"
+									th:value="${row.codigo}"
+									th:text="${row.descripcion}" />
+							</select>
+						</div>
+                    </div>-->
+                    <div class="col-sm-5">
+						
+						<div class="form-group col-sm-6">
+							<label for="inputEmail3">Seccion</label>
+							<select class="form-group form-control" id="idBien" name="nivelDetalle">
+								<option  th:each="row:${niveldetalle}"
+									th:value="${row.codigoNivelDetalle}"
+									th:text="${row.seccion.descripSeccion}" />
+							</select>
+						</div>
+                        
+                        
+                    </div>
+                    
+                    <div class="col-sm-5">
+						
+						 <div class="form-group col-sm-6">
+							<label for="inputEmail3">Curso</label>
+							<select class="form-group form-control" id="idBien" name="curso">
+								<option  th:each="row:${curso}"
+									th:value="${row.codigo}"
+									th:text="${row.descripcion}" />
+							</select>
+						</div>
+					</div>
+                    
+                   
+                    
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="bg"></label>
+                            <button type="button" class="btn btn-success btn-block mt-1" id="btnBuscar" >Buscar</button>
+                        </div>
+
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            
+							
+                               
+                            <div class="col-sm-12" >
+								
+					
+                                 <table id="tableSecNivel" class="table table-striped mt-4" style="width:100%">
+													<thead>
+														<tr >
+															<th>Código</th>
+															<th>Seccion</th>
+															<th>Cursos</th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+														<tr th:each="row:${detallesNivelCurso}">
+															<td th:text="${row.codigoDetalleCurso}"></td>
+															<td th:text="${row.nivelDetalle.seccion.descripSeccion}"></td>
+															<th th:text="${row.curso.descripcion}" ></th>
+															<td>
+																<button type="button" class="btn btn-danger" id="btn-eliminar-biean">
+																	<i class="fas fa-trash-alt"></i>
+																</button>
+															</td>
+														</tr>
+														
+													</tbody>
+												</table>
+									
+							
+								
+                                
+                                
+                            </div>
+                            
+                        </div>
+                     
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+			
+		</form>
+	
+        
+    </div>
+</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+	<script th:src="@{/resources/datepicker/bootstrap-datepicker.js}"></script>     
+	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://kit.fontawesome.com/08aaa156fb.js" crossorigin="anonymous"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="https://kit.fontawesome.com/08aaa156fb.js" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+	
+	
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		
+		//leer atributo mensaje 
+		let msj = /*[[${MENSAJE}]]*/
+		
+	toastr.success(msj, toastr.options = {
+	"timeOut": "2000",
+	"positionClass " : " toast-top-right ",
+	});
+		
+	</script>
+	
+	
+	
+	
+	
+	
+	<script>
+		
+		
+	
+
+	</script>
+	
+	<script>
+	
+	 $(function() {
+            $('#usr1').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr1').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr1'));
+        });
+
+
+		$(function() {
+            $('#usr2').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr2').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr2'));
+        });
+        
+		</script>
+	
+	<script type="text/javascript">    
+	    $(document).ready(function(){     
+	
+	        $('#idRegistra').bootstrapValidator({     
+	        	feedbackIcons: {
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+	        	 fields:{
+	        		 
+	        		 Nombres: {
+	     	    		selector:'#idNombre',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese nombre'    
+	                        }      
+	                    }    
+	                },   
+	                Descripcion: {
+	     	    		selector:'#idDescripcion',       
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese descripción'    
+	                        }      
+	                    }    
+	                },    
+	                Stock: {
+	     	    		selector:'#idStock',      
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese stock'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^[0-9]{1,2}$/,    
+	                            message: 'Campo stock hasta dos cifras'    
+	                        },   
+	                    }    
+	                },
+	                precio: {
+	     	    		selector:'#idPrecio',      
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese precio'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
+	                            message: 'Campo precio real hasta dos decimales'    
+	                        },   
+	                    }    
+	                },       				
+	                Fecha: {
+	     	    		selector:'#usr2',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Seleccione fecha '    
+	                        },
+	                        date: {
+	                            format: 'YYYY-MM-DD',
+	                            message: 'The format is dd/mm/yyyy'
+	                        },
+	                    }    
+	                },
+	                Tipo: {
+	     	    		selector:'#idTipo',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Seleccione tipo medicamento'    
+	                        },					
+	                    }    
+	                } 
+	        	 }
+	        })					
+	    });    
+	</script>   
+	
+	
+	
+
+	
+</body>
+</html>

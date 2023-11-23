@@ -1,6 +1,8 @@
 package com.sistema.academia.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ public class UsuarioServices {
 
 	@Autowired
 	private UsuarioRepository repo;
+	
+	private Map<String, Boolean> dniCache = new HashMap<>();
 	
 	public void registrar(Usuario usu) {
 		repo.save(usu);
@@ -49,19 +53,41 @@ public class UsuarioServices {
 		return repo.findAll();
 		}
 	
-	public boolean existsByDni(String dni) {
-	    // Lógica para verificar si el DNI ya existe en la base de datos
-	    // Esto puede ser una llamada a tu capa de persistencia o base de datos
-	    return repo.existsByDni(dni);
-	}
+	public boolean existeDni(String dni) {
+		 Usuario usuario = repo.findByDni(dni); // Suponiendo un método findByDni en tu repositorio
 
-	 public void guardarUsuario(Usuario usuario) {
-	        // Aquí puedes realizar validaciones adicionales, lógica de negocio, etc.,
-	        // antes de guardar el usuario en la base de datos, si es necesario.
-	        repo.save(usuario);
+	        return usuario != null; // Retorna true si el usuario con el DNI existe, de lo contrario, false
 	    }
 
-	
-}
+	public String guardarUsuario(Usuario usuario) {
+        
+        
+		String dni = usuario.getDni();
 
+		        // Verificar si el DNI ya está en la caché
+		        Boolean dniExistente = dniCache.get(dni);
 
+		        if (dniExistente != null && dniExistente) {
+		            return "El DNI ya está registrado en el sistema";
+		        } else {
+		            Usuario usuarioExistente = repo.findByDni(dni);
+
+		            if (usuarioExistente != null) {
+		                dniCache.put(dni, 
+		             
+		true); // Almacenar en caché el DNI verificado
+		                return "El DNI ya está registrado en el sistema";
+		            } else {
+		                // Guardar el usuario en la base de datos y actualizar la caché si es necesario
+		                repo.save(usuario);
+		                dniCache.put(dni, 
+		             
+		true);
+		                return "Usuario registrado correctamente";
+		            }
+		        }
+		    }
+
+		    // Otros métodos de servicio...
+
+		}

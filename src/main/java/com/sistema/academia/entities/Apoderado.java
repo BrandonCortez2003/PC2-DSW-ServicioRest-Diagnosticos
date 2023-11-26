@@ -61,10 +61,6 @@ public class Apoderado {
 	@JoinColumn(name="cod_dis")
 	private Distrito distrito;
 	
-	//Relacion con alummno
-	@ManyToOne
-	@JoinColumn(name="cod_alu")
-	private Alumno alumno;
 	
 	//Relacion con matricula
 	@OneToMany(mappedBy = "apoderado")
@@ -168,13 +164,6 @@ public class Apoderado {
 		this.distrito = distrito;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
-	}
-
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
 
 	public List<Matricula> getListaMatricula() {
 		return listaMatricula;

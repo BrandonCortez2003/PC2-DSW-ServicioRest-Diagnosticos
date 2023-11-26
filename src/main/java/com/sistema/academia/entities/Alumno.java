@@ -42,10 +42,6 @@ public class Alumno {
 	@Column(name="sexo_alu")
 	private String sexo;
 	
-
-	@Column(name="estado_Alu")
-	private Boolean estado;
-	
 	@Column(name="dni_alu")
 	private String dni;
 
@@ -68,9 +64,7 @@ public class Alumno {
 	private Distrito distrito;
 	
 	
-	//Relacion con apoderado
-	@OneToMany(mappedBy = "alumno")
-	private List<Apoderado> listaApoderado;
+
 	
 	//Relacion con matricula
 	@OneToMany(mappedBy = "alumno")
@@ -125,16 +119,6 @@ public class Alumno {
 	}
 
 
-
-	public Boolean getEstado() {
-		return estado;
-	}
-
-
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
 
 
 
@@ -201,15 +185,6 @@ public class Alumno {
 
 
 
-	public List<Apoderado> getListaApoderado() {
-		return listaApoderado;
-	}
-
-
-
-	public void setListaApoderado(List<Apoderado> listaApoderado) {
-		this.listaApoderado = listaApoderado;
-	}
 
 
 

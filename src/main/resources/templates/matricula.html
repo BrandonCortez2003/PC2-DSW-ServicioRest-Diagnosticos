@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Matricula</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" th:href="@{/resources/datepicker/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}"> 
+
+<style>
+	.modal-header, h4, .close {
+		background-color: #5E7A2E;
+		color: white !important;
+		text-align: center;
+		font-size: 20px;
+	}
+	.help-block{
+	 color: red;
+	 /*display: none;*/
+	}
+	.form-group.has-error .form-control-label {
+	  color: red;
+	}
+	.form-group.has-error .form-control {
+	  border: 1px solid red;
+	  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+	}
+	
+	.alertify .ajs-dialog {
+	    top: 50%;
+	    transform: translateY(-50%);
+	    margin: auto;
+	}
+	
+	.ajs-header{
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.ajs-ok{
+		color: #fff;
+	    background-color: #007bff;
+	    border-color: #007bff;
+	}
+	.ajs-cancel{
+		color: #fff;
+	    background-color: #dc3545;
+	    border-color: #dc3545;
+	}
+	.btn-primary{
+	background-color: #286090 !important;
+	}
+	.dataTables_length, .dataTables_info{
+		display: none;
+	}
+	.modal-lg, .modal-xl {
+		max-width: 400px;
+		max-height: 300px;
+	}
+	
+	.form-control-feedback2 {
+	  margin:1px;
+	  position: absolute;
+	  padding: 10px;
+	  pointer-events: none;
+	  background-color: #e9ecef;
+	  border-style: none;
+	}
+	.form-control-feedback3 {
+	  margin:1px;
+	  position: absolute;
+	  margin-left:225px;
+	  padding: 10px;
+	  pointer-events: none;
+	  background-color: #e9ecef;
+	  border-style: none;
+	}
+	.form-control {
+	  padding-left: 40px!important;
+	}
+	/*.toast-succes{
+		width: 120px;
+	}*/
+	
+	 .moveall, .removeall {
+            border: 1px solid #ccc !important;
+            background: #efefef;
+        }
+
+
+        .moveall:hover, .removeall:hover {
+            background: #efefef;
+        }
+
+        .moveall::after {
+            content: attr(title);
+        }
+
+        .removeall::after {
+            content: attr(title);
+        }
+
+        .form-control option {
+            padding: 10px;
+            border-bottom: 1px solid #efefef;
+            cursor:pointer
+        }
+        .bootstrap-duallistbox-container > div.box1 > select,
+        .bootstrap-duallistbox-container > div.box2 > select {
+            height: 180px !important;
+        }
+	
+</style> 
+</head>
+<body>
+	
+	<!-- consumir fragmento cabecera-->
+	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
+	
+	
+
+            <div class="card" id="Ventana2">
+                <div class="card-header text-center">
+                    <div class="float-left">
+                        Registrar Matricula
+                    </div>
+                </div>
+                <div class="card-body">
+    
+                    <form id="formdata">
+                        <!--DATOS ACADEMICOS-->
+                        <div class="row justify-content-between">
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="cbosituacionalumno">Alumno</label>
+                                    </div>
+                                    <input type="text" value="Nuevo" name="nuevo"  disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="txtautogenerado">Codigo Matricula</label>
+                                    </div>
+                                    <input type="text" value="0" name="codigo" id="idCodigo" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mb-3">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body p-2">
+                                        <p class="card-title"><ins>Datos Academicos</ins></p>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="txtinstitutoprocedencia">Instituto de Procedencia</label>
+                                                    <input type="text" class="form-control" id="txtinstitutoprocedencia" name="institutoprocedencia" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="inputEmail3">Nivel Academico</label>
+														<select class="form-group form-control" id="idBien" name="nivel">
+															<option  th:each="row:${niveles}"
+																th:value="${row.codigo}"
+																th:text="${row.nivel}" />
+														</select>
+							                     </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                    <label for="inputEmail3">Secciones</label>
+													<select class="form-group form-control" id="idBien" name="seccion">
+														<option  th:each="row:${seccion}"
+															th:value="${row.codigo}"
+															th:text="${row.descripSeccion}" />
+													</select>
+							                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--DATOS DEL ALUMNO-->
+                        <div class="row mb-3">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body p-2">
+                                        <p class="card-title"><ins>Datos del Alumno</ins></p>
+                                        <input id="txtidalumno" type="hidden" value="0" />
+                                        <div class="row align-items-end">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="txtalumnodocumentoidentidad">Documento Identidad</label>
+                                                    <input type="text" class="form-control required" id="txtalumnodocumentoidentidad" name="alumnodocumentoidentidad" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="txtalumnonombres">Nombres</label>
+                                                    <input type="text" class="form-control required" id="txtalumnonombres" name="alumnonombres" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="txtalumnoapellidos">Apellidos</label>
+                                                    <input type="text" class="form-control required" id="txtalumnoapellidos" name="alumnoapellidos" autocomplete="off">
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="row align-items-end">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="txtalumnofechanacimiento">Fecha Nacimiento</label>
+                                                    <input type="text" class="form-control required" id="txtalumnofechanacimiento" name="alumnofechanacimiento" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="cboalumnosexo">Sexo</label>
+                                                    <select id="cboalumnosexo" class="form-control">
+                                                        <option value="Masculino">Masculino</option>
+                                                        <option value="Femenino">Femenino</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="cboalumnodistrito">Distrito</label>
+                                                    <select class="form-control" id="idDistrito" name="distrito">
+													      
+													      <option th:each="row:${distritos}" 
+													      			th:value="${row.codigo}"
+													      			th:text="${row.nombre}"/>
+													    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="txtalumnodireccion">Direccion</label>
+                                                    <input type="text" class="form-control required" id="txtalumnodireccion" name="alumnodireccion" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--DATOS DEL APODERADO-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body p-2">
+                                        <p class="card-title"><ins>Datos del Apoderado</ins></p>
+                                        <div class="row align-items-end">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="cboapoderadotiporelacion">Tipo Relacion</label>
+                                                    <select id="cboapoderadotiporelacion" class="form-control">
+                            							 <option value="Masculino">Padre</option>
+                                                        <option value="Femenino">Madre</option>
+                                                         <option value="Femenino">Tío(a)</option>
+                                                         <option value="Femenino">Primo(a)</option>
+                                                         <option value="Femenino">Abuelo(a)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="txtapoderadodocumentoidentidad">Documento Identidad</label>
+                                                    <input type="text" class="form-control required" id="txtapoderadodocumentoidentidad" name="apoderadodocumentoidentidad" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="txtapoderadonombres">Nombres</label>
+                                                    <input type="text" class="form-control required" id="txtapoderadonombres" name="apoderadonombres" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="txtapoderadoapellidos">Apellidos</label>
+                                                    <input type="text" class="form-control required" id="txtapoderadoapellidos" name="apoderadoapellidos" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="txtapoderadofechanacimiento">Fecha Nacimiento</label>
+                                                    <input type="text" class="form-control required" id="txtapoderadofechanacimiento" name="apoderadofechanacimiento" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-end">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="cboapoderadosexo">Sexo</label>
+                                                    <select id="cboapoderadosexo" class="form-control">
+                                                        <option value="Masculino">Masculino</option>
+                                                        <option value="Femenino">Femenino</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="cboapoderadoestadocivil">Estado Civil</label>
+                                                    <select id="cboapoderadoestadocivil" class="form-control">
+                                                        <option value="Casado(a)">Casado(a)</option>
+                                                        <option value="Divorciado(a)">Divorciado(a)</option>
+                                                        <option value="Soltero(a)">Soltero(a)</option>
+                                                        <option value="Soltero(a)">Viudo(a)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="cboalumnodistrito">Distrito</label>
+                                                    <select class="form-control" id="idDistrito" name="distrito">
+													      
+													      <option th:each="row:${distritos}" 
+													      			th:value="${row.codigo}"
+													      			th:text="${row.nombre}"/>
+													    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label for="txtapoderadodireccion">Direccion</label>
+                                                    <input type="text" class="form-control required" id="txtapoderadodireccion" name="apoderadodireccion" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+    
+    
+    
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-danger float-right" onclick="salir()">Salir</button>
+                    <button type="button" class="btn btn-success float-right mr-2" onclick="registrar()">Registrar Matricula</button>
+    
+                </div>
+            </div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+	<script th:src="@{/resources/datepicker/bootstrap-datepicker.js}"></script>     
+	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://kit.fontawesome.com/08aaa156fb.js" crossorigin="anonymous"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="https://kit.fontawesome.com/08aaa156fb.js" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+	
+	
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		
+		//leer atributo mensaje 
+		let msj = /*[[${MENSAJE}]]*/
+		
+	toastr.success(msj, toastr.options = {
+	"timeOut": "2000",
+	"positionClass " : " toast-top-right ",
+	});
+		
+	</script>
+	
+	
+	
+	
+	
+	
+	<script>
+		
+		
+	
+
+	</script>
+	
+	<script>
+		
+		
+		//evento Click al boton eliminar
+		$(document).on("click",".btn-eliminar",function(){
+			
+			var cod;
+			//Almacenar el codigo del medicamento segun el boton eliminar que se seleccionò 
+			cod = $ (this).parents("tr").find("td")[0].innerHTML;
+			
+			alertify.confirm("SISTEMA","Seguro de eliminar!",
+			  function(){
+				  window.location="http://localhost:8091/seccionNivel/eliminar?codigo="+cod
+		
+			  },
+			  function(){ 
+				alertify.error('Cancelado!')
+			  }).
+			  set('labels', {ok:'Si', cancel:'No'});
+			
+			
+		})
+	
+	 $(function() {
+            $('#usr1').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr1').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr1'));
+        });
+
+
+		$(function() {
+            $('#usr2').datepicker({
+                'format': 'yyyy-mm-dd',
+                'autoclose': true
+            });
+        });
+        $('#usr2').on('changeDate show', function(e) {
+            $('#idRegistra').bootstrapValidator('revalidateField', $('#usr2'));
+        });
+        
+		</script>
+	
+	<script type="text/javascript">    
+	    $(document).ready(function(){     
+	
+	        $('#idRegistra').bootstrapValidator({     
+	        	feedbackIcons: {
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+	        	 fields:{
+	        		 
+	        		 Nombres: {
+	     	    		selector:'#idNombre',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese nombre'    
+	                        }      
+	                    }    
+	                },   
+	                Descripcion: {
+	     	    		selector:'#idDescripcion',       
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese descripción'    
+	                        }      
+	                    }    
+	                },    
+	                Stock: {
+	     	    		selector:'#idStock',      
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese stock'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^[0-9]{1,2}$/,    
+	                            message: 'Campo stock hasta dos cifras'    
+	                        },   
+	                    }    
+	                },
+	                precio: {
+	     	    		selector:'#idPrecio',      
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese precio'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
+	                            message: 'Campo precio real hasta dos decimales'    
+	                        },   
+	                    }    
+	                },       				
+	                Fecha: {
+	     	    		selector:'#usr2',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Seleccione fecha '    
+	                        },
+	                        date: {
+	                            format: 'YYYY-MM-DD',
+	                            message: 'The format is dd/mm/yyyy'
+	                        },
+	                    }    
+	                },
+	                Tipo: {
+	     	    		selector:'#idTipo',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Seleccione tipo medicamento'    
+	                        },					
+	                    }    
+	                } 
+	        	 }
+	        })					
+	    });    
+	</script>   
+	
+	
+	
+
+	
+</body>
+</html>

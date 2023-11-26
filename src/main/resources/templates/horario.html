@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Niveles</title>
+<title>Horarios</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -95,16 +95,21 @@
 	
 		
 
-			<h3 class="text-center mt-4">LISTA DE NIVELES</h3>
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Nivel
-			</button>
+			<h3 class="text-center mt-4">HORARIO</h3>
+			
+			
+				<div class="col-md-2 float-right">
+                            <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
+                            </button>
+                        </div>
+
 			<div class=" mt-2">
-	
-				<table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
+				
+				<table class="table table-striped table-bordered mt-5" id="tablePeriodo">
 							  <thead>
-							   <tr>
-					                <th>Codigo</th>
+							  <tr>
+					            <th>Codigo</th>
                                 <th>Curso</th>
                                 <th>Dia Semana</th>
                                 <th>Hora Inicio</th>
@@ -117,7 +122,7 @@
 							  <tbody>
 								<tr th:each="row:${horario}">
 							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.niveldetallecurso.curso}"></td>
+							      <td th:text="${row.niveldetallecurso.curso.descripcion}"></td>
 							      <td th:text="${row.diaSemana}"></td>
 							      <td th:text="${row.horaIni}"></td>
 							      <td th:text="${row.horaFin}"></td>
@@ -128,7 +133,7 @@
 							      <td th:text="${row.fechaRegistro}"></td>
 							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
-							    </tr>  
+							    </tr>   
 							  </tbody>
 				</table>
 			</div>
@@ -150,13 +155,15 @@
 											<div class="row">
 												
 												<div class="form-group col-sm-6">
-													<label for="inputEmail3">Cursos</label>
-													<select class="form-group form-control" id="idCurso" name="curso">
+													<label for="inputEmail3">Curso</label>
+													<select class="form-group form-control" id="idBien" name="curso">
 														<option  th:each="row:${nivelDetalleCurso}"
-															th:value="${row.codigo}"
-															th:text="${row.niveldetallecurso.curso}" />
+															th:value="${row.codigoDetalleCurso}"
+															th:text="${row.curso.descripcion}" />
 													</select>
 												</div>
+												
+												
 												
 													<div class="form-group has-feedback col-md-4">	
 														<label for="exampleInputEmail1"><b>Día de la semana</b></label><br>
@@ -194,18 +201,7 @@
 												
 											
 							
-												<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Periodo</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-													    <select class="form-control" id="idPeriodo" name="periodo">
-													      <option value=" ">[Seleccione Turno]</option>
-													      <option th:each="row:${periodo}"
-													      th:text="${row.descripcion}"
-													      th:value="${row.codigo}"
-													       />
-													    </select>
-													   
-												 </div>
+
 												 
 											    
 												 
@@ -309,7 +305,7 @@
 			
 			alertify.confirm("SISTEMA","Seguro de eliminar!",
 			  function(){
-				  window.location="http://localhost:8091/nivel/eliminar?codigo="+cod
+				  window.location="http://localhost:8091/horario/eliminar?codigo="+cod
 		
 			  },
 			  function(){ 

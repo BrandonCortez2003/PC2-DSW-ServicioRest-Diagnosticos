@@ -92,9 +92,20 @@ public class DetalleCursoController {
 		
 		
 		
-		
-		
-		
+		return "redirect:/detalleCurso/lista";
+	}
+	
+	
+	@RequestMapping("/buscar")
+	@ResponseBody
+	public NivelDetalleCurso buscar(@RequestParam("codigo")Integer cod) {
+		return servicioNivelDetCurso.buscarPorID(cod);
+	}
+	
+	@RequestMapping("/eliminar")
+	public String eliminar(@RequestParam("codigo") Integer cod,RedirectAttributes redirect) {
+		servicioNivelDetCurso.eliminarPoID(cod);
+		redirect.addFlashAttribute("MENSAJE","Detalle eliminado");
 		return "redirect:/detalleCurso/lista";
 	}
 	

@@ -43,8 +43,7 @@ public class AlumnoController {
 						 @RequestParam("fechaNac")String fechaNac,
 						 @RequestParam("sexo")String sexo,
 						 @RequestParam("distrito")int codDis,
-						 @RequestParam("direccion")String direccion,
-						 @RequestParam("estado")Boolean estado,						
+						 @RequestParam("direccion")String direccion,					
 						 RedirectAttributes redirect)
 	{
 		try {
@@ -57,7 +56,7 @@ public class AlumnoController {
 			alu.setFechanaci(LocalDate.parse(fechaNac));
 			alu.setSexo(sexo);
 			alu.setDireccion(direccion);
-			alu.setEstado(estado);
+
 
 			Distrito dis = new Distrito();
 			
@@ -97,7 +96,7 @@ public class AlumnoController {
 									RedirectAttributes redirect) 
 	{
 		servicioAlu.eliminarPorID(cod);
-		redirect.addFlashAttribute("MENSAJE","Curso eliminado correctamente");
+		redirect.addFlashAttribute("MENSAJE","Alumno eliminado correctamente");
 		
 		return "redirect:/alumno/lista";
 	}

@@ -90,13 +90,24 @@ public class SeccionNivelController {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
+	
 		
 		
 		return "redirect:/seccionNivel/lista";
 	}
 	
+	
+	@RequestMapping("/buscar")
+	@ResponseBody
+	public NivelDetalle buscar(@RequestParam("codigo")Integer cod) {
+		return servicioNivelDet.buscarPorID(cod);
+	}
+	
+	@RequestMapping("/eliminar")
+	public String eliminar(@RequestParam("codigo") Integer cod,RedirectAttributes redirect) {
+		servicioNivelDet.eliminarPoID(cod);
+		redirect.addFlashAttribute("MENSAJE","Detalle eliminado");
+		return "redirect:/seccionNivel/lista";
+	}
 
 }

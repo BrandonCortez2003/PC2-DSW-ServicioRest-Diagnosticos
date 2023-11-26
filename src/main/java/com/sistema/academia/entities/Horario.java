@@ -2,6 +2,7 @@ package com.sistema.academia.entities;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -29,10 +30,10 @@ public class Horario {
 	private String diaSemana;
 	
 	@Column(name="hora_ini_horario")
-	private Time horaIni;
+	private LocalTime horaIni;
 	
 	@Column(name="hora_fin_horario")
-	private Time horaFin;
+	private LocalTime horaFin;
 	
 	@Column(name="estado_horario")
 	private Boolean estado;
@@ -62,19 +63,21 @@ public class Horario {
 		this.diaSemana = diaSemana;
 	}
 
-	public Time getHoraIni() {
+
+
+	public LocalTime getHoraIni() {
 		return horaIni;
 	}
 
-	public void setHoraIni(Time horaIni) {
+	public void setHoraIni(LocalTime horaIni) {
 		this.horaIni = horaIni;
 	}
 
-	public Time getHoraFin() {
+	public LocalTime getHoraFin() {
 		return horaFin;
 	}
 
-	public void setHoraFin(Time horaFin) {
+	public void setHoraFin(LocalTime horaFin) {
 		this.horaFin = horaFin;
 	}
 

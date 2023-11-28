@@ -111,6 +111,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <button type="button" class="btn btn-primary mt-5  nuevo"  data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
                 <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
             </button>
+            <button type="button" class="btn btn-primary mt-5  nuevo" onclick="generarInforme()">
+                <i class="fas fa-solid fa-file"></i> Reporte
+            </button>
         </div>
 		
 
@@ -283,6 +286,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		
 	</script>
 
+<script>
+        function generarInforme() {
+            // Realizar una solicitud GET al controlador para generar el informe
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/reporte/alumno", true);
+            xhr.responseType = "blob";
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    // Crear un objeto de URL para el blob de respuesta
+                    var blob = new Blob([this.response], { type: "application/pdf" });
+                    var url = window.URL.createObjectURL(blob);
+
+                    // Abrir el informe en una nueva ventana del navegador
+                    window.open(url);
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
 
 	<script>
 		//asignar evento click a todos los botones con clase "btn-editar"

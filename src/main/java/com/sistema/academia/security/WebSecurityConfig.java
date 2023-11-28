@@ -28,7 +28,7 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests((requests) -> requests
 				
 				.requestMatchers("/bienvenida/**","/sesion/**","/resources/**","/css/**","/img/**","/js/**").permitAll()
-				.requestMatchers("/director/**","/profesor/**","/cursos/**","/periodos/**","/seccion/**","/alumno/**","/rol/**","/detalleCurso/**","/seccionNivel/**").authenticated()
+				.requestMatchers("/director/**","/profesor/**","/cursos/**","/periodos/**","/seccion/**","/alumno/**","/rol/**","/detalleCurso/**","/seccionNivel/**","/reporte/**").authenticated()
 				
 				.requestMatchers("/Admin/**").hasAnyRole("Admin")
 				.requestMatchers("/Director/**").hasAnyRole("Director")

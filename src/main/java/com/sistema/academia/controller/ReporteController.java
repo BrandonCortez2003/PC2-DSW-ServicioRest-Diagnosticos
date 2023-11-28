@@ -25,13 +25,13 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class ReporteController {
 
 	@Autowired
-	private ALumnoServices servicioMed;
+	private ALumnoServices servicioAlum;
 	
 	@RequestMapping("/alumno")
 	public void alumno(HttpServletResponse response) {
 		try {
 			//invocar al método listarTodos
-			List<Alumno> lista=servicioMed.listarTodos();
+			List<Alumno> lista=servicioAlum.listarTodos();
 			//acceder al reporte "reporteMedicamento.jrxml"
 			File file=ResourceUtils.getFile("classpath:alumno.jrxml");
 			//crear objeto de la clase JasperReport y manipular el objeto file

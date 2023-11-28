@@ -2,25 +2,29 @@ package com.sistema.academia.dto;
 
 public class DetalleNivelSeccion {
 	
-	private int  Codigo;
+	private int  codigo;
 	
-	private String descripcion;
+	private String descripSeccion;
+
+
 
 	public int getCodigo() {
-		return Codigo;
+		return codigo;
 	}
 
 	public void setCodigo(int codigo) {
-		Codigo = codigo;
+		this.codigo = codigo;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescripSeccion() {
+		return descripSeccion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripSeccion(String descripSeccion) {
+		this.descripSeccion = descripSeccion;
 	}
+
+	
 	
 	
 	

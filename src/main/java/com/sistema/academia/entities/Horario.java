@@ -1,11 +1,7 @@
 package com.sistema.academia.entities;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
+
 import java.time.LocalTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,8 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,17 +29,22 @@ public class Horario {
 	@Column(name="hora_fin_horario")
 	private LocalTime horaFin;
 	
-	@Column(name="estado_horario")
-	private Boolean estado;
-	
-	@Column(name="fecha_registro")
-	@CreationTimestamp
-	private LocalDateTime fechaRegistro;
+
 	
 	//Relacion con nivel detalle Curso 
 	@ManyToOne
-	@JoinColumn(name="cod_nivel_detalle_curso")
-	private NivelDetalleCurso niveldetallecurso;
+	@JoinColumn(name="cod_nivel")
+	private Nivel nivel;
+	
+	@ManyToOne
+	@JoinColumn(name="cod_seccion")
+	private Seccion seccion;
+	
+	@ManyToOne
+	@JoinColumn(name="cod_curso")
+	private Curso curso;
+	
+	
 
 	public Integer getCodigo() {
 		return codigo;
@@ -81,35 +80,31 @@ public class Horario {
 		this.horaFin = horaFin;
 	}
 
-	public Boolean getEstado() {
-		return estado;
+	public Nivel getNivel() {
+		return nivel;
 	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
 	}
 
-	public LocalDateTime getFechaRegistro() {
-		return fechaRegistro;
+	public Seccion getSeccion() {
+		return seccion;
 	}
 
-	public void setFechaRegistro(LocalDateTime fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
+	public void setSeccion(Seccion seccion) {
+		this.seccion = seccion;
 	}
 
-	public NivelDetalleCurso getNiveldetallecurso() {
-		return niveldetallecurso;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public void setNiveldetallecurso(NivelDetalleCurso niveldetallecurso) {
-		this.niveldetallecurso = niveldetallecurso;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
+
 	
 	
-	@PrePersist
-	@PreUpdate
-	public void beforeSaveOrUpdate() {
-		this.fechaRegistro = LocalDateTime.now();
-	}
-	
+
 }

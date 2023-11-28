@@ -132,7 +132,8 @@
                 </div>
                 <div class="card-body">
     
-                    <form id="formdata">
+                    <form id="formdata" method="POST" th:action="@{grabar}">
+						<input type="hidden" value="0" name="codigo" id="idCodigo">
                         <!--DATOS ACADEMICOS-->
                         <div class="row justify-content-between">
                             <div class="col-sm-4">
@@ -203,19 +204,19 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="txtalumnodocumentoidentidad">Documento Identidad</label>
-                                                    <input type="text" class="form-control required" id="txtalumnodocumentoidentidad" name="alumnodocumentoidentidad" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtalumnodocumentoidentidad" name="dniAlu" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="txtalumnonombres">Nombres</label>
-                                                    <input type="text" class="form-control required" id="txtalumnonombres" name="alumnonombres" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtalumnonombres" name="nomAlu" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="txtalumnoapellidos">Apellidos</label>
-                                                    <input type="text" class="form-control required" id="txtalumnoapellidos" name="alumnoapellidos" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtalumnoapellidos" name="apeAlu" autocomplete="off">
                                                 </div>
                                             </div>
                                            
@@ -224,13 +225,13 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="txtalumnofechanacimiento">Fecha Nacimiento</label>
-                                                    <input type="text" class="form-control required" id="txtalumnofechanacimiento" name="alumnofechanacimiento" autocomplete="off">
+                                                    <input type="date" class="form-control required" id="txtalumnofechanacimiento" name="naciAlu" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="cboalumnosexo">Sexo</label>
-                                                    <select id="cboalumnosexo" class="form-control">
+                                                    <select id="cboalumnosexo" class="form-control"  name="sexoAlu">
                                                         <option value="Masculino">Masculino</option>
                                                         <option value="Femenino">Femenino</option>
                                                     </select>
@@ -239,7 +240,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="cboalumnodistrito">Distrito</label>
-                                                    <select class="form-control" id="idDistrito" name="distrito">
+                                                    <select class="form-control" id="idDistrito" name="distritoAlu">
 													      
 													      <option th:each="row:${distritos}" 
 													      			th:value="${row.codigo}"
@@ -250,7 +251,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="txtalumnodireccion">Direccion</label>
-                                                    <input type="text" class="form-control required" id="txtalumnodireccion" name="alumnodireccion" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtalumnodireccion" name="direcAlu" autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -268,7 +269,7 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="cboapoderadotiporelacion">Tipo Relacion</label>
-                                                    <select id="cboapoderadotiporelacion" class="form-control">
+                                                    <select id="cboapoderadotiporelacion" class="form-control"  name="relaAPode">
                             							 <option value="Masculino">Padre</option>
                                                         <option value="Femenino">Madre</option>
                                                          <option value="Femenino">Tío(a)</option>
@@ -280,25 +281,25 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="txtapoderadodocumentoidentidad">Documento Identidad</label>
-                                                    <input type="text" class="form-control required" id="txtapoderadodocumentoidentidad" name="apoderadodocumentoidentidad" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtapoderadodocumentoidentidad" name="dniApode" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="txtapoderadonombres">Nombres</label>
-                                                    <input type="text" class="form-control required" id="txtapoderadonombres" name="apoderadonombres" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtapoderadonombres" name="nomApode" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="txtapoderadoapellidos">Apellidos</label>
-                                                    <input type="text" class="form-control required" id="txtapoderadoapellidos" name="apoderadoapellidos" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtapoderadoapellidos" name="apeApode" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="txtapoderadofechanacimiento">Fecha Nacimiento</label>
-                                                    <input type="text" class="form-control required" id="txtapoderadofechanacimiento" name="apoderadofechanacimiento" autocomplete="off">
+                                                    <input type="date" class="form-control required" id="txtapoderadofechanacimiento" name="naciApode" autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -306,7 +307,7 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="cboapoderadosexo">Sexo</label>
-                                                    <select id="cboapoderadosexo" class="form-control">
+                                                    <select id="cboapoderadosexo" class="form-control"  name="sexoapode">
                                                         <option value="Masculino">Masculino</option>
                                                         <option value="Femenino">Femenino</option>
                                                     </select>
@@ -315,7 +316,7 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="cboapoderadoestadocivil">Estado Civil</label>
-                                                    <select id="cboapoderadoestadocivil" class="form-control">
+                                                    <select id="cboapoderadoestadocivil" class="form-control"  name="estadoapode">
                                                         <option value="Casado(a)">Casado(a)</option>
                                                         <option value="Divorciado(a)">Divorciado(a)</option>
                                                         <option value="Soltero(a)">Soltero(a)</option>
@@ -326,7 +327,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="cboalumnodistrito">Distrito</label>
-                                                    <select class="form-control" id="idDistrito" name="distrito">
+                                                    <select class="form-control" id="idDistrito" name="distritoApode">
 													      
 													      <option th:each="row:${distritos}" 
 													      			th:value="${row.codigo}"
@@ -337,7 +338,7 @@
                                             <div class="col-sm-5">
                                                 <div class="form-group">
                                                     <label for="txtapoderadodireccion">Direccion</label>
-                                                    <input type="text" class="form-control required" id="txtapoderadodireccion" name="apoderadodireccion" autocomplete="off">
+                                                    <input type="text" class="form-control required" id="txtapoderadodireccion" name="direApode" autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -345,16 +346,18 @@
                                 </div>
                             </div>
                         </div>
+                    <div class="card-footer">
+                    <button type="button" class="btn btn-danger float-right" >Salir</button>
+                    <button type="submit" class="btn btn-success float-right mr-2">Registrar Matricula</button>
+    
+                </div>
+                        
                     </form>
     
     
     
                 </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-danger float-right" onclick="salir()">Salir</button>
-                    <button type="button" class="btn btn-success float-right mr-2" onclick="registrar()">Registrar Matricula</button>
-    
-                </div>
+
             </div>
 
 

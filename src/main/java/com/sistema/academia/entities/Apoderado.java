@@ -49,8 +49,6 @@ public class Apoderado {
 	@Column(name="direc_apode")
 	private String direccion;
 	
-	@Column(name="estado_apode")
-	private Boolean estadoApode;
 	
 	@Column(name="fecha_registro")
 	private LocalDateTime fechaRegistro;
@@ -140,13 +138,6 @@ public class Apoderado {
 		this.direccion = direccion;
 	}
 
-	public Boolean getEstadoApode() {
-		return estadoApode;
-	}
-
-	public void setEstadoApode(Boolean estadoApode) {
-		this.estadoApode = estadoApode;
-	}
 
 	public LocalDateTime getFechaRegistro() {
 		return fechaRegistro;

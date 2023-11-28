@@ -46,6 +46,11 @@ public class Curso {
 	@OneToMany(mappedBy = "curso")
 	private List<NivelDetalleCurso> listaNivelDetalleCurso;
 	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "curso")
+	private List<Horario> listaCursoHorario;
+	
 
 	public Integer getCodigo() {
 		return codigo;
@@ -79,6 +84,24 @@ public class Curso {
 		this.fechaRegistro = fechaRegistro;
 	}
 	
+
+	
+	
+	public List<NivelDetalleCurso> getListaNivelDetalleCurso() {
+		return listaNivelDetalleCurso;
+	}
+
+	public void setListaNivelDetalleCurso(List<NivelDetalleCurso> listaNivelDetalleCurso) {
+		this.listaNivelDetalleCurso = listaNivelDetalleCurso;
+	}
+
+	public List<Horario> getListaCursoHorario() {
+		return listaCursoHorario;
+	}
+
+	public void setListaCursoHorario(List<Horario> listaCursoHorario) {
+		this.listaCursoHorario = listaCursoHorario;
+	}
 
 	@PrePersist
 	@PreUpdate

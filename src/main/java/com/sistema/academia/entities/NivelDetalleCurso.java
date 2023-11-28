@@ -1,93 +1,89 @@
 package com.sistema.academia.entities;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="tb_nivel_detalle_curso")
 public class NivelDetalleCurso {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cod_nivel_detalle_curso")
-	private Integer codigoDetalleCurso;
+	@EmbeddedId
+	private NivelDetalleCursoPK PK;
 	
 	
-	
-	@Column(name="fecha_registro")
-	@CreationTimestamp
-	private LocalDateTime fechaRegistro;
-	
-	//Relacion con nivel detalle
 	@ManyToOne
-	@JoinColumn(name="cod_nivel_detalle")
-	private NivelDetalle nivelDetalle;
+	@JoinColumn(name="cod_nivel", insertable = false,
+			updatable = false,
+			referencedColumnName ="cod_nivel")
+	private Nivel nivel;
+	
+	@ManyToOne
+	@JoinColumn(name="cod_seccion", insertable = false,
+			updatable = false,
+			referencedColumnName ="cod_seccion")
+	private Seccion seccion;
+	
+	
 	
 	//Relacion con curso
 	@ManyToOne
-	@JoinColumn(name="cod_curso")
+	@JoinColumn(name="cod_curso", insertable = false,
+			updatable = false,
+			referencedColumnName ="cod_curso")
 	private Curso curso;
-	
-	
-	@OneToMany(mappedBy = "niveldetallecurso")
-	private List<Horario> listaHorario;
 
-	
 
-	public Integer getCodigoDetalleCurso() {
-		return codigoDetalleCurso;
-	}
 
-	public void setCodigoDetalleCurso(Integer codigoDetalleCurso) {
-		this.codigoDetalleCurso = codigoDetalleCurso;
+	public NivelDetalleCursoPK getPK() {
+		return PK;
 	}
 
 
 
-	public LocalDateTime getFechaRegistro() {
-		return fechaRegistro;
+	public void setPK(NivelDetalleCursoPK pK) {
+		PK = pK;
 	}
 
-	public void setFechaRegistro(LocalDateTime fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
+
+
+	public Nivel getNivel() {
+		return nivel;
 	}
 
-	public NivelDetalle getNivelDetalle() {
-		return nivelDetalle;
+
+
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
 	}
 
-	public void setNivelDetalle(NivelDetalle nivelDetalle) {
-		this.nivelDetalle = nivelDetalle;
+
+
+	public Seccion getSeccion() {
+		return seccion;
 	}
+
+
+
+	public void setSeccion(Seccion seccion) {
+		this.seccion = seccion;
+	}
+
+
 
 	public Curso getCurso() {
 		return curso;
 	}
+
+
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 	
 	
-	@PrePersist
-	@PreUpdate
-    protected void onCreate() {
-		fechaRegistro = LocalDateTime.now();
-    }
-	
-	
+
 }

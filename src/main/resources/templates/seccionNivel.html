@@ -166,19 +166,7 @@
                         
                     </div>
                     
-                    <div class="col-sm-5">
-						
-						 <div class="form-group col-sm-6">
-							<label for="inputEmail3">Secciones</label>
-							<select class="form-group form-control" id="idBien" name="seccion">
-								<option  th:each="row:${seccion}"
-									th:value="${row.codigo}"
-									th:text="${row.descripSeccion}" />
-							</select>
-						</div>
-					</div>
-                    
-                   
+                                 
                     
                     <div class="col-sm-2">
                         <div class="form-group">
@@ -189,45 +177,75 @@
                     </div>
                 </div>
                 <hr />
+                
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
-                            
-							
-                               
-                            <div class="col-sm-12" >
-								
-					
-                                 <table id="tableSecNivel" class="table table-striped mt-4" style="width:100%">
+
+                            <div class="col-sm-6">
+                                <div class="alert alert-danger" role="alert">
+                                    Secciones pendientes por asignar
+                                                                                                           
+                                </div>
+                                
+                               <table id="tableSeccion" class="table table-striped mt-6" style="width:100%">
 													<thead>
 														<tr >
 															<th>Código</th>
-															<th>Seccion</th>
-															<th>Nivel</th>
+															<th>Nombre</th>
 															<th></th>
 														</tr>
 													</thead>
 													<tbody>
 														
-														<tr th:each="row:${detallesNivel}">
-															<td th:text="${row.codigoNivelDetalle}"></td>
-															<td th:text="${row.seccion.descripSeccion}"></td>
-															<th th:text="${row.nivel.nivel}" ></th>
+														<tr>
+															<td></td>
+															<td></td>
 															<td>
-																<button type="button" class="btn btn-danger btn-eliminar" id="btn-eliminar-biean">
-																	<i class="fas fa-trash-alt"></i>
+																<button type="button" class="btn btn-warning">
+																	<i class="fa fa-plus" aria-hidden="true"></i>
 																</button>
 															</td>
 														</tr>
 														
 													</tbody>
 												</table>
-									
-							
-								
-                                
                                 
                             </div>
+                            <div class="col-sm-6">
+                                <div class="alert alert-success" role="alert">
+                                    Secciones Asignadas
+                                                                       
+                                </div>
+                                <table id="tableSecNiv" class="table table-striped mt-4" style="width:100%">
+													<thead>
+														<tr>
+															<th>Código</th>
+															<th>Nombre</th>
+															
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td></td>
+															<td></td>
+															
+															<td>
+																<button type="button" class="btn btn-danger" id="btn-eliminar-biean">
+																	<i class="fas fa-trash-alt"></i>
+																</button>
+															
+															</td>
+														</tr>
+														
+													</tbody>
+												</table>
+                                
+                            </div>
+                       
+                               
+
                             
                         </div>
                      
@@ -276,7 +294,52 @@
 	
 	<script>
 		
+		$('#tableSeccion').dataTable( {
+				  "searching": false,
+				  "lengthChange": false,
+				  responsive: true,
+		});
+	
+		$(document).on("click","#btnBuscar",function(){
+			
+			$("#tableSeccion").DataTable().destroy();
+			$("#tableSeccion tbody").empty()
+			$.get("/seccionNivel/consultaSecciones",function(response){
+				$.each(response,function(index,item){
+					$("#tableSeccion tbody").append(`<tr><td>${item.codigo}</td>
+												 <td>${item.descripSeccion}</td>
+												 <td>
+													<button type="button" class="btn btn-warning btn-adicionar">
+														<i class="fa fa-plus" aria-hidden="true"></i>
+													</button>
+												 </td>`);
+				})
+				$('#tableSeccion').dataTable( {
+				  "searching": false,
+				  "lengthChange": false,
+				  responsive: true,
+				});				
+			})
+		})
 		
+				$(document).on("click",".btn-adicionar",function(){
+			let cod=$(this).parents("tr").find("td")[0].innerHTML;
+			let des=$(this).parents("tr").find("td")[1].innerHTML;
+
+			$("#tableSecNiv tbody").empty();
+			$.get("adicionar?codigo="+cod+"&descripSeccion="+des,function(response){
+				$.each(response,function(index,item){
+					$("#tableSecNiv tbody").append(`<tr><td>${item.codigo}</td>
+							<td>${item.descripSeccion}</td>
+							<td>
+								<button type="button" class="btn btn-danger" id="btn-eliminar-biean">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							</td>`);
+				})
+			})	
+			
+		})
 	
 
 	</script>

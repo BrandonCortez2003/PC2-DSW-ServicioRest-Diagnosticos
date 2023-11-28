@@ -3,6 +3,8 @@ package com.sistema.academia.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,16 +25,13 @@ public class Matricula {
 	@Column(name="cod_matricula")
 	private Integer codigo;
 	
-	@Column(name="situ_matricula")
-	private String situacion;
 	
 	@Column(name="instituto_procedencia")
 	private String institutoPro;
 	
-	@Column(name="estado_matricula")
-	private Boolean estado;
 	
 	@Column(name="fecha_registro")
+	@CreationTimestamp
 	private LocalDateTime fechaRegistro;
 	
 	
@@ -40,11 +40,15 @@ public class Matricula {
 	@JoinColumn(name="cod_alu")
 	private Alumno alumno;
 	
-	//Relacion con nivel detalle
+
 	@ManyToOne
-	@JoinColumn(name="cod_nivel_detalle")
-	private NivelDetalle nivelDetalle;
+	@JoinColumn(name="cod_nivel")
+	private Nivel nivel;
 	
+	@ManyToOne
+	@JoinColumn(name = "cod_seccion")
+	private Seccion seccion;
+
 	
 	//Relacion con apoderado
 	@ManyToOne
@@ -68,20 +72,6 @@ public class Matricula {
 
 
 
-	public String getSituacion() {
-		return situacion;
-	}
-
-
-
-
-	public void setSituacion(String situacion) {
-		this.situacion = situacion;
-	}
-
-
-
-
 	public String getInstitutoPro() {
 		return institutoPro;
 	}
@@ -94,18 +84,6 @@ public class Matricula {
 	}
 
 
-
-
-	public Boolean getEstado() {
-		return estado;
-	}
-
-
-
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
 
 
 
@@ -138,19 +116,6 @@ public class Matricula {
 
 
 
-	public NivelDetalle getNivelDetalle() {
-		return nivelDetalle;
-	}
-
-
-
-
-	public void setNivelDetalle(NivelDetalle nivelDetalle) {
-		this.nivelDetalle = nivelDetalle;
-	}
-
-
-
 
 	public Apoderado getApoderado() {
 		return apoderado;
@@ -163,10 +128,40 @@ public class Matricula {
 		this.apoderado = apoderado;
 	}
 
+	
+	
+
+
+	public Nivel getNivel() {
+		return nivel;
+	}
+
+
+
+
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
+	}
+
+
+
+
+	public Seccion getSeccion() {
+		return seccion;
+	}
+
+
+
+
+	public void setSeccion(Seccion seccion) {
+		this.seccion = seccion;
+	}
+
 
 
 
 	@PrePersist
+	@PreUpdate
     protected void onCreate() {
 		fechaRegistro = LocalDateTime.now();
     }

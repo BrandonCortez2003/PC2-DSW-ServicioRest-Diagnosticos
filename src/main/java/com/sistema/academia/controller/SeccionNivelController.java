@@ -45,7 +45,7 @@ public class SeccionNivelController {
 		model.addAttribute("seccion", servicioSeccion.listarTodos());
 		model.addAttribute("periodos", servicioPeriodo.listarTodos());
 		model.addAttribute("niveles",servicioNivel.listarTodos());
-		model.addAttribute("detallesNivel", servicioNivelDet.listarTodos());
+
 		return "seccionNivel";
 	}
 	
@@ -55,38 +55,68 @@ public class SeccionNivelController {
         return servicioSeccion.listaTodasSecciones();
     }
 	
-	
+
+	@RequestMapping("/adicionar")
+	@ResponseBody
+	public List<DetalleNivelSeccion>adicionar(@RequestParam("codigo") int cod,
+											  @RequestParam("descripSeccion") String des,
+											  HttpServletRequest request)
+	{
+		List<DetalleNivelSeccion> lista = null;
+		
+		if(request.getSession().getAttribute("datos")==null)
+			lista = new ArrayList<DetalleNivelSeccion>();
+		else 
+			lista=(List<DetalleNivelSeccion>) request.getSession().getAttribute("datos");
+		
+		DetalleNivelSeccion det = new DetalleNivelSeccion();
+		
+		det.setCodigo(cod);
+		det.setDescripSeccion(des);
+		
+		lista.add(det);
+		request.getSession().setAttribute("datos", lista);
+				
+		return lista;
+	}
 	
 	
 	
 	
 	@RequestMapping("/grabar")
-	public String grabar(@RequestParam("codigo") Integer cod,
-						 @RequestParam("seccion") int codSec,
-						 @RequestParam("nivel") int codNiv,
-						
-						 RedirectAttributes redirect) {
+	public String grabar(@RequestParam("nivel") int idNiv,
+			HttpServletRequest request,RedirectAttributes redirect) {
 		
 
 		try {
+				NivelDetalle bean = new NivelDetalle();
+				
+				Nivel niv = new Nivel();
+				niv.setCodigo(idNiv);
+				bean.setNivel(niv);
+			
+			
 		
-			NivelDetalle det = new NivelDetalle();
+			List<DetalleNivelSeccion> lista =(List<DetalleNivelSeccion>) request.getSession().getAttribute("datos");
+			List<NivelDetalle> detalle = new ArrayList<NivelDetalle>();
 			
-			Seccion sec  = new Seccion();
+			for(DetalleNivelSeccion de : lista) {
+				NivelDetalle br = new NivelDetalle();
+				Seccion s = new Seccion();
+				s.setCodigo(de.getCodigo());
+				br.setSeccion(s);
+				
+				detalle.add(br);								
+			}
 			
-			Nivel  niv = new Nivel();
-			
-			sec.setCodigo(codSec);
-			niv.setCodigo(codNiv);
-			
-			det.setSeccion(sec);
-			det.setNivel(niv);
-			
-			servicioNivelDet.registrar(det);
-			redirect.addFlashAttribute("MENSAJE","Registrado Correctamente");
+			servicioNivelDet.registrarNivelSec(bean, detalle);
+			lista.clear();
+			request.getSession().setAttribute("datos",lista);
+			redirect.addFlashAttribute("MENSAJE","Detalle registrado");
 			
 			
 		} catch (Exception e) {
+			redirect.addFlashAttribute("MENSAJE","Error en el registro");
 			e.printStackTrace();
 		}
 		
@@ -97,10 +127,10 @@ public class SeccionNivelController {
 	}
 	
 	
-	@RequestMapping("/buscar")
+/*	@RequestMapping("/buscar")
 	@ResponseBody
 	public NivelDetalle buscar(@RequestParam("codigo")Integer cod) {
-		return servicioNivelDet.buscarPorID(cod);
+		//return servicioNivelDet.buscarPorID(cod);
 	}
 	
 	@RequestMapping("/eliminar")
@@ -109,5 +139,5 @@ public class SeccionNivelController {
 		redirect.addFlashAttribute("MENSAJE","Detalle eliminado");
 		return "redirect:/seccionNivel/lista";
 	}
-
+*/
 }

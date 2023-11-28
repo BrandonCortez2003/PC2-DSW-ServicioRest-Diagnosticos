@@ -2,6 +2,8 @@ package com.sistema.academia.controller;
 
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sistema.academia.entities.Curso;
 import com.sistema.academia.entities.Horario;
+import com.sistema.academia.entities.Nivel;
 import com.sistema.academia.entities.NivelDetalleCurso;
+import com.sistema.academia.entities.Seccion;
 import com.sistema.academia.services.HorarioServices;
 import com.sistema.academia.services.NivelDetalleCursoServices;
+import com.sistema.academia.services.NivelServices;
+import com.sistema.academia.services.PeriodoServices;
+import com.sistema.academia.services.SeccionServices;
 
 @Controller
 @RequestMapping("/horario")
@@ -22,6 +30,15 @@ public class HorarioController {
 	
 	@Autowired
 	private HorarioServices servicioHorario;
+	
+	@Autowired
+	private PeriodoServices servicioPeriodo;
+	
+	@Autowired
+	private NivelServices servicioNivel;
+	
+	@Autowired
+	private SeccionServices servicioSec;
 
 	@Autowired
 	private NivelDetalleCursoServices servicioDetallecurso;
@@ -30,37 +47,53 @@ public class HorarioController {
 	@RequestMapping("/lista")
 	public String Index(Model model) {
 		
+		model.addAttribute("periodos", servicioPeriodo.listarTodos());
+		model.addAttribute("niveles", servicioNivel.listarTodos());
+		model.addAttribute("secciones", servicioSec.listarTodos());
 		model.addAttribute("horario", servicioHorario.listarTodos());
-		model.addAttribute("nivelDetalleCurso", servicioDetallecurso.listarTodos());
+
 		
 		return "horario";
 	}
 	
+	@RequestMapping("/consultarCursosNivSec")
+	@ResponseBody
+	public List<Map<String, Object>> obtenerCursosPorNivelYSeccion(@RequestParam("codNivel") Integer codNivel, @RequestParam("codSeccion") Integer codSeccion) {
+        return servicioDetallecurso.obtenerCursosPorNivelYSeccion(codNivel, codSeccion);
+    }
+	
 	@RequestMapping("/grabar")
 	public String grabar(@RequestParam("codigo") Integer cod,
 						 @RequestParam("curso") int codCurso,
+						 @RequestParam("nivel") int codNiv,
+						 @RequestParam("seccion") int codSec,
 						 @RequestParam("semana") String semana,
-						 @RequestParam("horaIni") LocalTime ini,
+						 @RequestParam("horaInicio") LocalTime ini,
 						 @RequestParam("horaFin") LocalTime fin,
-						 @RequestParam("estado") Boolean est,
+						 
 						 RedirectAttributes redirect )
 	{
 		
 		try {
 			
 			Horario hora = new Horario();
-			
-			hora.setCodigo(cod);
+				
 			hora.setDiaSemana(semana);
 			hora.setHoraIni(ini);
 			hora.setHoraFin(fin);
-			hora.setEstado(est);
 			
-			NivelDetalleCurso detalle = new NivelDetalleCurso();
-			
-			detalle.setCodigoDetalleCurso(codCurso);
-			
-			hora.setNiveldetallecurso(detalle);
+			Nivel niv = new Nivel();
+			Seccion sec = new Seccion();
+			Curso cur = new Curso();
+
+			niv.setCodigo(codNiv);
+			sec.setCodigo(codSec);
+			cur.setCodigo(codCurso);
+
+			hora.setNivel(niv);
+			hora.setSeccion(sec);
+			hora.setCurso(cur);
+
 			
 			
 			if(cod == 0) {

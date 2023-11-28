@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida</title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/estilos.css">
+<link rel="stylesheet" th:href="@{/resources/css/estilos.css}"> 
+<link rel="stylesheet" th:href="@{/resources/css/normalize.css}"> 
 
+
+ 
     <meta name="theme-color" content="#2091F9">
 
     <meta name="title" content="Aprende CSS desde cero">
+    
+    
+    
+   
  
 </head>
 
@@ -29,8 +35,10 @@
         <section class="hero__container container">
             <h1 class="hero__title">Academia Linertec</h1>
             <p class="hero__paragraph">Nuestra academia ofrece una amplia gama de programas educativos para satisfacer tus intereses y metas profesionales.</p>
-            <a href="#" class="cta">Comienza ahora</a>
+            <a th:href="@{/sesion/login}" method="get" class="cta">Comienza ahora</a>
         </section>
+        
+      
     </header>
 
     <main>
@@ -40,19 +48,19 @@
 
             <div class="about__main">
                 <article class="about__icons">
-                    <img src="./images/1-0.png" >
+                    <img src="/img/1-0.png" >
                     <h3 class="about__title"> UNMSM </h3>
                  
                 </article>
 
                 <article class="about__icons">
-                    <img src="./images/2-0.png" >
+                    <img src="/img/2-0.png" >
                     <h3 class="about__title">Villarreal</h3>
                   
                 </article>
 
                 <article class="about__icons">
-                    <img src="./images/3-0.png" >
+                    <img src="/img/3-0.png" >
                     <h3 class="about__title">UNI</h3>
                 </article>
             </div>
@@ -71,7 +79,7 @@
                 </div>
 
                 <figure class="knowledge__picture">
-                    <img src="./images/macbook.png" class="knowledge__img">
+                    <img src="/img/macbook.png" class="knowledge__img">
                 </figure>
             </div>
         </section>
@@ -127,7 +135,7 @@
 
         <section class="testimony">
             <div class="testimony__container container">
-                <img src="./images/leftarrow.svg" class="testimony__arrow" id="before">
+                <img src="/img/leftarrow.svg" class="testimony__arrow" id="before">
 
                 <section class="testimony__body testimony__body--show" data-id="1">
                     <div class="testimony__texts">
@@ -136,7 +144,7 @@
                     </div>
 
                     <figure class="testimony__picture">
-                        <img src="./images/face.jpg" class="testimony__img">
+                        <img src="/img/face.jpg" class="testimony__img">
                     </figure>
                 </section>
 
@@ -147,7 +155,7 @@
                     </div>
 
                     <figure class="testimony__picture">
-                        <img src="./images/face2.jpg" class="testimony__img">
+                        <img src="/img/face2.jpg" class="testimony__img">
                     </figure>
                 </section>
 
@@ -158,10 +166,10 @@
                     </div>
 
                     <figure class="testimony__picture">
-                        <img src="./images/face3.jpg" class="testimony__img">
+                        <img src="/img/face3.jpg" class="testimony__img">
                     </figure>
                 </section>
-                <img src="./images/rightarrow.svg" class="testimony__arrow" id="next">
+                <img src="/img/rightarrow.png" class="testimony__arrow" id="next">
             </div>
         </section>
 
@@ -174,7 +182,7 @@
                     <div class="questions__answer">
                         <h3 class="questions__title">¿Que enseña Linertec?
                             <span class="questions__arrow">
-                                <img src="./images/arrow.svg" class="questions__img">
+                                <img src="/img/arrow.svg" class="questions__img">
                             </span>
                         </h3>
 
@@ -186,7 +194,7 @@
                     <div class="questions__answer">
                         <h3 class="questions__title">¿Cuánto cuesta la mensualidad en la academia Linertec?
                             <span class="questions__arrow">
-                                <img src="./images/arrow.svg" class="questions__img">
+                                <img src="/img/arrow.svg" class="questions__img">
                             </span>
                         </h3>
 
@@ -198,7 +206,7 @@
                     <div class="questions__answer">
                         <h3 class="questions__title">¿Cuál es la mejor academia para ingresar a San Marcos?
                             <span class="questions__arrow">
-                                <img src="./images/arrow.svg" class="questions__img">
+                                <img src="/img/arrow.svg" class="questions__img">
                             </span>
                         </h3>
 
@@ -249,18 +257,18 @@
 
         <section class="footer__copy container">
             <div class="footer__social">
-                <a href="#" class="footer__icons"><img src="./img/facebook.svg" class="footer__img"></a>
-                <a href="#" class="footer__icons"><img src="./img/twitter.svg" class="footer__img"></a>
-                <a href="#" class="footer__icons"><img src="./img/youtube.svg" class="footer__img"></a>
+                <a href="#" class="footer__icons"><img src="/img/facebook.svg" class="footer__img"></a>
+                <a href="#" class="footer__icons"><img src="/img/twitter.svg" class="footer__img"></a>
+                <a href="#" class="footer__icons"><img src="/img/youtube.svg" class="footer__img"></a>
             </div>
 
             <h3 class="footer__copyright">Derechos reservados &copy; Linertec</h3>
         </section>
     </footer>
 
-    <script src="./js/slider.js"></script>
-    <script src="./js/questions.js"></script>
-    <script src="./js/menu.js"></script>
+    <script src="/js/slider.js"></script>s
+    <script src="/js/questions.js"></script>
+    <script src="/js/menu.js"></script>
 </body>
 
 </html>

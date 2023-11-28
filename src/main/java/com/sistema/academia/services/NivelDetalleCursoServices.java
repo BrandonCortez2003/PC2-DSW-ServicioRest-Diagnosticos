@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.sistema.academia.entities.NivelDetalle;
 import com.sistema.academia.entities.NivelDetalleCurso;
 import com.sistema.academia.repository.NivelDetalleCursoRepository;
 
@@ -36,6 +36,9 @@ public class NivelDetalleCursoServices {
 	{
 		return repo.findAll();
 	}
+	
+	
+
 	
 
 	

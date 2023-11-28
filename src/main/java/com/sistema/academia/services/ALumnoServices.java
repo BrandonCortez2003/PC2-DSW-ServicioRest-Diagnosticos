@@ -34,13 +34,13 @@ public class ALumnoServices {
 		return repo.findById(cod).orElseGet(null);
 	}
 	
-	public List<Alumno> listarTodos()
+	public List<Alumno> listarTodos(String palabraClave)
 	{
-		return repo.findAll();
+	
+	if(palabraClave != null) {
+		return repo.findAll(palabraClave);
 	}
-	
-	
-	
-	
+	return repo.findAll();
+}
 	
 }

@@ -38,6 +38,12 @@ public class UsuarioController {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+	@RequestMapping("/bienvenida")
+	public String bienvenido() {
+		return "bienvenida";
+	}
+	
+	
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
@@ -68,7 +74,7 @@ public class UsuarioController {
 	
 
 	    
-	@PostMapping("/sesion/registrarse")
+	@PostMapping("/login/sesion/registrarse")
 	public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
 	    // Verificar si el DNI ya existe en la base de datos
 	    boolean dniExistente = servicioUsu.existeDni(usuario.getDni());

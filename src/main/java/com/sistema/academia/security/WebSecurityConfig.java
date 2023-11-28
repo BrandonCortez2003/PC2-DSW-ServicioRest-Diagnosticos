@@ -27,11 +27,16 @@ public class WebSecurityConfig {
 
 		http.authorizeHttpRequests((requests) -> requests
 				
-				.requestMatchers("/sesion/**","resources/**","/css/**","/img/**").permitAll()
+				.requestMatchers("/bienvenida/**","/sesion/**","/resources/**","/css/**","/img/**","/js/**").permitAll()
 				.requestMatchers("/director/**","/profesor/**","/cursos/**","/periodos/**","/seccion/**","/alumno/**","/rol/**","/detalleCurso/**","/seccionNivel/**").authenticated()
+				
+				.requestMatchers("/Admin/**").hasAnyRole("Admin")
+				.requestMatchers("/Director/**").hasAnyRole("Director")
+				
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
+			
 				.loginPage("/sesion/login")
 				.defaultSuccessUrl("/sesion/intranet")
 				.permitAll()

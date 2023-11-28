@@ -24,7 +24,7 @@ public class CursoController {
 @RequestMapping("/lista")
 	public String Index(Model model)
 	{
-		model.addAttribute("cursos", servicioCurso.listarTodos());
+		model.addAttribute("cursos", servicioCurso.listAll(null));
 
 		
 		return "cursos";

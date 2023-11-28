@@ -33,6 +33,8 @@ public class Rol {
 	private List<RolEnlace> listaRolEnlace;
 	
 	
+	
+	
 	public int getCodigo() {
 		return codigo;
 	}

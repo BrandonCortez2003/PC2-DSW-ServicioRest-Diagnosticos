@@ -41,18 +41,19 @@ public class DetalleCursoController {
 
 	@RequestMapping("/lista")
 	public String lista(Model model) {
-		
-		model.addAttribute("curso", servicioCurso.listarTodos());
+		//String buscarPorNombreCurso ="Matematica tu";
+		model.addAttribute("curso", servicioCurso.listAll(null));
 		model.addAttribute("periodos", servicioPeriodo.listarTodos());
 		model.addAttribute("niveldetalle",servicioNivelDetalle.listarTodos());
 		model.addAttribute("detallesNivelCurso", servicioNivelDetCurso.listarTodos());
+		//model.addAttribute("detallesNivelCurso", servicioNivelDetCurso.listar(buscarPorNombreCurso));
 		return "detalleCurso";
 	}
 	
 	@RequestMapping("/consultaCursos")
 	@ResponseBody
 	public List<Curso> obtenerTodosLosCursos() {
-        return servicioCurso.listaCursos();
+        return servicioCurso.listAll(null);
     }
 	
 	

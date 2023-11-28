@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1">
 <title>Alumno</title>
@@ -86,6 +87,12 @@
 	.form-control {
 	  padding-left: 40px!important;
 	}
+	
+	.buscar{
+		margin-left: 650px;
+		
+	}
+	
 	/*.toast-succes{
 		width: 120px;
 	}*/
@@ -96,15 +103,34 @@
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>	
 	
 	<div class="container">
+    <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
+
+    <div class="container">
+        <div class="col-md-5  ">
+       
+            <button type="button" class="btn btn-primary mt-5  nuevo"  data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+                <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
+            </button>
+        </div>
 		
-			<h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
+
+		<div class="col-md-6 mt-1 buscar">
+            <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
+                <div class="form-group mb-2">
+                    <label>Buscar: </label>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el valor a filtrar" required>
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Buscar">
+                <input type="button" class="btn btn-secondary mb-2 ml-2" value="Limpiar" onclick="limpiarYEnviar()">
+            </form>
+        </div>
+    </div>
 			
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-			 <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
-			</button>
 			<div class=" mt-2">
 	
-				<table class="table table-striped table-bordered mt-5 " id="tableMedicamentos">
+				<table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
 							  <thead>
 							   <tr>
 					                <th>Código</th>
@@ -254,6 +280,20 @@
 		});
 	</script>
 
+
+<script>
+		function limpiarYEnviar() {
+        // Limpia el campo de texto
+        document.getElementById('palabraClave').value = '';
+        
+        // Envía el formulario
+        document.getElementById('filtroForm').submit();
+    }
+	
+		
+	</script>
+
+
 	<script>
 		//asignar evento click a todos los botones con clase "btn-editar"
 		$(document).on("click",".btn-editar",function(){
@@ -308,6 +348,26 @@
 		
 		})
 		
+		
+		function buscarPorLetras() {
+			console.log("Se hizo clic en el botón de búsqueda");
+	    var letras = document.getElementById("#inputBusqueda").value;
+	
+	    // Realizar la solicitud al servidor usando AJAX
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/buscarPorLetras?letras=" + letras, true);
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === XMLHttpRequest.DONE) {
+	            if (xhr.status === 200) {
+	                var response = JSON.parse(xhr.responseText);
+	                actualizarTabla(response);
+	            } else {
+	                console.error('Hubo un problema al realizar la solicitud');
+	            }
+	        }
+	    };
+	    xhr.send();
+	}
 		
 		$('#tableMedicamentos').DataTable();
 		$(function() {

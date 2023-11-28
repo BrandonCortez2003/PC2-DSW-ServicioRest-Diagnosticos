@@ -175,16 +175,7 @@
                             regexp: /^[0-9]+$/,
                             message: 'Ingrese solo números'
                         },
-                        remote: {
-                            url: '/sesion/existeDni/{dni}', // URL sin el valor del DNI
-                            message: 'El DNI ya está registrado',
-                            method: 'GET',
-                            delay: 500,
-                            data: function() {
-                                return {
-                                    dni: $('#dni').val() // Obtiene el valor del campo DNI
-                               }
-                            }
+                       
                         }
                     }
                 },
@@ -217,7 +208,7 @@
                             message: 'Por favor, seleccione un Rol'
                         }
                     }
-                }
+                
            
                 
                 

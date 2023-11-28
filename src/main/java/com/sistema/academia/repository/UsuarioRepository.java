@@ -6,9 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.sistema.academia.entities.Enlace;
+import com.sistema.academia.entities.Rol;
 import com.sistema.academia.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>  {
+	
+	
+	 List<Usuario> findByRol(Rol rol);
 	
 	Usuario findByDni(String dni);
 	

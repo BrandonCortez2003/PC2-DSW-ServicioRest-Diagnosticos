@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sistema.academia.entities.Enlace;
+import com.sistema.academia.entities.Rol;
 import com.sistema.academia.entities.Usuario;
+import com.sistema.academia.repository.RolRepository;
 import com.sistema.academia.repository.UsuarioRepository;
 
 @Service
@@ -16,6 +18,7 @@ public class UsuarioServices {
 
 	@Autowired
 	private UsuarioRepository repo;
+	
 	
 	private Map<String, Boolean> dniCache = new HashMap<>();
 	
@@ -61,11 +64,11 @@ public class UsuarioServices {
 	    }
 
 	public String guardarUsuario(Usuario usuario) {
-       
-       
+        
+        
 		String dni = usuario.getDni();
 
-	
+		        // Verificar si el DNI ya está en la caché
 		        Boolean dniExistente = dniCache.get(dni);
 
 		        if (dniExistente != null && dniExistente) {
@@ -76,10 +79,10 @@ public class UsuarioServices {
 		            if (usuarioExistente != null) {
 		                dniCache.put(dni, 
 		             
-		true); 
+		true); // Almacenar en caché el DNI verificado
 		                return "El DNI ya está registrado en el sistema";
 		            } else {
-		      
+		                // Guardar el usuario en la base de datos y actualizar la caché si es necesario
 		                repo.save(usuario);
 		                dniCache.put(dni, 
 		             
@@ -88,9 +91,6 @@ public class UsuarioServices {
 		            }
 		        }
 		    }
-
-		    
-
-		}
-
+		
+}
 		

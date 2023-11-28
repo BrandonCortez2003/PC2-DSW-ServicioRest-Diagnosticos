@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,10 @@ public class AlumnoController {
 	private DistritoServices servicioDis;
 	
 	@RequestMapping("/lista")
-	public String Index(Model  model)
+	public String index(Model model, @Param("palabraClave") String palabraClave) 
 	{
-		model.addAttribute("alumnos", servicioAlu.listarTodos());
+		model.addAttribute("alumnos", servicioAlu.listarTodos(palabraClave));
+		model.addAttribute("palabraClave", palabraClave);
 		model.addAttribute("distritos", servicioDis.listaDistrito());
 		
 		return "alumno";

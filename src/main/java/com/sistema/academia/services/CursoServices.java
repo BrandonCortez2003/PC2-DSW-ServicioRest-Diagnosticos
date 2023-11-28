@@ -35,13 +35,13 @@ public class CursoServices {
 		return repo.findById(cod).orElse(null);
 	}
 	
-	public List<Curso> listarTodos()
+	public List<Curso> listAll(String palabraClave)
 	{
+		if(palabraClave !=null) {
+			return repo.findAll(palabraClave);
+		}
 		return repo.findAll();
 	}
 	
-	public List<Curso> listaCursos(){
-		return repo.listarCursos();
-	}
-	
+
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Profesor</title>
+<title>Apoderado</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -101,15 +101,8 @@
 	
 	<div class="container">
 		
-			<h3 class="text-center mt-4">LISTA DE PROFESORES</h3>
+			<h3 class="text-center mt-4">LISTA DE APODERADOS</h3>
 			
-					
-						<div class="col-md-2 float-right">
-                            <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo">
-                                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Profesor
-                            </button>
-                        </div>
-	
 
 				<form class="form-imline" th:action="@{lista}" id="filtroForm">
 				<div class="form-group mb-2">
@@ -137,13 +130,10 @@
 					                <th>Apellido</th>
 					                <th>Dni</th>
 					                <th>sexo</th>
-					                <th>Grado</th>
+					                <th>Estado Civil</th>
 					                <th>Fecha Nacimiento</th>
 					                <th>Distrito</th>
-					                <th>Direccion</th>
-					                <th>Correo</th>
-					                <th>telefono</th>
-					                <th>Estado</th>					                
+					                <th>Direccion</th>				                
 					                <th>Fecha Registro </th>
 					                
 					                <th></th>
@@ -151,25 +141,19 @@
 					            </tr>
 							  </thead>
 							  <tbody>
-								<tr th:each="row:${profesor}">
+								<tr th:each="row:${apoderado}">
 							      <td th:text="${row.codigo}"></td>
 							      <td th:text="${row.nombre}"></td>
 							      <td th:text="${row.apellido}"></td>
 							      <td th:text="${row.dni}"></td>
 							      <td th:text="${row.sexo}"></td>
-							      <td th:text="${row.gradoStudio}"></td>
-							      <td th:text="${row.fecNacimiento}"></td>
+							      <td th:text="${row.estadoCivil}"></td>
+							      <td th:text="${row.fechaNaci}"></td>
 							      <td th:text="${row.distrito.nombre}"></td>
 							      <td th:text="${row.direccion}"></td>
-							      <td th:text="${row.correo}"></td>
-							      <td th:text="${row.fono}"></td>
-							      <td>
-                   						 <span th:if="${row.estado}">Activo</span>
-                    					<span th:unless="${row.estado}">Inactivo</span>
-                				  </td>
-                				  <td th:text="${row.fecReg}"></td>
+                				  <td th:text="${row.fechaRegistro}"></td>
 							  
-							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalProfesor"><i class="far fa-edit"></i></a></td>
+							     
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
 							    </tr>  
 							  </tbody>

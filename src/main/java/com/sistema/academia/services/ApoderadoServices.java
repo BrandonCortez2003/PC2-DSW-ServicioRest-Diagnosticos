@@ -33,8 +33,11 @@ public class ApoderadoServices {
 		return repo.findById(cod).orElseGet(null);
 	}
 	
-	public List<Apoderado> listarTodos()
+	public List<Apoderado> listarTodos(String palabraClave)
 	{
+		if(palabraClave != null) {
+			return repo.findAll(palabraClave);
+		}
 		return repo.findAll();
 	}
 	

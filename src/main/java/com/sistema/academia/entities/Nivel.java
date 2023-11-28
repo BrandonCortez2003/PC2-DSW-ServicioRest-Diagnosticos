@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -45,6 +47,7 @@ public class Nivel {
 	private Boolean estado;
 	
 	@Column(name="fecha_registro")
+	@CreationTimestamp
 	private LocalDateTime fecharegi;
 	
 	//Relacion con periodo
@@ -57,6 +60,20 @@ public class Nivel {
 	//Relacion con nivel detalle
 	@OneToMany(mappedBy = "nivel")
 	private List<NivelDetalle> listaNivelDetalle;
+	
+	
+	//Relacion con nivel detalle curso
+	@JsonIgnore
+	@OneToMany(mappedBy = "nivel")
+	private List<NivelDetalleCurso> listaNivelDetalleCurso;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "nivel")
+	private List<Horario> listaNivelHorario;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "nivel")
+	private List<Matricula> listaNivelMatricula;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -131,6 +148,39 @@ public class Nivel {
 	}
 	
 	
+	
+	
+	
+	public List<NivelDetalleCurso> getListaNivelDetalleCurso() {
+		return listaNivelDetalleCurso;
+	}
+
+	public void setListaNivelDetalleCurso(List<NivelDetalleCurso> listaNivelDetalleCurso) {
+		this.listaNivelDetalleCurso = listaNivelDetalleCurso;
+	}
+
+	
+	
+
+	public List<Horario> getListaNivelHorario() {
+		return listaNivelHorario;
+	}
+
+	public void setListaNivelHorario(List<Horario> listaNivelHorario) {
+		this.listaNivelHorario = listaNivelHorario;
+	}
+
+	
+	
+	
+	public List<Matricula> getListaNivelMatricula() {
+		return listaNivelMatricula;
+	}
+
+	public void setListaNivelMatricula(List<Matricula> listaNivelMatricula) {
+		this.listaNivelMatricula = listaNivelMatricula;
+	}
+
 	@PrePersist
 	@PreUpdate
     protected void onCreate() {

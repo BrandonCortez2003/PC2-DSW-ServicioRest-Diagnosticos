@@ -49,8 +49,6 @@ public class Apoderado {
 	@Column(name="direc_apode")
 	private String direccion;
 	
-	@Column(name="estado_apode")
-	private Boolean estadoApode;
 	
 	@Column(name="fecha_registro")
 	private LocalDateTime fechaRegistro;
@@ -61,10 +59,6 @@ public class Apoderado {
 	@JoinColumn(name="cod_dis")
 	private Distrito distrito;
 	
-	//Relacion con alummno
-	@ManyToOne
-	@JoinColumn(name="cod_alu")
-	private Alumno alumno;
 	
 	//Relacion con matricula
 	@OneToMany(mappedBy = "apoderado")
@@ -144,13 +138,6 @@ public class Apoderado {
 		this.direccion = direccion;
 	}
 
-	public Boolean getEstadoApode() {
-		return estadoApode;
-	}
-
-	public void setEstadoApode(Boolean estadoApode) {
-		this.estadoApode = estadoApode;
-	}
 
 	public LocalDateTime getFechaRegistro() {
 		return fechaRegistro;
@@ -168,13 +155,6 @@ public class Apoderado {
 		this.distrito = distrito;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
-	}
-
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
 
 	public List<Matricula> getListaMatricula() {
 		return listaMatricula;

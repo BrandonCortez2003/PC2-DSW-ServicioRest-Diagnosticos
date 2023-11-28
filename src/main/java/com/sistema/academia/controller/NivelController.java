@@ -67,13 +67,13 @@ public class NivelController {
 					//invocar mètodo registrar
 					servicioni.registrar(nivel);
 					//crear atributo de tipo flash
-					redirect.addFlashAttribute("MENSAJE","Medicamento registrado");
+					redirect.addFlashAttribute("MENSAJE","Nivel registrado");
 				}
 				else {
 					//setear atributo còdigo
 					nivel.setCodigo(cod);
 					servicioni.actualizar(nivel);
-					redirect.addFlashAttribute("MENSAJE","Medicamento actualizado");
+					redirect.addFlashAttribute("MENSAJE","Nivel actualizado");
 				}
 				
 			} catch (Exception e) {
@@ -93,7 +93,7 @@ public class NivelController {
 		@RequestMapping("/eliminar")
 		public String eliminar(@RequestParam("codigo") Integer cod,RedirectAttributes redirect) {
 			servicioni.eliminarPorID(cod);
-			redirect.addFlashAttribute("MENSAJE","Mendicamento eliminado");
+			redirect.addFlashAttribute("MENSAJE","Nivel eliminado");
 			return "redirect:/nivel/lista";
 		}
 }

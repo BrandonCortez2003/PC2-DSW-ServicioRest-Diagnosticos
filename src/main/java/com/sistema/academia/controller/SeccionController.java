@@ -83,7 +83,7 @@ public class SeccionController {
 									RedirectAttributes redirect) 
 	{
 		servicioSeccion.eliminarPoID(cod);
-		redirect.addFlashAttribute("MENSAJE","Seccion eliminado correctamente");
+		redirect.addFlashAttribute("MENSAJE","Seccion eliminada correctamente");
 		
 		return "redirect:/seccion/lista";
 	}

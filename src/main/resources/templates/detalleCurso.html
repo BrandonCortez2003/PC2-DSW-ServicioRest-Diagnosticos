@@ -19,7 +19,7 @@
 	}
 	.help-block{
 	 color: red;
-	 /*display: none;*/
+	 display: none;
 	}
 	.form-group.has-error .form-control-label {
 	  color: red;
@@ -38,7 +38,7 @@
 	.ajs-header{
 		background-color: #286090 !important;
 		color: white !important;
-		/*text-align: center;*/
+		text-align: center;
 		font-size: 18px;
 		font-weight: bold;
 	}
@@ -131,7 +131,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-10">
-                        Asignar Curso
+                        Asignar Cursos
                     </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-primary btn-sm float-right" >
@@ -142,43 +142,44 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <!---<div class="col-sm-5">
+                    <div class="col-sm-5">
                         <div class="form-group col-sm-6">
 							<label for="inputEmail3">Periodo</label>
-							<select class="form-group form-control" id="idBien" name="periodos">
+							<select class="form-group form-control" id="idBien" name="periodo">
 								<option  th:each="row:${periodos}"
 									th:value="${row.codigo}"
 									th:text="${row.descripcion}" />
 							</select>
 						</div>
-                    </div>-->
+                    </div>
                     <div class="col-sm-5">
 						
 						<div class="form-group col-sm-6">
-							<label for="inputEmail3">Seccion</label>
-							<select class="form-group form-control" id="idBien" name="nivelDetalle">
-								<option  th:each="row:${niveldetalle}"
-									th:value="${row.codigoNivelDetalle}"
-									th:text="${row.seccion.descripSeccion}" />
+							<label for="inputEmail3">Nivel Academico</label>
+							<select class="form-group form-control" id="idBien" name="nivel">
+								<option  th:each="row:${niveles}"
+									th:value="${row.codigo}"
+									th:text="${row.nivel}" />
+							</select>
+						</div>
+                        
+                        
+                    </div>
+                    <div class="col-sm-5">
+						
+						<div class="form-group col-sm-6">
+							<label for="inputEmail3">Secciones</label>
+							<select class="form-group form-control" id="idSeccion" name="seccion">
+								<option  th:each="row:${secciones}"
+									th:value="${row.codigo}"
+									th:text="${row.descripSeccion}" />
 							</select>
 						</div>
                         
                         
                     </div>
                     
-                    <div class="col-sm-5">
-						
-						 <div class="form-group col-sm-6">
-							<label for="inputEmail3">Curso</label>
-							<select class="form-group form-control" id="idBien" name="curso">
-								<option  th:each="row:${curso}"
-									th:value="${row.codigo}"
-									th:text="${row.descripcion}" />
-							</select>
-						</div>
-					</div>
-                    
-                   
+                                 
                     
                     <div class="col-sm-2">
                         <div class="form-group">
@@ -189,60 +190,75 @@
                     </div>
                 </div>
                 <hr />
+                
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
-                            
-							
-                               
-                            <div class="col-sm-12" >
-								
-								
-								<form class="form-inline" th:action="@{/}">
-									
-  <div class="form-group mb-2">
-    <label >Filtrar:</label>
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-  </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <label for="inputPassword2" class="sr-only">Password</label>
-    <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">Buscar</button>
-  &nbsp;&nbsp;
-</form>
-								
-					
-                                 <table id="tableSecNivel" class="table table-striped mt-4" style="width:100%">
+
+                            <div class="col-sm-6">
+                                <div class="alert alert-danger" role="alert">
+                                    Cursos pendientes por asignar
+                                                                                                           
+                                </div>
+                                
+                               <table id="tableCursos" class="table table-striped mt-6" style="width:100%">
 													<thead>
 														<tr >
 															<th>Código</th>
-															<th>Seccion</th>
-															<th>Cursos</th>
+															<th>Nombre</th>
 															<th></th>
 														</tr>
 													</thead>
 													<tbody>
 														
-														<tr th:each="row:${detallesNivelCurso}">
-															<td th:text="${row.codigoDetalleCurso}"></td>
-															<td th:text="${row.nivelDetalle.seccion.descripSeccion}"></td>
-															<th th:text="${row.curso.descripcion}" ></th>
+														<tr>
+															<td></td>
+															<td></td>
 															<td>
-																<button type="button" class="btn btn-danger" id="btn-eliminar-biean">
-																	<i class="fas fa-trash-alt"></i>
+																<button type="button" class="btn btn-warning">
+																	<i class="fa fa-plus" aria-hidden="true"></i>
 																</button>
 															</td>
 														</tr>
 														
 													</tbody>
 												</table>
-									
-							
-								
-                                
                                 
                             </div>
+                            <div class="col-sm-6">
+                                <div class="alert alert-success" role="alert">
+                                    Cursos Asignados
+                                                                       
+                                </div>
+                                <table id="tableNivCur" class="table table-striped mt-4" style="width:100%">
+													<thead>
+														<tr>
+															<th>Código</th>
+															<th>Nombre</th>
+															
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td></td>
+															<td></td>
+															
+															<td>
+																<button type="button" class="btn btn-danger" id="btn-eliminar-biean">
+																	<i class="fas fa-trash-alt"></i>
+																</button>
+															
+															</td>
+														</tr>
+														
+													</tbody>
+												</table>
+                                
+                            </div>
+                       
+                               
+
                             
                         </div>
                      
@@ -275,7 +291,7 @@
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		
 		//leer atributo mensaje 
-		let msj = /*[[${MENSAJE}]]*/
+		let msj = /[[${MENSAJE}]]/
 		
 	toastr.success(msj, toastr.options = {
 	"timeOut": "2000",
@@ -291,12 +307,93 @@
 	
 	<script>
 		
+		$(document).on("click", "#tableCursos .btn.btn-danger", function() {
+        $(this).closest("tr").remove();
+        
+        let codigoEliminar = $(this).closest("tr").find("td:first").text(); // Obtener el código del bien a eliminar
+            $.get("eliminar?codigoEliminar=" + codigoEliminar, function(response) {
+                // Actualizar la tabla u otros elementos de la interfaz si es necesario
+                // Por ejemplo, actualizar la lista de bienes solicitados
+            });
+        });
+        
 		
+		
+		
+		
+		$('#tableCursos').dataTable( {
+				  "searching": false,
+				  "lengthChange": false,
+				  responsive: true,
+		});
+	
+		$(document).on("click","#btnBuscar",function(){
+			
+			$("#tableCursos").DataTable().destroy();
+			$("#tableCursos tbody").empty()
+			$.get("/detalleCurso/consultaCursos",function(response){
+				$.each(response,function(index,item){
+					$("#tableCursos tbody").append(`<tr><td>${item.codigo}</td>
+												 <td>${item.descripcion}</td>
+												 <td>
+													<button type="button" class="btn btn-warning btn-adicionar">
+														<i class="fa fa-plus" aria-hidden="true"></i>
+													</button>
+												 </td>`);
+				})
+				$('#tableCursos').dataTable( {
+				  "searching": false,
+				  "lengthChange": false,
+				  responsive: true,
+				});				
+			})
+		})
+		
+				$(document).on("click",".btn-adicionar",function(){
+			let cod=$(this).parents("tr").find("td")[0].innerHTML;
+			let des=$(this).parents("tr").find("td")[1].innerHTML;
+
+			$("#tableNivCur tbody").empty();
+			$.get("adicionar?codigo="+cod+"&descripcion="+des,function(response){
+				$.each(response,function(index,item){
+					$("#tableNivCur tbody").append(`<tr><td>${item.codigo}</td>
+							<td>${item.descripcion}</td>
+							<td>
+								<button type="button" class="btn btn-danger" id="btn-eliminar-biean">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							</td>`);
+				})
+			})	
+			
+		})
+	
 	
 
 	</script>
 	
 	<script>
+		
+		//evento Click al boton eliminar
+		$(document).on("click",".btn-eliminar",function(){
+			
+			var cod;
+			//Almacenar el codigo del medicamento segun el boton eliminar que se seleccionò 
+			cod = $ (this).parents("tr").find("td")[0].innerHTML;
+			
+			alertify.confirm("SISTEMA","Seguro de eliminar!",
+			  function(){
+				  window.location="http://localhost:8091/detalleCurso/eliminar?codigo="+cod
+		
+			  },
+			  function(){ 
+				alertify.error('Cancelado!')
+			  }).
+			  set('labels', {ok:'Si', cancel:'No'});
+			
+			
+		})
+		
 	
 	 $(function() {
             $('#usr1').datepicker({

@@ -141,7 +141,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					                <th>Sexo</th>
 					                <th>Distrito</th>
 					                <th>Direccion</th>
-					                <th>Estado</th>
+					    
 					                <th>Fecha Registro</th>
 					                <th></th>
 					            </tr>
@@ -156,10 +156,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							      <td th:text="${row.sexo}"></td>
 							      <td th:text="${row.distrito.nombre}"></td>
 							      <td th:text="${row.direccion}"></td>
-							      <td>
-                   						 <span th:if="${row.estado}">Activo</span>
-                    					<span th:unless="${row.estado}">Inactivo</span>
-                				  </td>
+							
                 				  <td th:text="${row.fecharegi}"></td>	
 							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
 							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
@@ -237,14 +234,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 														<input type="text" class="form-control"  id="idDireccion" name="direccion">																										
 												</div>
 												 
-												 <div class="form-group has-feedback col-md-12">
-													    <label><b>Estado</b></label><br>
-													    <input type="radio" id="activo" name="estado" value="true">
-													    <label for="activo">Activo</label>
-													    <input type="radio" id="inactivo" name="estado" value="false">
-													    <label for="inactivo">Inactivo</label>
-												</div>		
-												
+							
 											</div>
 										</div>								
 										<div class="col-md-12 text-center mt-4"> 										
@@ -314,13 +304,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				$("#idDistrito").val(response.distrito.codigo);
 				$("#idDireccion").val(response.direccion);
 				$("#idFechaRegistro").val(response.fecharegi);
-				if (response.estado === true) {
-			        $("#activo").prop("checked", true);
-			        $("#inactivo").prop("checked", false);
-			    } else {
-			        $("#activo").prop("checked", false);
-			        $("#inactivo").prop("checked", true);
-			    }
+				
 			})
 		})
 		//asignar ebento click al botòn con ID "btn-cerrar"
@@ -402,7 +386,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
             if (age < 18) {
                 alert('Debes ser mayor de edad para registrarte.');
-                this.value = '';// Limpiar la fecha seleccionada si es menor de edad
+                this.value = '';
             }
         });
         form.addEventListener('submit', function(event) {
@@ -417,7 +401,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
             if (age < 18) {
                 alert('Debes ser mayor de edad para registrarte.');
-                event.preventDefault(); // Prevenir el envío del formulario si es menor de edad
+                event.preventDefault(); 
             }
         });
     };

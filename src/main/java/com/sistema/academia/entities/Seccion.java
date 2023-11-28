@@ -46,6 +46,21 @@ public class Seccion {
 		private List<NivelDetalle> listaNivelDetalle;
 		
 	
+	//Relacion con Nivel Detalle Curso
+	@JsonIgnore
+	@OneToMany(mappedBy = "seccion")
+	private List<NivelDetalleCurso> listaNivelDetalleCurso;
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "seccion")
+	private List<Horario> listaSeccionHorario;
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "seccion")
+	private List<Matricula> listaSeccionMatricula;
+	
 	
 	public Seccion() {
 		
@@ -118,6 +133,7 @@ public class Seccion {
 
 		
 		
+		
 
 
 	public Integer getVacante() {
@@ -127,6 +143,45 @@ public class Seccion {
 
 		public void setVacante(Integer vacante) {
 			this.vacante = vacante;
+		}
+
+		
+		
+		
+
+	public List<NivelDetalleCurso> getListaNivelDetalleCurso() {
+			return listaNivelDetalleCurso;
+		}
+
+
+		public void setListaNivelDetalleCurso(List<NivelDetalleCurso> listaNivelDetalleCurso) {
+			this.listaNivelDetalleCurso = listaNivelDetalleCurso;
+		}
+
+
+		
+		
+		
+	public List<Horario> getListaSeccionHorario() {
+			return listaSeccionHorario;
+		}
+
+
+		public void setListaSeccionHorario(List<Horario> listaSeccionHorario) {
+			this.listaSeccionHorario = listaSeccionHorario;
+		}
+
+		
+		
+		
+
+	public List<Matricula> getListaSeccionMatricula() {
+			return listaSeccionMatricula;
+		}
+
+
+		public void setListaSeccionMatricula(List<Matricula> listaSeccionMatricula) {
+			this.listaSeccionMatricula = listaSeccionMatricula;
 		}
 
 

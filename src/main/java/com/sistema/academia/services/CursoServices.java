@@ -44,4 +44,9 @@ public class CursoServices {
 	}
 	
 
+	public List<Curso> listaCursos(){
+		return repo.listarCursos();
+	}
+	
+
 }

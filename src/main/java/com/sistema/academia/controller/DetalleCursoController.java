@@ -93,6 +93,21 @@ public class DetalleCursoController {
 		return lista;
 	}
 	
+	@RequestMapping("/eliminar")
+	@ResponseBody
+	public List<DetalleNivelCurso> eliminar(@RequestParam("codigo") int codigo, HttpServletRequest request) {
+	    // Obtener la lista actual de detalles almacenada en la sesión
+	    List<DetalleNivelCurso> lista = (List<DetalleNivelCurso>) request.getSession().getAttribute("datos");
+
+	    if (lista != null) {
+	        // Eliminar el detalle correspondiente al código a eliminar
+	        lista.removeIf(detalle -> detalle.getCodigo() == codigo);
+	        // Actualizar la lista en la sesión
+	        request.getSession().setAttribute("datos", lista);
+	    }
+
+	    return lista;
+	}
 	
 	
 	@RequestMapping("/grabar")

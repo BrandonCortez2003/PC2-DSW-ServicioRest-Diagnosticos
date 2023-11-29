@@ -24,10 +24,6 @@ public class DetalleNivelSeccion {
 		this.descripSeccion = descripSeccion;
 	}
 
-	
-	
-	
-	
-	
+
 
 }

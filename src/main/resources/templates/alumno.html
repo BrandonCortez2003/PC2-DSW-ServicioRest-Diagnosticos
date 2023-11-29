@@ -23,7 +23,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	}
 	.help-block{
 	 color: red;
-	 /*display: none;*/
+	 display: none;
 	}
 	.form-group.has-error .form-control-label {
 	  color: red;
@@ -42,7 +42,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	.ajs-header{
 		background-color: #286090 !important;
 		color: white !important;
-		/*text-align: center;*/
+		text-align: center;
 		font-size: 18px;
 		font-weight: bold;
 	}
@@ -264,7 +264,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//leer atributo MENSAJE
-		let msj=/*[[${MENSAJE}]]*/
+		let msj=/[[${MENSAJE}]]/
 		toastr.success(msj, toastr.options = {
 			"timeOut": "2000",
 			"positionClass " : " toast-top-right ",

@@ -306,11 +306,11 @@
 	
 	<script>
 		
-		$(document).on("click", "#tableCursos .btn.btn-danger", function() {
+		$(document).on("click", "#tableNivCur .btn.btn-danger", function() {
         $(this).closest("tr").remove();
         
-        let codigoEliminar = $(this).closest("tr").find("td:first").text(); // Obtener el código del bien a eliminar
-            $.get("eliminar?codigoEliminar=" + codigoEliminar, function(response) {
+        let codigo = $(this).closest("tr").find("td:first").text(); // Obtener el código del bien a eliminar
+            $.get("eliminar?codigo=" + codigo, function(response) {
                 // Actualizar la tabla u otros elementos de la interfaz si es necesario
                 // Por ejemplo, actualizar la lista de bienes solicitados
             });

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.sistema.academia.dto.DetalleNivelSeccion;
 import com.sistema.academia.entities.Nivel;
 import com.sistema.academia.entities.NivelDetalle;
@@ -42,7 +43,7 @@ public class SeccionNivelController {
 	@RequestMapping("/lista")
 	public String lista(Model model) {
 		
-		model.addAttribute("seccion", servicioSeccion.listarTodos());
+		
 		model.addAttribute("periodos", servicioPeriodo.listarTodos());
 		model.addAttribute("niveles",servicioNivel.listarTodos());
 
@@ -81,7 +82,21 @@ public class SeccionNivelController {
 	}
 	
 	
-	
+	@RequestMapping("/eliminar")
+	@ResponseBody
+	public List<DetalleNivelSeccion> eliminar(@RequestParam("codigo") int codigo, HttpServletRequest request) {
+	    // Obtener la lista actual de detalles almacenada en la sesión
+	    List<DetalleNivelSeccion> lista = (List<DetalleNivelSeccion>) request.getSession().getAttribute("datos");
+
+	    if (lista != null) {
+	        // Eliminar el detalle correspondiente al código a eliminar
+	        lista.removeIf(detalle -> detalle.getCodigo() == codigo);
+	        // Actualizar la lista en la sesión
+	        request.getSession().setAttribute("datos", lista);
+	    }
+
+	    return lista;
+	}
 	
 	@RequestMapping("/grabar")
 	public String grabar(@RequestParam("nivel") int idNiv,
@@ -95,7 +110,7 @@ public class SeccionNivelController {
 				niv.setCodigo(idNiv);
 				bean.setNivel(niv);
 			
-			
+		
 		
 			List<DetalleNivelSeccion> lista =(List<DetalleNivelSeccion>) request.getSession().getAttribute("datos");
 			List<NivelDetalle> detalle = new ArrayList<NivelDetalle>();
@@ -132,13 +147,9 @@ public class SeccionNivelController {
 	@ResponseBody
 	public NivelDetalle buscar(@RequestParam("codigo")Integer cod) {
 		//return servicioNivelDet.buscarPorID(cod);
-	}
+	}*/
 	
-	@RequestMapping("/eliminar")
-	public String eliminar(@RequestParam("codigo") Integer cod,RedirectAttributes redirect) {
-		servicioNivelDet.eliminarPoID(cod);
-		redirect.addFlashAttribute("MENSAJE","Detalle eliminado");
-		return "redirect:/seccionNivel/lista";
-	}
-*/
+
+	
+	
 }

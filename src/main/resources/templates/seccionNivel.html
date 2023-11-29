@@ -293,6 +293,16 @@
 	
 	
 	<script>
+			$(document).on("click", "#tableSecNiv .btn.btn-danger", function() {
+        $(this).closest("tr").remove();
+        
+        let codigo = $(this).closest("tr").find("td:first").text(); // Obtener el código del bien a eliminar
+            $.get("eliminar?codigo=" + codigo, function(response) {
+                // Actualizar la tabla u otros elementos de la interfaz si es necesario
+                // Por ejemplo, actualizar la lista de bienes solicitados
+            });
+        });
+        
 		
 		$('#tableSeccion').dataTable( {
 				  "searching": false,
@@ -346,26 +356,7 @@
 	
 	<script>
 		
-		
-		//evento Click al boton eliminar
-		$(document).on("click",".btn-eliminar",function(){
-			
-			var cod;
-			//Almacenar el codigo del medicamento segun el boton eliminar que se seleccionò 
-			cod = $ (this).parents("tr").find("td")[0].innerHTML;
-			
-			alertify.confirm("SISTEMA","Seguro de eliminar!",
-			  function(){
-				  window.location="http://localhost:8091/seccionNivel/eliminar?codigo="+cod
-		
-			  },
-			  function(){ 
-				alertify.error('Cancelado!')
-			  }).
-			  set('labels', {ok:'Si', cancel:'No'});
-			
-			
-		})
+	
 	
 	 $(function() {
             $('#usr1').datepicker({

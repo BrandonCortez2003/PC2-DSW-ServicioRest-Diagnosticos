@@ -57,8 +57,9 @@ public class UsuarioServices {
 		}
 	
 
+
 	public boolean existeDni(String dni) {
-		 Usuario usuario = repo.findByDni(dni); 
+		 Usuario usuario = repo.findByDni(dni);
 
 	        return usuario != null; 
 	    }
@@ -92,5 +93,7 @@ public class UsuarioServices {
 		        }
 		    }
 		
+	
+	
 }
 		

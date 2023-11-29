@@ -29,7 +29,7 @@
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="440" height="95" forecolor="#B57A79" backcolor="#D17F7D" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
 				<staticText>
-					<reportElement style="Title" x="3" y="0" width="389" height="60" forecolor="#1F100F" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+					<reportElement style="Title" x="3" y="0" width="434" height="60" forecolor="#1F100F" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
 					<textElement>
 						<font isBold="false"/>
 					</textElement>
@@ -54,8 +54,8 @@
 			<frame>
 				<reportElement mode="Opaque" x="0" y="95" width="553" height="77" forecolor="#000000" backcolor="#695454" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement x="364" y="8" width="104" height="20" forecolor="#D9D9D9" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
-					<textElement textAlignment="Right">
+					<reportElement x="364" y="8" width="176" height="20" forecolor="#D9D9D9" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Left">
 						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -117,7 +117,7 @@
 					<text><![CDATA[Contacto:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="366" y="27" width="178" height="19" forecolor="#D7D7D7" uuid="a3de45de-d171-4b1b-95f7-a81bbac47bfe"/>
+					<reportElement x="364" y="27" width="179" height="19" forecolor="#D7D7D7" uuid="a3de45de-d171-4b1b-95f7-a81bbac47bfe"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="12" isBold="false" isItalic="false"/>
 					</textElement>

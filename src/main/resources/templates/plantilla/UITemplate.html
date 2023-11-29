@@ -11,23 +11,54 @@
 <!--crear fragmento "cabecera" -->
 <div th:fragment="cabecera">
 		<div class="pos-f-t">
-			<nav  style="background-color: #CACFD2; width: 100%; height: 160px;" class="navbar navbar-expand-sm  navbar-black">
+			<nav  style="background-color: #CACFD2; width: 100%; height: 80px;" class="navbar navbar-expand-sm  navbar-black">
 				  <div class="navbar-header">
 					   <div class="navbar-header barra">
 						 <!--<h1 style="font-family: Arial, Helvetica, sans-serif;">Linertec</h1>-->
-					     <img width="260px" height="250px"  th:src="@{/img/logo_cabecera.png}">
+					     <img width="140px" height="140px"  th:src="@{/img/logo_cabecera.png}">
 						</div>
 				</div>
 			  <div class="collapse navbar-collapse">
 				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 30px;">
-						<li style="font-size: 21px; margin-right:10px ; font-family: 'Courier New', Courier, monospace;" class="nav-item" th:each="bean:${session.ENLACES}">
-						  <a class="nav-link" style="color: black; font-weight:bold;" 
-						  th:text="${bean.descripcion}" 
-						  th:href="${bean.ruta}"></a>
-						</li>
-				
-				  </ul>
-				  
+					  <a class"nav-link" style=" font-size: 16px; color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Inicio'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Periodo'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Nivel'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Secciones'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link " style="font-size: 16px; color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Asignar Sección'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace; " th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Cursos'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="font-size: 16px;  color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Asignar Cursos'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Horario'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Alumnos'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Profesores'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Apoderado'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Matricula'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="font-size: 16px;  color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Lista Matricula'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+  
 				   
 				  <div class="navbar-nav ml-auto">
 					  <div class="flex" style="width:200px!important;padding-top: 10px;font-weight:bold ">
@@ -35,14 +66,15 @@
 			      	  </div>
 					  <span class="nav-item nav-link"></span>  
 					  <form method="post" th:action="@{/logout}"> 
-								<input type="submit" class="btn btn-secondary" style="width: 150px; height:60px; font-size: 20px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"; value="Cerrar Sesión">
-								<input type="submit" class="btn btn-dark" style="width: 150px; height:60px; font-size: 20px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"; sec:authorize="!isAuthenticated()" value="Inisiar Sesión">
+								<input type="submit" class="btn btn-secondary" style="width: 120px; height:50px; font-size: 15px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"; value="Cerrar Sesión">
+								<input type="submit" class="btn btn-dark" style="width: 120px; height:50px; font-size: 15px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"; sec:authorize="!isAuthenticated()" value="Iniciar Sesión">
 					  </form>
-				  </div>
+				  </div> 
 			</div>
 			</nav>
 		</div>
 </div>
+
 
 
 

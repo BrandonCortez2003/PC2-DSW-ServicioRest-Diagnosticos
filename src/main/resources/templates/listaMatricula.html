@@ -105,6 +105,20 @@
         <div class="container">
             <h3 class="text-center mt-4">MATRICULAS</h3>
             <div class="mt-2">
+				
+				
+        <div class="container">
+			
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary mt-1 nuevo" onclick="generarInforme()">
+                        <i class="fas fa-solid fa-file"></i> Reporte
+                    </button>
+                </div>
+            </div>
+				
+				
+				
                 <table class="table table-striped table-bordered mt-5" id="tableProfesor">
                     <thead>
                         <tr>
@@ -325,6 +339,33 @@ function actualizarTabla(data) {
         });
         
 		</script>
+		
+		
+		
+		<script>
+        function generarInforme() {
+            // Realizar una solicitud GET al controlador para generar el informe
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/reporte/matricula", true);
+            xhr.responseType = "blob";
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    // Crear un objeto de URL para el blob de respuesta
+                    var blob = new Blob([this.response], { type: "application/pdf" });
+                    var url = window.URL.createObjectURL(blob);
+
+                    // Abrir el informe en una nueva ventana del navegador
+                    window.open(url);
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+    
+		
+		
 	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     

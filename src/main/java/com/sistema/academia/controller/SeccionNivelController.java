@@ -124,6 +124,7 @@ public class SeccionNivelController {
 				detalle.add(br);								
 			}
 			
+			
 			servicioNivelDet.registrarNivelSec(bean, detalle);
 			lista.clear();
 			request.getSession().setAttribute("datos",lista);

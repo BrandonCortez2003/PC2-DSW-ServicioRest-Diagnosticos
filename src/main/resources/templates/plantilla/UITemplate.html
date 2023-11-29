@@ -22,34 +22,40 @@
 				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 30px;">
 					  <a class"nav-link" style=" font-size: 16px; color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Inicio'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Periodo'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Nivel'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Secciones'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link " style="font-size: 16px; color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Asignar Sección'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace; " th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Cursos'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="font-size: 16px;  color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Asignar Cursos'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Horario'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Alumnos'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Profesores'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Apoderado'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Matricula'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
-				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 10px;">
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="font-size: 16px;  color: black; font-family: 'Courier New', Courier, monospace; font-weight:bold" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Lista Matricula'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
   
@@ -63,11 +69,12 @@
 								<input type="submit" class="btn btn-secondary" style="width: 120px; height:50px; font-size: 15px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"; value="Cerrar Sesión">
 								<input type="submit" class="btn btn-dark" style="width: 120px; height:50px; font-size: 15px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"; sec:authorize="!isAuthenticated()" value="Iniciar Sesión">
 					  </form>
-				  </div>
+				  </div> 
 			</div>
 			</nav>
 		</div>
 </div>
+
 
 
 

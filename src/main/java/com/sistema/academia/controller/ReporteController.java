@@ -10,7 +10,9 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sistema.academia.entities.Alumno;
+import com.sistema.academia.entities.Matricula;
 import com.sistema.academia.services.ALumnoServices;
+import com.sistema.academia.services.MatriculaServices;
 
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -26,6 +28,9 @@ public class ReporteController {
 
 	@Autowired
 	private ALumnoServices servicioAlum;
+
+	@Autowired
+	private MatriculaServices servicioMatri;
 	
 	@RequestMapping("/alumno")
 	public void alumno(HttpServletResponse response) {
@@ -50,4 +55,34 @@ public class ReporteController {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
+	@RequestMapping("/matricula")
+	public void matricula(HttpServletResponse response) {
+		try {
+			//invocar al método listarTodos
+			List<Matricula> lista=servicioMatri.listarTodos();
+			//acceder al reporte "reporteMedicamento.jrxml"
+			File file=ResourceUtils.getFile("classpath:listaMatricula.jrxml");
+			//crear objeto de la clase JasperReport y manipular el objeto file
+			JasperReport jasper=JasperCompileManager.compileReport(file.getAbsolutePath());
+			//origen de datos "manipular lista"
+			JRBeanCollectionDataSource origen=new JRBeanCollectionDataSource(lista);
+			//crear reporte
+			JasperPrint jasperPrint=JasperFillManager.fillReport(jasper,null,origen);
+			//salida del reporte en formato PDF
+			response.setContentType("application/pdf");
+			
+			OutputStream salida=response.getOutputStream();
+			//exportar a pdf
+			JasperExportManager.exportReportToPdfStream(jasperPrint,salida);		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 }

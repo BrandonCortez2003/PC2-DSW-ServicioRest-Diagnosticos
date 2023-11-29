@@ -94,53 +94,49 @@
 	}*/
 </style> 
 </head>
-<body class="base">
+<body class="base" style="background-color: #286090;">
 	
 	<!-- consumir fragmento cabecera-->
 	<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>
 
 	
-	<div class="container">
-		
-			<h3 class="text-center mt-4">MATRICULAS</h3>
-			
-		
-			<div class=" mt-2">
-				
+<div class="card mt-4">
+    <div class="card-body" style="background-color: #e9ecef;">
+        <div class="container">
+            <h3 class="text-center mt-4">MATRICULAS</h3>
+            <div class="mt-2">
+                <table class="table table-striped table-bordered mt-5" id="tableProfesor">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Alumno</th>
+                            <th>nivel</th>
+                            <th>Seccion</th>
+                            <th>Apoderado</th>
+                            <th>Colegio Procedencia</th>
+                            <th>Fecha Registro </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="row:${matricula}">
+                            <td th:text="${row.codigo}"></td>
+                            <td th:text="${row.alumno.nombre}"></td>
+                            <td th:text="${row.nivel.nivel}"></td>
+                            <td th:text="${row.seccion.descripSeccion}"></td>
+                            <td th:text="${row.apoderado.nombre}"></td>
+                            <td th:text="${row.institutoPro}"></td>
+                            <td th:text="${row.fechaRegistro}"></td>
+                            <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-	
-				<table class="table table-striped table-bordered mt-5" id="tableProfesor">
-							  <thead>
-							   <tr>
-					                <th>Codigo</th>
-					                <th>Alumno</th>
-					                <th>nivel</th>
-					                <th>Seccion</th>
-					                <th>Apoderado</th>
-					                <th>Colegio Procedencia</th>				                
-					                <th>Fecha Registro </th>
-					                
-					                <th></th>
-					                <th></th>
-					            </tr>
-							  </thead>
-							  <tbody>
-								<tr th:each="row:${matricula}">
-							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.alumno.nombre}"></td>
-							      <td th:text="${row.nivel.nivel}"></td>
-							      <td th:text="${row.seccion.descripSeccion}"></td>
-							      <td th:text="${row.apoderado.nombre}"></td>
-							      <td th:text="${row.institutoPro}"></td>
-                				  <td th:text="${row.fechaRegistro}"></td>
-							  
-							      
-							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
-							    </tr>  
-							  </tbody>
-				</table>
-			</div>
-		
 		
 			
 	</div>

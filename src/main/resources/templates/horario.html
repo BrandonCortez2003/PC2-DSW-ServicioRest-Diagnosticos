@@ -90,17 +90,17 @@
 </head>
 <body>
 	
-	<!-- <div th:replace="~{plantilla/UITemplate :: cabecera}"></div> -->
+	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div> 
 	
 	
 	<div class="row mt-4">
         <div class="col-sm-12">
 			<form method="POST" id="idRegistra" th:action="@{grabar}">	
 				<input  type="hidden" value="0" name="codigo" id="idCodigo">
-            <div class="card">
-                <div class="card-header">
+            <div class="card" >
+                <div class="card-header" style="background-color: #286090;">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-10" style="color: #e9ecef;">
                             Crear Horario
                         </div>
                         <div class="col-md-2">
@@ -109,10 +109,10 @@
                     </div>
                 </div>
                 <div class="card-body" >
-                    <div class="row">
+                    <div class="row" style="background-color: #286090;">
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="cboPeriodo">Periodo</label>
+                                <label for="cboPeriodo" style="color: #e9ecef;">Periodo</label>
                                 <select class="form-group form-control" id="idBien" name="periodo">
 								<option  th:each="row:${periodos}"
 									th:value="${row.codigo}"
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="cboNivelAcademico">Nivel Academico</label>
+                                <label for="cboNivelAcademico" style="color: #e9ecef;">Nivel Academico</label>
                                 <select class="form-group form-control" id="idNivel" name="nivel">
 								<option  th:each="row:${niveles}"
 									th:value="${row.codigo}"
@@ -133,7 +133,7 @@
     
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="cboGradoSeccion">Grado Seccion</label>
+                                <label for="cboGradoSeccion" style="color: #e9ecef;">Grado Seccion</label>
                                 <select class="form-group form-control" id="idSeccion" name="seccion">
 								<option  th:each="row:${secciones}"
 									th:value="${row.codigo}"
@@ -150,10 +150,10 @@
                     </div>
                     <hr />
     
-                    <div class="row">
+                    <div class="row" style="background-color:#286090;">
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="cboDiaSemana">Dia Semana</label>
+                                <label for="cboDiaSemana" style="color: #e9ecef;">Dia Semana</label>
                                 <select id="cboDiaSemana" class="form-control" name="semana">
                                     <option value="Lunes">Lunes</option>
                                     <option value="Martes">Martes</option>
@@ -167,14 +167,14 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="cboCurso">Curso</label>
+                                <label for="cboCurso" style="color: #e9ecef;">Curso</label>
                                 <select id="cboCurso" class="form-control" name="curso"></select>
                             </div>
                         </div>
     
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <label for="txtHoraInicio">Hora Inicio </label>
+                                <label for="txtHoraInicio" style="color: #e9ecef;">Hora Inicio </label>
                                 <span id="spHoraInicio" class="float-right text-danger" style="font-size:12px"></span>
                                 <input type="time" class="form-control required" id="txtHoraInicio" name="horaInicio" autocomplete="off">
                             </div>
@@ -182,7 +182,7 @@
                         
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <label for="txtHoraFin">Hora Fin </label>
+                                <label for="txtHoraFin" style="color: #e9ecef;">Hora Fin </label>
                                 <span id="spHoraFin" class="float-right text-danger" style="font-size:12px"></span>
                                 <input type="time" class="form-control required" id="txtHoraFin" name="horaFin" autocomplete="off">
                             </div>

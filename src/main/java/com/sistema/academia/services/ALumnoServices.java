@@ -42,5 +42,9 @@ public class ALumnoServices {
 	}
 	return repo.findAll();
 }
+	public List<Alumno> listarTodos()
+	{
+		return repo.findAll();
+	}
 	
 }

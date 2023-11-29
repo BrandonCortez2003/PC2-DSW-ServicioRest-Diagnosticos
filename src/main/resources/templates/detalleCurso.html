@@ -120,17 +120,16 @@
 <body>
 	
 	<!-- consumir fragmento cabecera-->
-	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
-	
+<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	
 	
 	<div class="row mt-4">
     <div class="col-sm-12">
 		<form th:action="@{grabar}" method="POST">
 			<input  type="hidden" value="0" name="codigo" id="idCodigo">
 			<div class="card" >
-            <div class="card-header">
+            <div class="card-header" style="background-color: #286090">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-10" style="color: #e9ecef;">
                         Asignar Cursos
                     </div>
                     <div class="col-md-2">
@@ -141,10 +140,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="row" style="background-color: #286090;">
                     <div class="col-sm-5">
                         <div class="form-group col-sm-6">
-							<label for="inputEmail3">Periodo</label>
+							<label for="inputEmail3" style="color: #e9ecef;">Periodo</label>
 							<select class="form-group form-control" id="idBien" name="periodo">
 								<option  th:each="row:${periodos}"
 									th:value="${row.codigo}"
@@ -155,7 +154,7 @@
                     <div class="col-sm-5">
 						
 						<div class="form-group col-sm-6">
-							<label for="inputEmail3">Nivel Academico</label>
+							<label for="inputEmail3" style="color: #e9ecef;">Nivel Academico</label>
 							<select class="form-group form-control" id="idBien" name="nivel">
 								<option  th:each="row:${niveles}"
 									th:value="${row.codigo}"
@@ -168,7 +167,7 @@
                     <div class="col-sm-5">
 						
 						<div class="form-group col-sm-6">
-							<label for="inputEmail3">Secciones</label>
+							<label for="inputEmail3"style="color: #e9ecef;">Secciones</label>
 							<select class="form-group form-control" id="idSeccion" name="seccion">
 								<option  th:each="row:${secciones}"
 									th:value="${row.codigo}"
@@ -307,11 +306,11 @@
 	
 	<script>
 		
-		$(document).on("click", "#tableCursos .btn.btn-danger", function() {
+		$(document).on("click", "#tableNivCur .btn.btn-danger", function() {
         $(this).closest("tr").remove();
         
-        let codigoEliminar = $(this).closest("tr").find("td:first").text(); // Obtener el código del bien a eliminar
-            $.get("eliminar?codigoEliminar=" + codigoEliminar, function(response) {
+        let codigo = $(this).closest("tr").find("td:first").text(); // Obtener el código del bien a eliminar
+            $.get("eliminar?codigo=" + codigo, function(response) {
                 // Actualizar la tabla u otros elementos de la interfaz si es necesario
                 // Por ejemplo, actualizar la lista de bienes solicitados
             });

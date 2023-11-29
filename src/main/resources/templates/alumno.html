@@ -98,36 +98,45 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	}*/
 </style> 
 </head>
-<body class="base">
+<body class="base" style="background-color: #286090;">
 	
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>	
 	
-	<div class="container">
-    <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
 
-    <div class="container">
-        <div class="col-md-5  ">
-       
-            <button type="button" class="btn btn-primary mt-5  nuevo"  data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-                <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
+<div class="card mt-4">
+    <div class="card-header">
+        <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
+    </div>
+    <div class="card-body mt-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+                        <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
+                    </button>
+                     <button type="button" class="btn btn-primary mt-5  nuevo" onclick="generarInforme()">
+                <i class="fas fa-solid fa-file"></i> Reporte
             </button>
+
+	
         </div>
 		
 
 		<div class="col-md-6 mt-1 buscar">
-            <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
-                <div class="form-group mb-2">
-                    <label>Buscar: </label>
+            
+                    <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
+                        <div class="form-group mb-2">
+                            <label>Buscar: </label>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el valor a filtrar" required>
+                        </div>
+                        <input type="submit" class="btn btn-primary mb-2" value="Buscar">
+                        <input type="button" class="btn btn-secondary mb-2 ml-2" value="Limpiar" onclick="limpiarYEnviar()">
+                    </form>
                 </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el valor a filtrar" required>
-                </div>
-                <input type="submit" class="btn btn-primary mb-2" value="Buscar">
-                <input type="button" class="btn btn-secondary mb-2 ml-2" value="Limpiar" onclick="limpiarYEnviar()">
-            </form>
-        </div>
-      
-    </div>
+            </div>
+       
 			 <br>
 			  <br>
 			   
@@ -169,6 +178,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</table>
 			</div>
 			
+</div>
+
 		
 			
 			<div class="modal fade" id="modalMedicamento" data-backdrop="static" 
@@ -287,6 +298,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		
 	</script>
 
+<script>
+        function generarInforme() {
+            // Realizar una solicitud GET al controlador para generar el informe
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/reporte/alumno", true);
+            xhr.responseType = "blob";
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    // Crear un objeto de URL para el blob de respuesta
+                    var blob = new Blob([this.response], { type: "application/pdf" });
+                    var url = window.URL.createObjectURL(blob);
+
+                    // Abrir el informe en una nueva ventana del navegador
+                    window.open(url);
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
 
 	<script>
 		//asignar evento click a todos los botones con clase "btn-editar"

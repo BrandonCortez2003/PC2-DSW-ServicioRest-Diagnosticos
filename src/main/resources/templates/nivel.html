@@ -6,7 +6,6 @@
 <title>Nivel</title>
 
 <title>Niveles</title>
->>>>>>> branch 'master' of https://github.com/DanielPRe15/Sistema_Academia_2023
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -92,54 +91,51 @@
 	}*/
 </style> 
 </head>
-<body class="base">
+<body class="base" style="background-color: #286090;">
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>
-	<div class="container">
-		
-	
-		
+	<div class="card mt-4">
+    <div class="container">
+        <h3 class="text-center mt-4">LISTA DE NIVELES</h3>
+        <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+            <i class="far fa-file"></i> Nuevo Nivel
+        </button>
+        <div class="mt-2">
+            <table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Descripcion Periodo</th>
+                        <th>Descripcion Nivel</th>
+                        <th>Descripcion Turno</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fin</th>
+                        <th>Estado</th>
+                        <th>Registro</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="row:${nivel}">
+                        <td th:text="${row.codigo}"></td>
+                        <td th:text="${row.periodo.descripcion}"></td>
+                        <td th:text="${row.nivel}"></td>
+                        <td th:text="${row.turno}"></td>
+                        <td th:text="${row.horaIni}"></td>
+                        <td th:text="${row.horaFin}"></td>
+                        <td>
+                            <span th:if="${row.estado}">Activo</span>
+                            <span th:unless="${row.estado}">Inactivo</span>
+                        </td>
+                        <td th:text="${row.fecharegi}"></td>
+                        <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
+                        <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-
-			<h3 class="text-center mt-4">LISTA DE NIVELES</h3>
-
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Nivel
-			</button>
-			<div class=" mt-2">
-	
-				<table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
-							  <thead>
-							   <tr>
-					                <th>Codigo</th>
-                                <th>Descripcion Periodo</th>
-                                <th>Descripcion Nivel</th>
-                                <th>Descripcion Turno</th>
-                                <th>Hora Inicio</th>
-                                <th>Hora Fin</th>
-                                <th>Estado</th>
-                                <th>Registro</th>
-                                <th></th>
-					            </tr>
-							  </thead>
-							  <tbody>
-								<tr th:each="row:${nivel}">
-							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.periodo.descripcion}"></td>
-							      <td th:text="${row.nivel}"></td>
-							      <td th:text="${row.turno}"></td>
-							      <td th:text="${row.horaIni}"></td>
-							      <td th:text="${row.horaFin}"></td>
-							      <td>
-							      <span th:if="${row.estado}">Activo</span>
-                    					<span th:unless="${row.estado}">Inactivo</span>
-                    					</td>
-							      <td th:text="${row.fecharegi}"></td>
-							      <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
-							      <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
-							    </tr>  
-							  </tbody>
-				</table>
-			</div>
 		
 		
 			<!-- begin #modal-dialog : MODAL MEDICAMENTO-->

@@ -110,7 +110,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-success mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+                    <button   type="button" class="btn btn-success mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
                         <i class="fa fa-plus"></i> NUEVO ALUMNO
                     </button>
                     <button type="button" class="btn btn-primary mt-1 nuevo" onclick="generarInforme()">
@@ -158,8 +158,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                             <td th:text="${row.distrito.nombre}"></td>
                             <td th:text="${row.direccion}"></td>
                             <td th:text="${row.fecharegi}"></td>
-                            <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i>Editar</a></td>
-                            <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i>Eliminar</a></td>
+                            <td sec:authorize="hasRole('Director')" ><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i>Editar</a></td>
+                            <td  ><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i>Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -239,7 +239,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											</div>
 										</div>								
 										<div class="col-md-12 text-center mt-4"> 										
-									<button type="submit" id="Guardar" class="btn btn-success"><i class="fas fa-save"></i> Registrar</button> 	
+									<button   type="submit" id="Guardar" class="btn btn-success"><i class="fas fa-save"></i> Registrar</button> 	
 											<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
 										</div> 																								
 									</form>

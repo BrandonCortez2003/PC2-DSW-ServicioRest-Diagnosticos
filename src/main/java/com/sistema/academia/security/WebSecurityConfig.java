@@ -30,8 +30,10 @@ public class WebSecurityConfig {
 				.requestMatchers("/bienvenida/**","/sesion/**","/resources/**","/css/**","/img/**","/js/**").permitAll()
 				.requestMatchers("/director/**","/profesor/**","/cursos/**","/periodos/**","/seccion/**","/alumno/**","/rol/**","/detalleCurso/**","/seccionNivel/**","/reporte/**").authenticated()
 				
+
 				.requestMatchers("/Admin/**").hasAnyRole("Admin")
 				.requestMatchers("/Director/**").hasAnyRole("Director")
+				.requestMatchers("/Secretaria/**").hasAnyRole("Secretaria")
 				
 				.anyRequest().authenticated()
 			)

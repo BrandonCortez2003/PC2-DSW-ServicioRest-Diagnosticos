@@ -90,30 +90,33 @@
 </head>
 <body class="base" style="background-color: #286090;">
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>
-<div class="card mt-4">
-    <div class="container">
-        <h3 class="text-center mt-4">LISTA DE PERIODOS</h3>
-        <div class="col-md-2 float-right">
-            <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalPeriodo" id="btn-nuevo">
-                <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
-            </button>
+	
+<div class="card mt-4 mx-auto" style="max-width: 1000px;">
+    <div class="card-body">
+        <h3 class="card-title text-center mt-4">LISTA DE PERIODOS</h3>
+        <div class="row justify-content-end mb-3">
+            <div class="col-md-4 text-right">
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalPeriodo" id="btn-nuevo">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Periodo
+                </button>
+            </div>
         </div>
-        <div class="mt-2">
-            <table class="table table-striped table-bordered mt-5" id="tablePeriodo">
-                <thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
                     <tr>
                         <th>Código</th>
-                        <th>Descripcion</th>
-                        <th>Fecha inicio</th>
+                        <th>Descripción</th>
+                        <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
-                        <th>estado</th>
+                        <th>Estado</th>
                         <th>Fecha Registro</th>
-                        <th></th>
-                        <th></th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="row:${periodo}">
+                    <tr th:each="row : ${periodo}">
                         <td th:text="${row.codigo}"></td>
                         <td th:text="${row.descripcion}"></td>
                         <td th:text="${row.fechaIni}"></td>
@@ -123,13 +126,22 @@
                             <span th:unless="${row.estado}">Inactivo</span>
                         </td>
                         <td th:text="${row.fechaRegistro}"></td>
-                        <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalPeriodo"><i class="far fa-edit"></i></a></td>
-                        <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
+                        <td>
+                            <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPeriodo">
+                                <i class="far fa-edit"></i> Editar
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-sm btn-eliminar">
+                                <i class="far fa-trash-alt "></i> Eliminar
+                            </a>
+                        </td>
                     </tr>  
                 </tbody>
             </table>
         </div>
     </div>
+</div>
 </div>
 
 		

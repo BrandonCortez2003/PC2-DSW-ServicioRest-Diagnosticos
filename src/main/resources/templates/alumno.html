@@ -102,8 +102,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>	
 	
-<<<<<<< HEAD
-<div class="card mt-4">
+ <div class="card mt-4" style="max-width: 1400px; max-height: 600px; margin-left: 250px;">
     <div class="card-header">
         <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
     </div>
@@ -111,30 +110,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-primary mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-                        <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
+                    <button type="button" class="btn btn-success mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+                        <i class="fa fa-plus"></i> NUEVO ALUMNO
                     </button>
-=======
-	<div class="container">
-    <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
-
-    <div class="container">
-        <div class="col-md-5  ">
-       
-            <button type="button" class="btn btn-primary mt-5  nuevo"  data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
-                <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
-            </button>
-            <button type="button" class="btn btn-primary mt-5  nuevo" onclick="generarInforme()">
-                <i class="fas fa-solid fa-file"></i> Reporte
-            </button>
-        </div>
-		
-
-		<div class="col-md-6 mt-1 buscar">
-            <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
-                <div class="form-group mb-2">
-                    <label>Buscar: </label>
->>>>>>> branch 'master' of https://github.com/DanielPRe15/Sistema_Academia_2023
+                    <button type="button" class="btn btn-primary mt-1 nuevo" onclick="generarInforme()">
+                        <i class="fas fa-solid fa-file"></i> Reporte
+                    </button>
                 </div>
                 <div class="col-md-6">
                     <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
@@ -149,42 +130,42 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     </form>
                 </div>
             </div>
-        <div class="mt-2">
-            <table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Dni</th>
-                        <th>Fecha Nacimiento</th>
-                        <th>Sexo</th>
-                        <th>Distrito</th>
-                        <th>Direccion</th>
-                        <th>Fecha Registro</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="row:${alumnos}">
-                        <td th:text="${row.codigo}"></td>
-                        <td th:text="${row.nombre}"></td>
-                        <td th:text="${row.apellido}"></td>
-                        <td th:text="${row.dni}"></td>
-                        <td th:text="${row.fechanaci}"></td>
-                        <td th:text="${row.sexo}"></td>
-                        <td th:text="${row.distrito.nombre}"></td>
-                        <td th:text="${row.direccion}"></td>
-                        <td th:text="${row.fecharegi}"></td>
-                        <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i></a></td>
-                        <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="mt-2">
+                <table class="table table-striped table-bordered mt-5" id="tableMedicamentos">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dni</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Sexo</th>
+                            <th>Distrito</th>
+                            <th>Direccion</th>
+                            <th>Fecha Registro</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="row:${alumnos}">
+                            <td th:text="${row.codigo}"></td>
+                            <td th:text="${row.nombre}"></td>
+                            <td th:text="${row.apellido}"></td>
+                            <td th:text="${row.dni}"></td>
+                            <td th:text="${row.fechanaci}"></td>
+                            <td th:text="${row.sexo}"></td>
+                            <td th:text="${row.distrito.nombre}"></td>
+                            <td th:text="${row.direccion}"></td>
+                            <td th:text="${row.fecharegi}"></td>
+                            <td><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i>Editar</a></td>
+                            <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i>Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-		
 			
 			<div class="modal fade" id="modalMedicamento" data-backdrop="static" 
 							data-keyboard="false" tabindex="-1" 

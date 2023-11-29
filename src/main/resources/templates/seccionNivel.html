@@ -120,7 +120,7 @@
 <body>
 	
 	<!-- consumir fragmento cabecera-->
-	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
+	<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>
 	
 	
 	<div class="row mt-4">
@@ -128,9 +128,9 @@
 		<form th:action="@{grabar}" method="POST">
 			<input  type="hidden" value="0" name="codigo" id="idCodigo">
 			<div class="card" >
-            <div class="card-header">
+            <div class="card-header" style="background-color: #286090;">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-10" style="color: #e9ecef;">
                         Asignar Secciones por nivel academico
                     </div>
                     <div class="col-md-2">
@@ -141,10 +141,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="row" style="background-color: #286090;">
                     <div class="col-sm-5">
                         <div class="form-group col-sm-6">
-							<label for="inputEmail3">Periodo</label>
+							<label for="inputEmail3" style="color: #e9ecef;">Periodo</label>
 							<select class="form-group form-control" id="idBien" name="periodo">
 								<option  th:each="row:${periodos}"
 									th:value="${row.codigo}"
@@ -155,7 +155,7 @@
                     <div class="col-sm-5">
 						
 						<div class="form-group col-sm-6">
-							<label for="inputEmail3">Nivel Academico</label>
+							<label for="inputEmail3" style="color: #e9ecef;">Nivel Academico</label>
 							<select class="form-group form-control" id="idBien" name="nivel">
 								<option  th:each="row:${niveles}"
 									th:value="${row.codigo}"

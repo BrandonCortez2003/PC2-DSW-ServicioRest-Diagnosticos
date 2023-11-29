@@ -117,20 +117,20 @@
 	
 </style> 
 </head>
-<body>
+<body >
 	
 	<!-- consumir fragmento cabecera-->
-	<!--<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	 -->
+<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	
 	
 	
 
             <div class="card" id="Ventana2">
-                <div class="card-header text-center">
-                    <div class="float-left">
+                <div class="card-header text-center" style="background-color: #286090;">
+                    <div class="float-left" style="color: #e9ecef;">
                         Registrar Matricula
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="background-color: #286090;">
     
                     <form id="formdata" method="POST" th:action="@{grabar}">
 						<input type="hidden" value="0" name="codigo" id="idCodigo">
@@ -156,8 +156,9 @@
                         <div class="row  mb-3">
                             <div class="col-sm-12">
                                 <div class="card">
-                                    <div class="card-body p-2">
-                                        <p class="card-title"><ins>Datos Academicos</ins></p>
+                                    <div class="card-body p-2" style="background-color: #efefef">
+                                        <h5 class="card-title" style="margin-bottom: 10px; border-bottom: none; padding-bottom: 5px; background-color: rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 5px;">Datos Académicos</h5>
+
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <div class="form-group">
@@ -197,8 +198,8 @@
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="card">
-                                    <div class="card-body p-2">
-                                        <p class="card-title"><ins>Datos del Alumno</ins></p>
+                                   <div class="card-body p-2" style="background-color: #efefef">
+                                    <h5 class="card-title" style="margin-bottom: 10px; border-bottom: none; padding-bottom: 5px; background-color: rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 5px;">Datos Alumno</h5>
                                         <input id="txtidalumno" type="hidden" value="0" />
                                         <div class="row align-items-end">
                                             <div class="col-sm-2">
@@ -263,8 +264,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card">
-                                    <div class="card-body p-2">
-                                        <p class="card-title"><ins>Datos del Apoderado</ins></p>
+                                    <div class="card-body p-2" style="background-color: #efefef">
+                                      <h5 class="card-title" style="margin-bottom: 10px; border-bottom: none; padding-bottom: 5px; background-color: rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 5px;">Datos del Apoderado</h5>
                                         <div class="row align-items-end">
                                             <div class="col-sm-2">
                                                 <div class="form-group">

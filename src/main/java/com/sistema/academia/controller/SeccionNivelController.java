@@ -42,7 +42,7 @@ public class SeccionNivelController {
 	@RequestMapping("/lista")
 	public String lista(Model model) {
 		
-		model.addAttribute("seccion", servicioSeccion.listarTodos());
+		
 		model.addAttribute("periodos", servicioPeriodo.listarTodos());
 		model.addAttribute("niveles",servicioNivel.listarTodos());
 
@@ -95,7 +95,7 @@ public class SeccionNivelController {
 				niv.setCodigo(idNiv);
 				bean.setNivel(niv);
 			
-			
+		
 		
 			List<DetalleNivelSeccion> lista =(List<DetalleNivelSeccion>) request.getSession().getAttribute("datos");
 			List<NivelDetalle> detalle = new ArrayList<NivelDetalle>();

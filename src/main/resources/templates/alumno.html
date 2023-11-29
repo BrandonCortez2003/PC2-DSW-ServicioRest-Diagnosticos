@@ -102,6 +102,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>	
 	
+<<<<<<< HEAD
 <div class="card mt-4">
     <div class="card-header">
         <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
@@ -113,6 +114,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <button type="button" class="btn btn-primary mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
                         <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
                     </button>
+=======
+	<div class="container">
+    <h3 class="text-center mt-4">LISTA DE ALUMNOS</h3>
+
+    <div class="container">
+        <div class="col-md-5  ">
+       
+            <button type="button" class="btn btn-primary mt-5  nuevo"  data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+                <i class="fas fa-solid fa-file"></i> NUEVO ALUMNO
+            </button>
+            <button type="button" class="btn btn-primary mt-5  nuevo" onclick="generarInforme()">
+                <i class="fas fa-solid fa-file"></i> Reporte
+            </button>
+        </div>
+		
+
+		<div class="col-md-6 mt-1 buscar">
+            <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
+                <div class="form-group mb-2">
+                    <label>Buscar: </label>
+>>>>>>> branch 'master' of https://github.com/DanielPRe15/Sistema_Academia_2023
                 </div>
                 <div class="col-md-6">
                     <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
@@ -280,6 +302,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		
 	</script>
 
+<script>
+        function generarInforme() {
+            // Realizar una solicitud GET al controlador para generar el informe
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/reporte/alumno", true);
+            xhr.responseType = "blob";
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    // Crear un objeto de URL para el blob de respuesta
+                    var blob = new Blob([this.response], { type: "application/pdf" });
+                    var url = window.URL.createObjectURL(blob);
+
+                    // Abrir el informe en una nueva ventana del navegador
+                    window.open(url);
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
 
 	<script>
 		//asignar evento click a todos los botones con clase "btn-editar"

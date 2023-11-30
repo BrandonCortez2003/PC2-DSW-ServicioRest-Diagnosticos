@@ -99,9 +99,11 @@
         <h3 class="card-title text-center mt-4">LISTA DE NIVELES</h3>
         <div class="row justify-content-end mb-3">
             <div class="col-md-4 text-right">
+		<td sec:authorize="hasAuthority('ROLE_Director')">
             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
                 <i class="fa fa-plus"></i> Nuevo Nivel
             </button>
+         </td>
              </div>
         </div>
         <div class="table-responsive mt-4">
@@ -133,12 +135,12 @@
                             <span th:unless="${row.estado}">Inactivo</span>
                         </td>
                         <td th:text="${row.fecharegi}"></td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ROLE_Director')">
                             <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalMedicamento">
                                 <i class="far fa-edit"></i> Editar
                             </a>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ROLE_Director')">
                             <a class="btn btn-danger btn-sm btn-eliminar">
                                 <i class="far fa-trash-alt "></i> Eliminar
                             </a>

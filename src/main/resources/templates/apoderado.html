@@ -100,8 +100,8 @@
 	<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	
 	
 <div class="container" >
-    <div class="card mt-4">
-        <div class="card-body p-0">
+    <div class="card mt-4" style="text-align: center; margin-left: 150px; margin-right: -120px;">
+        <div class="card-body ">
             <h3 class="card-title text-center mt-4">LISTA DE APODERADOS</h3>
 
                            <div class="col-md-6">
@@ -150,7 +150,7 @@
                 				  <td th:text="${row.fechaRegistro}"></td>
 							  
 							     
-							      <td>
+							      <td sec:authorize="hasAuthority('ROLE_Director')">
 									   <a class="btn btn-danger btn-sm  btn-eliminar">
                                     <i class="far fa-trash-alt"></i> Eliminar
                                 </a>

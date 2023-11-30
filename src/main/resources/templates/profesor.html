@@ -95,38 +95,41 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	}*/
 </style> 
 </head>
-<body class="base">
+<body class="base" style="background-color: #286090;">
 	
 	<!-- consumir fragmento cabecera-->
 	<div th:replace="~{plantilla/UITemplate :: cabecera}" ></div>	
 	
-<div class="container-fluid" style="max-width: 1500px;">
-    <h3 class="text-center mt-4">LISTA DE PROFESORES</h3>
-    <div class="card-body p-0">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-					<td sec:authorize="hasRole('Director')">
-                    <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo">
-                        <i class="fa fa-plus"></i> Nuevo Profesor
-                    </button>
-                    </td>
+
+<div class="container" >
+    <div class="card mt-4" style="width: 1550px; margin-left: -50px; right: 90px; ">
+        <div class="card-body" style="margin-left: -200px;">
+            <h3 class="card-title text-center mt-4">LISTA DE PROFESORES</h3>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col-md-6 ">
+						<td sec:authorize="hasAuthority('ROLE_Director')" >
+                        <button type="button" style="margin-left: 190px;" class="btn btn-success mt-2 " data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo" >
+                            <i class="fa fa-plus"></i> Nuevo Profesor
+                        </button>
+                        </td>
+                    </div>
+                    <div class="col-md-6">
+                        <form class="form-inline float-md-right mt-2" th:action="@{lista}" id="filtroForm">
+                            <div class="form-group mb-2">
+                                <label>Filtrar: </label>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el valor a filtrar" required>
+                            </div>
+                            <input type="submit" class="btn btn-primary mb-2" value="Buscar">
+                            <input type="button" class="btn btn-secondary mb-2 ml-2" value="Limpiar" onclick="limpiarYEnviar()">
+                        </form>
+                    </div>
+
                 </div>
-                <div class="col-md-6">
-                    <form class="form-inline float-md-right mt-2" th:action="@{lista}" id="filtroForm">
-                        <div class="form-group mb-2">
-                            <label>Filtrar: </label>
-                        </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                            <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el valor a filtrar" required>
-                        </div>
-                        <input type="submit" class="btn btn-primary mb-2" value="Buscar">
-                        <input type="button" class="btn btn-secondary mb-2 ml-2" value="Limpiar" onclick="limpiarYEnviar()">
-                    </form>
-                </div>
-            </div>
-            <div class="mt-2">
-                <table class="table table-striped table-bordered mt-4">
+            <div class="mt-2" style="margin-left: 190px;">
+                <table class="table table-striped table-bordered mt-4" style="width: 50%;">
                     <thead class="thead-dark">
                         <tr>
                             <th>Código</th>
@@ -164,13 +167,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                                 <span th:unless="${row.estado}">Inactivo</span>
                             </td>
                             <td th:text="${row.fecReg}">01/01/2022</td>
-                            <td sec:authorize="hasRole('Director')">
-							
+                            
+                            <td sec:authorize="hasAuthority('ROLE_Director')">
                                 <a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalProfesor">
                                     <i class="far fa-edit"></i>Editar
                                 </a>
                             </td>
-                            <td sec:authorize="hasRole('Director')">
+                            <td sec:authorize="hasAuthority('ROLE_Director')">
                                 <a class="btn btn-danger btn-eliminar">
                                     <i class="far fa-trash-alt"></i>Eliminar
                                 </a>
@@ -180,6 +183,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                 </table>
             </div>
         </div>
+        </div>
+    </div>
+    </div>
     </div>
 </div>
 		

@@ -98,9 +98,11 @@
         </div>
         <div class="card-body">
             <div class="text-right mb-2">
+				<td sec:authorize="hasAuthority('ROLE_Director')">
                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalPeriodo" id="btn-nuevo">
                     <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Curso
                 </button>
+                </td>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered mt-3">
@@ -123,12 +125,12 @@
                                 <span th:unless="${row.estado}">Inactivo</span>
                             </td>
                             <td th:text="${row.fechaRegistro}"></td>
-                            <td>
+                            <td sec:authorize="hasAuthority('ROLE_Director')">
                                 <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPeriodo">
                                     <i class="far fa-edit"></i> Editar
                                 </a>
                             </td>
-                            <td>
+                            <td sec:authorize="hasAuthority('ROLE_Director')">
                                 <a class="btn btn-danger btn-sm  btn-eliminar">
                                     <i class="far fa-trash-alt"></i> Eliminar
                                 </a>

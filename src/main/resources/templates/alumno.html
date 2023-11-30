@@ -111,11 +111,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-					<td sec:authorize="hasRole('Director')">
+					<!--<td sec:authorize="hasRole('Director')">
                     <button   type="button" class="btn btn-success mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
                         <i class="fa fa-plus"></i> NUEVO ALUMNO
                     </button>
-                    </td>
+                    </td>-->
                     <button type="button" class="btn btn-primary mt-1 nuevo" onclick="generarInforme()">
                         <i class="fas fa-solid fa-file"></i> Reporte
                     </button>
@@ -152,6 +152,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                             <th>Direccion</th>
                             <th>Fecha Registro</th>
                             <th></th>
+                             <th></th>
                             
                         </tr>
                     </thead>
@@ -166,7 +167,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                             <td th:text="${row.distrito.nombre}"></td>
                             <td th:text="${row.direccion}"></td>
                             <td th:text="${row.fecharegi}"></td>
-                            <td sec:authorize="hasAuthority('ROLE_Director')" ><a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalMedicamento"><i class="far fa-edit"></i>Editar</a></td>
+                            
                             <td sec:authorize="hasAuthority('ROLE_Director')" ><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i>Eliminar</a></td>
                         </tr>
                     </tbody>

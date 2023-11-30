@@ -125,7 +125,7 @@
                         </td>
                         <td th:text="${row.fechaRegistro}"></td>                           
                         <td sec:authorize="hasAuthority('ROLE_Director')">
-                            <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPeriodo">
+                            <a class="btn btn-info btn-sm btn-editar" data-toggle="modal" data-target="#modalPeriodo">
                                 <i class="far fa-edit"></i> Editar
                             </a>
                         </td>

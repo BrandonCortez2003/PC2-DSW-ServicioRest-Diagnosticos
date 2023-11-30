@@ -98,7 +98,7 @@ public class MatriculaReporteExcel {
 				celda.setCellStyle(estilo);
 	
 				celda = fila.createCell(3);
-				celda.setCellValue(matricula.getNivel().getNivel());
+				celda.setCellValue(matricula.getSeccion().getDescripSeccion());
 				hoja.autoSizeColumn(3);
 				celda.setCellStyle(estilo);
 				

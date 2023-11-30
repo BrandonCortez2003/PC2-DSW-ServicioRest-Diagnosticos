@@ -23,6 +23,8 @@ public class Rol {
 	@Column(name="descripcion")
 	private String descripcion;
 
+	@Column(name="estado_rol")
+	private Boolean rol;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "rol")
@@ -46,6 +48,12 @@ public class Rol {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public Boolean getRol() {
+		return rol;
+	}
+	public void setRol(Boolean rol) {
+		this.rol = rol;
 	}
 	public List<Usuario> getListaUsuario() {
 		return listaUsuario;

@@ -24,6 +24,8 @@ public class Rol {
 	private String descripcion;
 
 	
+	
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "rol")
 	private List<Usuario> listaUsuario;

@@ -1,7 +1,11 @@
 package com.sistema.academia.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import com.sistema.academia.entities.Alumno;
 import com.sistema.academia.entities.Matricula;
 import com.sistema.academia.services.ALumnoServices;
 import com.sistema.academia.services.MatriculaServices;
+import com.sistema.academia.util.reportesExcel.AlumnoReporteExcel;
 
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -83,6 +88,27 @@ public class ReporteController {
 		}
 	}
 	
+
+
+	@RequestMapping("/exportar-alumnos-excel") 
+	public void exportarAlumnosEnExcel(HttpServletResponse response) throws IOException {
+	    response.setContentType("application/octet-stream");
+
+	    DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-d_HH:mm:ss");
+	    String fechaActual = dateFormatter.format(new Date());
+
+	    String cabecera = "Content-Disposition";
+	    String valor = "attachment; filename=Alumnos_" + fechaActual + ".xlsx";
+
+	    response.setHeader(cabecera, valor);
+
+	    List<Alumno> alumnos = servicioAlum.listarTodos();
+
+	    AlumnoReporteExcel exporter = new AlumnoReporteExcel(alumnos);
+	    exporter.exportar(response);
+	}
+
+ 	
 	
 	
 }

@@ -98,6 +98,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	}*/
 </style> 
 </head>
+
 <body class="base" style="background-color: #286090;">
 	
 	<div th:replace="~{plantilla/UITemplate :: cabecera}"></div>	
@@ -116,6 +117,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <button type="button" class="btn btn-primary mt-1 nuevo" onclick="generarInforme()">
                         <i class="fas fa-solid fa-file"></i> Reporte
                     </button>
+                    
+                    <a href="/alumno/exportar-alumnos-excel" class="btn btn-success mt-1 nuevo">
+						<i class="fas fa-solid fa-file"></i> Reporte Excel
+					</a>
+                    
                 </div>
                 <div class="col-md-6">
                     <form class="form-inline float-md-right" th:action="@{lista}" id="filtroForm">
@@ -305,6 +311,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             xhr.send();
         }
     </script>
+    
+    
+<script th:inline="javascript">
+    function generarExcel() {
+        window.location.href = /*[[ @{/exportar-alumnos-excel} ]]*/ '/exportar-alumnos-excel';
+    }
+</script>
+
+
 
 	<script>
 		//asignar evento click a todos los botones con clase "btn-editar"

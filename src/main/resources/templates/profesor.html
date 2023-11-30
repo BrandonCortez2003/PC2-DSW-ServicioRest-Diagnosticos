@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1">
 <title>Profesor</title>
@@ -105,9 +106,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
+					<td sec:authorize="hasRole('Director')">
                     <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#modalProfesor" id="btn-nuevo">
                         <i class="fa fa-plus"></i> Nuevo Profesor
                     </button>
+                    </td>
                 </div>
                 <div class="col-md-6">
                     <form class="form-inline float-md-right mt-2" th:action="@{lista}" id="filtroForm">
@@ -161,12 +164,13 @@
                                 <span th:unless="${row.estado}">Inactivo</span>
                             </td>
                             <td th:text="${row.fecReg}">01/01/2022</td>
-                            <td>
+                            <td sec:authorize="hasRole('Director')">
+							
                                 <a class="btn btn-info btn-editar" data-toggle="modal" data-target="#modalProfesor">
                                     <i class="far fa-edit"></i>Editar
                                 </a>
                             </td>
-                            <td>
+                            <td sec:authorize="hasRole('Director')">
                                 <a class="btn btn-danger btn-eliminar">
                                     <i class="far fa-trash-alt"></i>Eliminar
                                 </a>

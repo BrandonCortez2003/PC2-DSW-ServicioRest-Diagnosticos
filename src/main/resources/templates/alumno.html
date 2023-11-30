@@ -110,9 +110,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
+					<td sec:authorize="hasRole('Director')">
                     <button   type="button" class="btn btn-success mt-1 nuevo" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
                         <i class="fa fa-plus"></i> NUEVO ALUMNO
                     </button>
+                    </td>
                     <button type="button" class="btn btn-primary mt-1 nuevo" onclick="generarInforme()">
                         <i class="fas fa-solid fa-file"></i> Reporte
                     </button>

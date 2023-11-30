@@ -34,6 +34,7 @@ public class WebSecurityConfig {
 				.requestMatchers("/Admin/**").hasAnyRole("Admin")
 				.requestMatchers("/Director/**").hasAnyRole("Director")
 				.requestMatchers("/Secretaria/**").hasAnyRole("Secretaria")
+
 				
 				.anyRequest().authenticated()
 			)

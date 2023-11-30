@@ -53,6 +53,12 @@
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Apoderado'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
 				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Rol'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
+					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Usuarios'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
+				   </ul>
+				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">
 					  <a class"nav-link" style="color: black; font-family: 'Courier New', Courier, monospace;" th:each="bean : ${session.ENLACES}" th:if="${bean.descripcion == 'Matricula'}" th:text="${bean.descripcion}" th:href="${bean.ruta}"></a>
 				   </ul>
 				   <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 7px;">

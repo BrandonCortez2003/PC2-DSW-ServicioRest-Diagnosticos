@@ -147,7 +147,7 @@
                             <td th:text="${row.apoderado.nombre}"></td>
                             <td th:text="${row.institutoPro}"></td>
                             <td th:text="${row.fechaRegistro}"></td>
-                            <td><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
+                            <td sec:authorize="hasAuthority('ROLE_Director')"><a class="btn btn-danger btn-eliminar"><i class="far fa-trash-alt"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
